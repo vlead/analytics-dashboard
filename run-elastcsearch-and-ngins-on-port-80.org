@@ -1,6 +1,7 @@
 * Documentation for installing elastic search and nginx 
 
 ** Initially install the following Pre-requisites for elastic search
+#+BEGIN_EXAMPLE
   sudo apt-get update
   sudo apt-get -y install build-essential
   sudo apt-get -y install binutils
@@ -10,6 +11,8 @@
   sudo apt-get -y install git
   sudo apt-get install -y software-properties-common
   sudo apt-get install -y python-software-properties
+
+#+END_EXAMPLE
 
 
 ** Setting up JVM
@@ -21,8 +24,9 @@
 
 ** Installing Elastic search
    First we add the public key.
+   #+BEGIN_EXAMPLE
    wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
-   
+   #+END_EXAMPLE
    Add the following line to the file /etc/apt/sources.list.d/elasticsearch.list
    deb http://packages.elasticsearch.org/elasticsearch/1.1/debian stable main
    
@@ -36,8 +40,8 @@
 
 ** Testing Elastic Search
   Open the browser and type http://localhost:9200
-
-  You should get an output similar to the one below
+#+BEGIN_EXAMPLE
+ You should get an output similar to the one below
   {
    "name" : "Mister Fear",
    "cluster_name" : "elasticsearch",
@@ -51,6 +55,8 @@
    },
    "tagline" : "You Know, for Search"
   }
+#+END_EXAMPLE
+ 
 
 
 ** Setting up nginx
