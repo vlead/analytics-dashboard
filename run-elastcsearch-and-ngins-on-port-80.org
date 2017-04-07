@@ -16,10 +16,13 @@
 
 
 ** Setting up JVM
+#+BEGIN_EXAMPLE
    To install Oracle Java, run:
    sudo add-apt-repository ppa:webupd8team/java
    sudo apt-get update
    sudo apt-get install oracle-java7-installer
+#+END_EXAMPLE
+
 
 
 ** Installing Elastic search
@@ -27,15 +30,26 @@
    #+BEGIN_EXAMPLE
    wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
    #+END_EXAMPLE
-   Add the following line to the file /etc/apt/sources.list.d/elasticsearch.list
+   Add the following line to the file
+#+BEGIN_EXAMPLE
+/etc/apt/sources.list.d/elasticsearch.list
+
    deb http://packages.elasticsearch.org/elasticsearch/1.1/debian stable main
+#+END_EXAMPLE
+
    
    Now let us install ElasticSearch by running the following commands.
+#+BEGIN_EXAMPLE
    sudo apt-get update
    sudo apt-get install elasticsearch
+#+END_EXAMPLE
+
    
    Start Elasticsearch with the command
+#+BEGIN_EXAMPLE
    sudo service elasticsearch start
+
+#+END_EXAMPLE
    
 
 ** Testing Elastic Search
