@@ -74,17 +74,23 @@
 
 ** Setting up nginx
   To install nginx run the following commands in terminal.
+#+BEGIN_EXAMPLE
   sudo apt-get update
   sudo apt-get install nginx
 
+#+END_EXAMPLE
+
   We need to now start nginx, which can be done using either the command
+#+BEGIN_EXAMPLE
   sudo service nginx start
+#+END_EXAMPLE
 
 
 ** Testing nginx
   After configuring nginx run http://localhost:9200 
   the following result should be obtained
-  {
+#+BEGIN_EXAMPLE
+ {
    "name" : "Mister Fear",
    "cluster_name" : "elasticsearch",
    "cluster_uuid" : "xrgRgsPFSkeqx266XlQuyQ",
@@ -97,18 +103,27 @@
    },
   "tagline" : "You Know, for Search"
  }
+#+END_EXAMPLE
+ 
 
 
 ** Routing the requests through nginx
    Comment out the config network.bind_host and network.publish_host.
+#+BEGIN_EXAMPLE
    #network.bind_host: #some_value
-   #network.publish_host: #some_other_value  
+   #network.publish_host: #some_other_value 
+#+END_EXAMPLE
+ 
 
    Now add the following config to the same file.
+#+BEGIN_EXAMPLE
    network.host: localhost
+#+END_EXAMPLE
 
    We need to restart Elasticsearch  Run the following command in the terminal
+#+BEGIN_EXAMPLE
    sudo service elasticsearch restart
+#+END_EXAMPLE
 
 
 ** Testing disabling of external request to elastic search
