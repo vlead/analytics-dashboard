@@ -128,16 +128,20 @@
 
 ** Testing disabling of external request to elastic search
    Running the command
+#+BEGIN_EXAMPLE
    curl http://domain.com:9200
-
-   will result in the below error. 
+#+END_EXAMPLE
+will result in the below error. 
+#+BEGIN_EXAMPLE
    curl: (7) Failed to connect to domain.com port 9200: Connection refused
+#+END_EXAMPLE
+   
    
    If you login into the elasticsearch server and run the below command 
    in the terminal, it should produce a valid output.
    curl http://localhost:9200
    should result in
-
+#+BEGIN_EXAMPLE
    {
     "status" : 200,
     "name" : "Agent",
@@ -150,13 +154,14 @@
    },
    "tagline" : "You Know, for Search"
    }
+#+END_EXAMPLE
    Now route the requests to Elasticsearch server through the domain.
    The next task is to make nginx capture all the requests to the 
    domain 10.4.12.46 and route it to localhost:9200 and send back a response.
 
-   To accomplish that, we need to create a file 
-   /etc/nginx/sites-available/elasticsearch with the following content.
-
+   To accomplish that, we need to create a file  
+   /etc/nginx/sites-available/elasticsearch with the following content.W
+#+BEGIN_EXAMPLE
    server {
        listen 80;
        server_name 10.4.12.46;
@@ -170,16 +175,21 @@
        proxy_set_header  Host $http_host;
        }
    }
+#+END_EXAMPLE   
 
    In the above config, we have only created the configuration. 
    To enable it, we need to create a symlink for this in
    /etc/nginx/sites-enabled.
-
+#+BEGIN_EXAMPLE
    Run the following command in terminal   
    sudo ln /etc/nginx/sites-available/elasticsearch /etc/nginx/sites-enabled/
-
-   Now we need to reload the nginx configuration for the new site to take effect.  
+#+END_EXAMPLE
+   Now we need to reload the nginx configuration for the new site to take
+   effect.
+#+BEGIN_EXAMPLE
    sudo service nginx reload
+#+END_EXAMPLE  
+  
 
 
 ** Test nginx forwards the request
@@ -187,7 +197,7 @@
    Run the following command in browser
    http://10.4.12.46
    should return something similar to
-   
+#+BEGIN_EXAMPLE
    {
    "status" : 200,
    "name" : "Richard Parker",
@@ -201,33 +211,44 @@
    "tagline" : "You Know, for Search"
    }
 
+#+END_EXAMPLE   
+  
 
 ** Adding Basic HTTP Authentication
    To setup basic HTTP authentication, we need to create a password file. 
    The easiest way to do it is through apache-utils. We need to install it.
+#+BEGIN_EXAMPLE
    sudo apt-get install apache2-utils
-
+#+END_EXAMPLE
    Now lets create a password file with the command htpasswd. 
+#+BEGIN_EXAMPLE
    sudo htpasswd -c /etc/elasticsearch/user.pwd username
+#+END_EXAMPLE
+
    htpasswd will prompt you for a password.
+#+BEGIN_EXAMPLE
    New password: 
    Re-type new password: 
    Adding password for user username
-
+#+END_EXAMPLE
    Now a file /etc/elasticsearch/user.pwd will be created with 
    the username and password specified in the following format.
+#+BEGIN_EXAMPLE
    login:password
-
-   Now we need to add this to our nginx’s es.domain.com configuration. We will add the following lines to /etc/nginx/sites-available/elasticsearch.
+#+END_EXAMPLE
+   Now we need to add this to our nginx’s es.domain.com configuration.
+ We will add the following lines to /etc/nginx/sites-available/elasticsearch.
+#+BEGIN_EXAMPLE
    auth_basic "Elasticsearch Authentication";
    auth_basic_user_file /etc/elasticsearch/user.pwd;
-   
+#+END_EXAMPLE
+  
    The file /etc/nginx/sites-available/elasticsearch should look like this.
-
-   server {
+#+BEGIN_EXAMPLE
+    server {
       listen 80;
-    server_name 10.4.12.46;
-    location / {
+      server_name 10.4.12.46;
+      location / {
         rewrite ^/(.*) /$1 break;
         proxy_ignore_client_abort on;
         proxy_pass http://localhost:9200;
@@ -239,31 +260,44 @@
         auth_basic_user_file /etc/elasticsearch/user.pwd;
         }
    }
+#+END_EXAMPLE
+
+   
    Now lets reload nginx 
+#+BEGIN_EXAMPLE
    sudo service nginx reload
+#+END_EXAMPLE
+
 
 
 ** Testing HTTP Authentication
 
    Let us try to access Elasticsearch without authentication should cause an error.
-
+#+BEGIN_EXAMPLE
    curl http://10.4.12.46
+#+END_EXAMPLE
+
    should result in
-
+#+BEGIN_EXAMPLE
    <html>
-   <head><title>401 Authorization Required</title></head>
-   <body bgcolor="white">
-   <center><h1>401 Authorization Required</h1></center>
-   <hr><center>nginx/1.4.1 (Ubuntu)</center>
-   </body>
+     <head><title>401 Authorization Required</title></head>
+     <body bgcolor="white">
+        <center><h1>401 Authorization Required</h1></center>
+        <hr><center>nginx/1.4.1 (Ubuntu)</center>
+     </body>
    </html>
-   Now let us try the same command with authentication.
-   curl -u username http://es.domain.com
-   will prompt you for the password.
+#+END_EXAMPLE
 
+   
+   Now let us try the same command with authentication.
+#+BEGIN_EXAMPLE
+   curl -u username http://es.domain.com
+#+END_EXAMPLE
+
+   will prompt you for the password.
    Enter host password for user 'username':
    Following the correct password, you should get the status message
-   
+#+BEGIN_EXAMPLE
    {
     "status" : 200,
     "name" : "Steel Spider",
@@ -273,8 +307,10 @@
     "build_timestamp" : "2014-06-03T15:02:52Z",
     "build_snapshot" : false,
     "lucene_version" : "4.8"
-    },
+   },
   "tagline" : "You Know, for Search"
   }
+#+END_EXAMPLE
+   
 
 
