@@ -32,8 +32,7 @@
    #+END_EXAMPLE
    Add the following line to the file
 #+BEGIN_EXAMPLE
-/etc/apt/sources.list.d/elasticsearch.list
-
+   /etc/apt/sources.list.d/elasticsearch.list
    deb http://packages.elasticsearch.org/elasticsearch/1.1/debian stable main
 #+END_EXAMPLE
 
