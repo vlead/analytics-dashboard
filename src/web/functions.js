@@ -3,7 +3,6 @@ console.log(feedbacks.length);
 document.write(feedbacks.length);
 var m, question_type, answer_type, n, version;
 var feedbackLen = feedbacks.length;
-document.write("hellooooo");
 var myChart = new Chart(ctx);
 {
   for (m = 0; m<feedbackLen; m++) {
@@ -16,9 +15,7 @@ var myChart = new Chart(ctx);
       console.log(version);
       console.log(question_type);
       console.log(JSON.stringify(answer_type));
-    }
-    
-   
+    }   
   }
   document.write(n);
 }
