@@ -1,9 +1,13 @@
+$(document).ready(function(){
+$(function() {
+  $( "#tabs-1" ).tabs();
+});
+});
 var ctx = document.getElementById("myChart");
 var total_vlabs_generic_fbs = 0;
 var total_exp_fbs = 0;
 var total_lab_fbs = 0;
 var total_edx_lab_fbs = 0;
-var total_edx_exp_fbs = 0;
 var total_edx_exp_fbs = 0;
 var url_feedbacks = 0;
 var total_generic_fbs = 0;
@@ -11,7 +15,7 @@ var count = 0;
 var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?size=10000";
 $.getJSON(elastic_url, function(data) {
     total_feedbacks = data['hits']['hits'];
-    console.log("total_fbs" + total_feedbacks.length)
+  console.log("total_fbs" + total_feedbacks.length);
     for(var i=0;i<total_feedbacks.length;i++){
 	if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_experiment"){
 	    total_edx_exp_fbs += 1;	
@@ -84,7 +88,7 @@ $.getJSON(elastic_url, function(data) {
 
 //version base graphs
 
-var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:virtual-labs-feedback-v1.0&size=10000"
+var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:virtual-labs-feedback-v1.0&size=10000";
 $.getJSON(elastic_url, function(data) {
     total_feedbacks = data['hits']['hits'];
     console.log(total_feedbacks);

@@ -20,7 +20,7 @@
     border-radius: 4px 0px 0px 4px; 
     overflow: hidden; 
 } 
-#tabs-1 .ui-tabs-nav li.ui-tabs-selected, 
+#tabs-1 .ui-tabs-nav li.ui-tabs-selected,
 #tabs-1 .ui-tabs-nav li.ui-state-active { 
     border-right: 1px solid transparent; 
 } 
