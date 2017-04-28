@@ -16,8 +16,7 @@ var version_list = new Array();
       console.log(version);
       console.log(question_type);
       console.log(JSON.stringify(answer_type));     
-      contains(feedbacks,version);
-    }
+     }
     
   }
   function contains(feedbacks, version) {
