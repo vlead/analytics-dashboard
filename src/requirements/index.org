@@ -1,0 +1,16 @@
+#+TITLE: Requirements for analytics dashboard
+#+AUTHOR: VLEAD
+#+DATE: [2016-08-15 Mon]
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+SETUPFILE: ../org-templates/level-1.org
+#+options: ^:nil
+#+LATEX: Literal LaTeX code for export
+
+* Introduction 
+  The requirements of =feedback analytics dashboard= are listed here.
+
+** Requirements
+*** Ability to view the total feedbacks
+*** Ability to view the offline and online feedbacks
+*** Ability to view total feedbacks for given question
