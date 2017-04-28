@@ -10,7 +10,7 @@
 * Introduction 
   The requirements of =feedback analytics dashboard= are listed here.
 
-
-* Ability to view the total feedbacks
-* Ability to view the offline and online feedbacks
-* Ability to view total feedback for given question
+** Requirements
+*** Ability to view the total feedbacks
+*** Ability to view the offline and online feedbacks
+*** Ability to view total feedbacks for given question
