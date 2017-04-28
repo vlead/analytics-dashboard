@@ -3,35 +3,50 @@
   <head>
     <title> dashboard </title>
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet"/>
-    <link href = "feedback_tags.css" rel = "stylesheet"/>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<!--    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>-->
+    <link href = "tab.css" rel = "stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
   </head>
   <body>
-    <div id = "tabs-1">
-      <ul class="ui-tabs-nav">
-        <li class="ui-tabs-selected ui-state-active"><a href = "#tabs-2">Overall Feedbacks</a></li>
-        <li><a href = "#tabs-3">Tab 2</a></li>
-        <li><a href = "#tabs-4">Tab 3</a></li>
+    <div id="tabs" style="width:100%; height:2400px;">
+      <ul>
+        <li>
+          <a href="#a">Overall feedback</a>
+        </li>
+        <li>
+          <a href="#b">Virtual Labs V1.0</a>
+        </li>
+        <li>
+          <a href="#c">Open Edx lab V2.0</a>
+        </li>
+        <li>
+          <a href="#d">Open Edx Exp V2.0</a>
+        </li>
       </ul>
-      <div id = "tabs-2" class="ui-tabs-panel">
-        <canvas id="myChart" style="display: block; height: 2066px; width: 997px;" width="495" height="309"></canvas>
+      <div id="a" style= "width:764px; height:468px;">
+        <canvas id="myChart" style="display: block; height: 1074px; width: 768px;" width="1074" height="768"></canvas>
       </div>
-      <div id = "tabs-3" class="ui-tabs-panel">
-        <canvas id="versionChart" style="display: block; height: 2066px; width: 997px;" width="495" height="309"></canvas>
-      </div>
-      <div id = "tabs-4" class="ui-tabs-panel">
-        <p>
-          ed ut perspiciatis unde omnis iste natus error sit 
-          voluptatem accusantium doloremque laudantium, totam rem aperiam, 
-          eaque ipsa quae ab illo inventore veritatis et quasi architecto 
-          beatae vitae dicta sunt explicabo.
-        </p>
-      </div>
-    </div>   
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-  <script src="chart_display.js"></script>
-</body>
+      <div id="b" style= "width:764px; height:468px;">
+        <canvas id="versionChart" style="display: block; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
+      </div>
+      <div id="c" style= "width:764px; height:468px;">
+        <canvas id="openEdxLabChart" style="display: block; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
+      </div>
+      <div id="d" style= "width:764px; height:468px;">
+        <canvas id="openEdxExpChart" style="display: block; height: 2066px;
+        width: 997px;"  width="1074" height="768"></canvas>
+      </div>
+    </div>
+    
+    <script>
+      $('#tabs')
+      .tabs()
+      .addClass('ui-tabs-vertical ui-helper-clearfix');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="chart_display.js"></script>
+  </body>
 </html>
