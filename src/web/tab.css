@@ -1,53 +1,36 @@
-.ui-tabs.ui-tabs-vertical {
-   padding: 0;
-   width: 42em;
-}
-.ui-tabs.ui-tabs-vertical .ui-widget-header {
-   border: none;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav {
-   float: left;
-   width: 15em;
-   background: #CCC;
-   border-radius: 4px 0 0 4px;
-   border-right: 1px solid gray;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
-   clear: left;
-   width: 100%;
-   margin: 0.2em 0;
-   border: 1px solid gray;
-   border-width: 1px 0 1px 1px;
-   border-radius: 4px 0 0 4px;
-   overflow: hidden;
-   z-index: 2;
-   position: relative;
-   right: -2px;
-   
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
-   display: block;
-   width: 100%;
-   padding: 0.6em 1em;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
-   cursor: pointer;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
-   margin-bottom: 0.2em;
-   padding-bottom: 0;
-   border-right: 1px solid white;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {
-   margin-bottom: 10px;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
-   float: left;
-   width: 15em;
-   border-left: 1px solid gray;
-   border-radius: 0;
-   position: relative;
-   left: -1px;
+tabs-left { 
+    position: relative; 
+    padding-left: 6.5em; 
+} 
+tabs-left .ui-tabs-nav { 
+    position: absolute; 
+    left: 0.25em; 
+    top: 0.25em; 
+    bottom: 0.25em; 
+    width: 6em; 
+    padding: 0.2em 0 0.2em 0.2em; 
+} 
+tabs-left .ui-tabs-nav li { 
+    right: 1px; 
+    width: 100%; 
+    border-right: none; 
+    border-bottom-width: 1px !important; 
+    -moz-border-radius: 4px 0px 0px 4px; 
+    -webkit-border-radius: 4px 0px 0px 4px; 
+    border-radius: 4px 0px 0px 4px; 
+    overflow: hidden; 
+} 
+tabs-left .ui-tabs-nav li.ui-tabs-selected, 
+tabs-left .ui-tabs-nav li.ui-state-active { 
+    border-right: 1px solid transparent; 
+} 
+tabs-left .ui-tabs-nav li a { 
+    float: right; 
+    width: 100%; 
+    text-align: right; 
+} 
+tabs-left .ui-tabs-panel { 
+    height: 40em; 
 }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
@@ -130,3 +113,4 @@ Also I have setup each h1 header element to use our custom "Merienda" font famil
 #nav li ul li a:hover {
   background: #394963;
 }
+
