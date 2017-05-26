@@ -1,205 +1,62 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title> dashboard </title>
-      <link href = "tab.css" rel = "stylesheet" type="text/css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-      <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-      <link rel="stylesheet" type="text/css" href="styles.css">
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-      <script type="text/javascript" language="javascript" charset="utf-8" src="nav.js"></script>
-   </head>
-   <body style="width:100%; height:100%;">
-     <div id="tabs" style="width:100%; height:2400px;">
-       <div  style="width:20%; float:left;">
-         <ul id="nav">
-            <li>
-               <a href="#a" id="myDiv">Generic Feedback</a>
-               <ul>
-                  <li><a href="#c" >Designation</a></li>
-                  <li><a href="">Attempt any experiment</a></li>
-                  <li><a href="">rate experience</a></li>
-                  <li><a href="">overall feedback</a></li>
-               </ul>
-            </li>
-            <li>
-               <a href="#b">Lab Feedback</a>
-               <ul>
-                 <li><a href="" >Designation</a></li>
-                  <li><a href="">Know about lab</a></li>
-                  <li><a href="">Any bugs found</a></li>
-                  <li><a href="">Help needed</a></li>
-                  <li><a href="">overall feedback</a></li>
-               </ul>
-            </li>
-            <li>
-               <a href="#c">Exp Feedback</a>
-               <ul>
-                  <li><a href="">Designation</a></li>
-                  <li><a href="">Attempt any experiment</a></li>
-                  <li><a href="">Did experiment work</a></li>
-                  <li><a href="">Any bugs found</a></li>
-                  <li><a href="">about experiment before doing in  Virtual Labs</a></li>
-                  <li><a href="">experiment part of curriculum</a></li>
-                  <li><a href="">experiment help you understand concept better</a></li>
-                  <li><a href="">Recommend this experiment to others</a></li>
-                  <li><a href="">Any other feedback</a></li>
-               </ul>
-            </li>
-            <li>
-               <a href="#d">Open Edx lab</a>
-               <ul>
-                   <li><a href="" >Designation</a></li>
-                  <li><a href="">Know about lab</a></li>
-                  <li><a href="">Any bugs found</a></li>
-                  <li><a href="">Help needed</a></li>
-                  <li><a href="">overall feedback</a></li>
-               </ul>
-            </li>
-            <li>
-               <a href="#e">Open Edx Exp</a>
-               <ul>
-                  <li><a href="">Designation</a></li>
-                  <li><a href="">Attempt any experiment</a></li>
-                  <li><a href="">Did experiment work</a></li>
-                  <li><a href="">Any bugs found</a></li>
-                  <li><a href="">about experiment before doing in  Virtual Labs</a></li>
-                  <li><a href="">experiment part of curriculum</a></li>
-                  <li><a href="">experiment help you understand concept better</a></li>
-                  <li><a href="">Recommend this experiment to others</a></li>
-                  <li><a href="">Any other feedback</a></li>
-               </ul>
-            </li>
-         </ul>
-       </div>
-       <div style="width:80%; float:left">
-         <div id="a"  style= "width:764px; height:468px;">
-            <canvas  id="myChart" style="display: block; height: 1074px; width: 768px;" width="1074" height="768"></canvas>
-         </div>
-         <div id="b" style= "width:764px; height:468px;">
-            <canvas  id="versionChart" style="display: none ; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
-         </div>
-         <div id="c" style= "width:764px; height:468px;">
-            <canvas id="genericExpChart" style="display: none; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
-         </div>
-         <div id="d" style= "width:764px; height:468px;">
-            <canvas id="openEdxLabChart" style="display: none; height: 2066px;
-               width: 997px;"  width="1074" height="768"></canvas>
-         </div>
-         <div id="e" style= "width:764px; height:468px;">
-            <canvas id="openEdxExpChart" style="display: none; height: 2066px;
-               width: 997px;"  width="1074" height="768"></canvas>
-         </div>
-</div>
-         <!--  
-            <ul id="nav">
-               <li>
-                 <a href="#a">Generic Feedback</a>
-                 <ul>
-                   <li><a href="" >Cartoons</a></li>
-                   <li><a href="">Comic Strips</a></li>
-                   <li><a href="">Video Clips</a></li>
-                   <li><a href="">Web GIFs</a></li>
-                   
-                 </ul>
-               </li>
-               <li>
-                 <a href="#b">Lab Feedback</a>
-                 <ul>
-                   <li><a href="">Adobe Photoshop</a></li>
-                   <li><a href="">Branding & Logos</a></li>
-                   <li><a href="">Digital Marketing</a></li>
-                   <li><a href="">lustrations</a></li>
-                   <li><a href="">Infographics</a></li>
-                   <li><a href="">Product Design</a></li>
-                 </ul>
-               </li>
-               <li>
-                 <a href="#c">Exp Feedback</a>
-                 <ul>
-                   <li><a href="">Adobe Photoshop</a></li>
-                   <li><a href="">Branding & Logos</a></li>
-                   <li><a href="">Digital Marketing</a></li>
-                   <li><a href="">lustrations</a></li>
-                   <li><a href="">Infographics</a></li>
-                   <li><a href="">Product Design</a></li>
-                 </ul>
-                 
-                 
-               </li>
-               <li>
-                 <a href="#d">Open Edx lab</a>
-                 <ul>
-                   <li><a href="">Adobe Photoshop</a></li>
-                   <li><a href="">Branding & Logos</a></li>
-                   <li><a href="">Digital Marketing</a></li>
-                   <li><a href="">lustrations</a></li>
-                   <li><a href="">Infographics</a></li>
-                   <li><a href="">Product Design</a></li>
-                 </ul>
-                 
-                 
-               </li>
-               <li>
-                 <a href="#e">Open Edx Exp</a>
-                 <ul>
-                   <li><a href="">Adobe Photoshop</a></li>
-                   <li><a href="">Branding & Logos</a></li>
-                   <li><a href="">Digital Marketing</a></li>
-                   <li><a href="">lustrations</a></li>
-                   <li><a href="">Infographics</a></li>
-                   <li><a href="">Product Design</a></li>
-                 </ul>
-               </li>
-             </ul>
-             <div id="a" style= "width:764px; height:468px;">
-               <canvas id="myChart" style="display: block; height: 1074px; width: 768px;" width="1074" height="768"></canvas>
-             </div>
-             
-             <div id="b" style= "width:764px; height:468px;">
-               <canvas id="versionChart" style="display: block; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
-             </div>
-             
-             <div id="c" style= "width:764px; height:468px;">
-               <canvas id="genericExpChart" style="display: block; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
-             </div>
-             
-             <div id="d" style= "width:764px; height:468px;">
-               <canvas id="openEdxLabChart" style="display: block; height: 2066px;
-               width: 997px;"  width="1074" height="768"></canvas>
-             </div>
-            
-            <div id="e" style= "width:764px; height:468px;">
-               <canvas id="openEdxExpChart" style="display: block; height: 2066px;
-               width: 997px;"  width="1074" height="768"></canvas>
-            </div>-->
+  <head>
+    <title> dashboard </title>
+    <link href = "tab.css" rel = "stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+     <!-- <script type="text/javascript" language="javascript" charset="utf-8"
+              src="nav.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
+     <div id="tabs">
+       <div style="float:left; width:30%;">
+        <ul>
+          <li>
+            <a href="#a">Generic Feedback</a>
+          </li>
+          <li>
+            <a href="#b">Lab Feedback</a>
+          </li>
+          <li>
+            <a href="#c">Exp Feedback</a>
+          </li>
+          <li>
+            <a href="#d">Open Edx lab</a>
+          </li>
+          <li>
+            <a href="#e">Open Edx Exp</a>
+          </li>
+        </ul>
+      </div> 
+      <div style="float:left; width:70%;">
+        <div id="a"  style= "width:764px; height:468px;">
+          <canvas  id="myChart" style="display: block; height: 1074px; width: 768px;" width="1074" height="768"></canvas>
+        </div>
+        <div id="b" style= "width:764px; height:468px;">
+          <canvas  id="versionChart" style="display: block; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
+        </div>
+        <div id="c" style= "width:764px; height:468px;">
+          <canvas id="genericExpChart" style="display: block; height: 2066px; width: 997px;"  width="1074" height="768"></canvas>
+        </div>
+        <div id="d" style= "width:764px; height:468px;">
+          <canvas id="openEdxLabChart" style="display: block; height: 2066px;
+                                              width: 997px;"  width="1074" height="768"></canvas>
+        </div>
+        <div id="e" style= "width:764px; height:468px;">
+          <canvas id="openEdxExpChart" style="display: block; height: 2066px;
+                                              width: 997px;"  width="1074" height="768"></canvas>
+        </div>
       </div>
-     <script>
-      
-       $('#tabs')
-       .tabs();
-       .addClass('ui-tabs-vertical ui-helper-clearfix');
-         
-         if(!$(this).hasClass("open")) {
-         // hide any open menus and remove all other classes
-         $("#nav li ul").slideUp(350);
-         $("#nav li a").removeClass("open");
-         
-         // open our new menu and add the open class
-         $(this).next("ul").slideDown(350);
-         $(this).addClass("open");
-         }
-         
-         else if($(this).hasClass("open")) {
-         $(this).removeClass("open");
-         $(this).next("ul").slideUp(350);
-         }
-         });
-       });
-     </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-      <script src="chart_display.js"></script>
-   </body>
+</div>
+
+
+<script>
+  $('#tabs')
+  .tabs()
+  .addClass('ui-tabs-vertical ui-helper-clearfix');
+  
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="chart_display.js"></script>
+</body>
 </html>
