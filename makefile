@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 CODE_DIR=build/code
 DOC_DIR=build/docs
-SRC_DIR=src/runtime
+SRC_DIR=src
 PWD=$(shell pwd)
 LINT_FILE=${PWD}/${CODE_DIR}/lint_output
 EXIT_FILE=${PWD}/exit.txt
@@ -15,8 +15,8 @@ init:
 
 build: init
 	make -f tangle-make -k all
-	rsync -a ${SRC_DIR}/static ${CODE_DIR}/runtime/
-	rsync -a ${SRC_DIR}/templates ${CODE_DIR}/runtime/
+	#rsync -a ${SRC_DIR}/runtime/static ${CODE_DIR}/runtime/
+	#rsync -a ${SRC_DIR}/runtime/templates ${CODE_DIR}/runtime/
 
 install-pep:
 	sudo pip install pep8

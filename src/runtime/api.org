@@ -13,7 +13,7 @@
 * WebApp
   
 ** Index HTML
-#+BEGIN_SRC  html :tangle templates/index.html :eval no :noweb yes
+#+BEGIN_SRC  html :tangle ../runtime/web/templates/index.html :eval no :noweb yes
 <html>
   <head>
     <title> dashboard </title>
@@ -95,7 +95,7 @@
 
 
 ** JS
-#+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
+#+BEGIN_SRC  javascript :tangle ../runtime/web/static/js/chart_display.js :eval no :noweb yes
 var ctx = document.getElementById("myChart");
 var total_vlabs_generic_fbs = 0;
 var total_exp_fbs = 0;
@@ -451,7 +451,7 @@ var ctx = document.getElementById("openEdxExpChart");
    
    
 ** CSS 
-#+BEGIN_SRC  css :tangle /static/css/tab.css :eval no :noweb yes
+#+BEGIN_SRC  css :tangle ../runtime/web/static/css/tab.css
 body {
   .ui-tabs.ui-tabs-vertical {
     padding: 0;
