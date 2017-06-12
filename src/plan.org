@@ -1,7 +1,7 @@
 * Feedback Visualization 
   - Initially created a container on base4 to request on port 80. Posted 
     edited format of data in the elastic search and made visualization in kibana.
-  - found errors in the  format of data posted into kibana so there was a need
+  - Found errors in the  format of data posted into kibana so there was a need
     to change the format of data to post into kibana due to few issues
     mentioned below.
        - We cannot traverse through different index and access data
