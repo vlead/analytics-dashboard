@@ -10,8 +10,7 @@
   This  displays the visualization of the feedbacks given by the users
 
 
-* WebApp
-  
+* WebApp 
 ** Index HTML
 #+BEGIN_SRC  html :tangle templates/index.html :eval no :noweb yes
 <html>
@@ -19,10 +18,7 @@
     <title> dashboard </title>
     <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-    <link href = "../static/css/tab.css" rel = "stylesheet" type="text/css">
-    
-    
-    
+    <link href = "../static/css/tab.css" rel = "stylesheet" type="text/css">    
      <!-- <script type="text/javascript" language="javascript" charset="utf-8"
               src="nav.js"></script>
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
@@ -466,7 +462,7 @@ var ctx = document.getElementById("openEdxExpChart");
     border: none;
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav {
-    width: 10em;
+    width: 11em;
 /*  background: #CCC;*/
     padding: left;
     margin-left:-44px;
