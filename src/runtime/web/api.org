@@ -190,6 +190,10 @@ total_feedbacks = data['hits']['hits'];
 
 var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:generic-lab-feedback-v2.0&size=10000";
 $.getJSON(elastic_url, function(data) {
+    var lab_fbs = 0;
+    var exp_fbs = 0;
+    var edx_lab_fbs = 0;
+    var edx_exp_fbs = 0;
     total_feedbacks = data['hits']['hits'];
    /// console.log(total_feedbacks);
 //    console.log(total_feedbacks.length);
@@ -247,6 +251,10 @@ var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:generic-ex
 $.getJSON(elastic_url, function(data) {
     console.log("*****************************************************************");
     console.log(data);
+    var lab_fbs = 0;
+    var exp_fbs = 0;
+    var edx_lab_fbs = 0;
+    var edx_exp_fbs = 0;
     total_feedbacks = data['hits']['hits'];
     console.log(total_feedbacks);
     console.log(total_feedbacks.length);
@@ -310,6 +318,10 @@ $.getJSON(elastic_url, function(data) {
     total_feedbacks = data['hits']['hits'];
 //    console.log(total_feedbacks);
   //  console.log(total_feedbacks.length);
+    var lab_fbs = 0;
+    var exp_fbs = 0;
+    var edx_lab_fbs = 0;
+    var edx_exp_fbs = 0;
     for(var i=0;i<total_feedbacks.length;i++){
 	if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_lab"){
 	    edx_lab_fbs += 1;	
@@ -364,6 +376,10 @@ var ctx = document.getElementById("openEdxLabChart");
 
 var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:open-edx-virtual-labs-v2.0_for_experiment&size=10000";
 $.getJSON(elastic_url, function(data) {
+    var lab_fbs = 0;
+    var exp_fbs = 0;
+    var edx_lab_fbs = 0;
+    var edx_exp_fbs = 0;
     total_feedbacks = data['hits']['hits'];
     console.log(total_feedbacks);
     console.log(total_feedbacks.length);
