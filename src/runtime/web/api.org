@@ -69,21 +69,6 @@
        $('#tabs')
   .tabs()
   .addClass('ui-tabs-vertical ui-helper-clearfix');
-
-  var saveData = $.ajax({
-      type: "POST",
-      url: "http://10.4.12.46/vlabs/feedback/_search",
-      data: {
-   "query" : { "query_string" : {"query" : "*"} },
-   "facets" : {
-     "tags" : { "terms" : {"field" : "version"} }
-   }
- },
-       dataType: "json",
-       
-       success: function(resultData, textStatus) { alert("Save Complete") }
-       });
-  saveData.error(function() { alert("Something went wrong"); });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="../static/js/chart_display.js"></script>
@@ -150,6 +135,7 @@ total_feedbacks = data['hits']['hits'];
 	    datasets: [
 		{
 		    label: "Feedbacks Dashboard",
+                    legendText:"open-edx-virtual-labs-v2.0_for_experiment",
 		    backgroundColor: [
 			'rgba(255, 51, 51, 1)',
 			'rgba(14, 128, 154, 1)',
