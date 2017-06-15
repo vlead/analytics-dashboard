@@ -1,3 +1,4 @@
+
 #+TITLE: The REST API
 #+AUTHOR: VLEAD
 #+DATE: [2017-05-12 Fri]
@@ -104,12 +105,17 @@ var total_edx_exp_fbs = 0;
 var url_feedbacks = 0;
 var total_generic_fbs = 0;
 var count = 0;
+var lab_fbs = 0;
+var exp_fbs = 0;
+var edx_lab_fbs = 0;
+var edx_exp_fbs = 0;
+var generic_fbs = 0;
 
 var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?size=10000";
    // total_feedbacks = data['hits']['hits'];
 $.getJSON(elastic_url, function(data) {
 total_feedbacks = data['hits']['hits'];
-  console.log("total_fbs" + total_feedbacks.length);
+  //console.log("total_fbs" + total_feedbacks.length);
     for(var i=0;i<total_feedbacks.length;i++){
 	if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_experiment"){
 	    total_edx_exp_fbs += 1;	
@@ -131,12 +137,12 @@ total_feedbacks = data['hits']['hits'];
 	    total_generic_fbs += 1;	
 	}
     }
-    console.log("open-edx-virtual-labs-v2.0_for_experiments " + total_edx_exp_fbs);
-    console.log("open-edx-virtual-labs-v2.0_for_lab " + total_edx_lab_fbs);
-    console.log("generic-lab-feedback-v2.0 " + total_lab_fbs);
-    console.log("generic-exp-feedback-v2.0 " + total_exp_fbs);
-    console.log("virtual-labs-feedback-v1.0 " + total_vlabs_generic_fbs);
-    console.log("generic-feedback-v1.0 " + total_generic_fbs);
+    //console.log("open-edx-virtual-labs-v2.0_for_experiments " + total_edx_exp_fbs);
+    //console.log("open-edx-virtual-labs-v2.0_for_lab " + total_edx_lab_fbs);
+//    console.log("generic-lab-feedback-v2.0 " + total_lab_fbs);
+//    console.log("generic-exp-feedback-v2.0 " + total_exp_fbs);
+  //  console.log("virtual-labs-feedback-v1.0 " + total_vlabs_generic_fbs);
+    //console.log("generic-feedback-v1.0 " + total_generic_fbs);
     var myBarChart = new Chart(ctx, {
 	type: 'bar',
 	data: {
@@ -185,13 +191,14 @@ total_feedbacks = data['hits']['hits'];
 var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:generic-lab-feedback-v2.0&size=10000";
 $.getJSON(elastic_url, function(data) {
     total_feedbacks = data['hits']['hits'];
-    console.log(total_feedbacks);
-    console.log(total_feedbacks.length);
+   /// console.log(total_feedbacks);
+//    console.log(total_feedbacks.length);
     for(var i=0;i<total_feedbacks.length;i++){
 	 if(total_feedbacks[i]['_source']['version'] == "generic-lab-feedback-v2.0"){
-	    total_lab_fbs += 1;	            
+	    lab_fbs += 1;	            
 	}
     }
+    
 var ctx = document.getElementById("versionChart");    
     var myBarChart = new Chart(ctx, {
 	type: 'bar',
@@ -217,7 +224,7 @@ var ctx = document.getElementById("versionChart");
 			'rgba(255, 51, 153, 1)'
 		    ],
 		    borderWidth: 1,
-		    data: [total_edx_exp_fbs, total_edx_lab_fbs, total_lab_fbs, total_exp_fbs, total_generic_fbs],
+		    data: [edx_exp_fbs, edx_lab_fbs, lab_fbs, exp_fbs, generic_fbs],
 		}
 	    ]
 	}
@@ -236,33 +243,25 @@ var ctx = document.getElementById("versionChart");
   });
 
   //Generic exp chart
-var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:virtual-labs-feedback-v1.0&size=10000";
+var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:generic-exp-feedback-v2.0&size=10000";
 $.getJSON(elastic_url, function(data) {
+    console.log("*****************************************************************");
+    console.log(data);
     total_feedbacks = data['hits']['hits'];
     console.log(total_feedbacks);
     console.log(total_feedbacks.length);
     for(var i=0;i<total_feedbacks.length;i++){
-	if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_experiment"){
-	    total_edx_exp_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_lab"){
-	    total_edx_lab_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "generic-lab-feedback-v2.0"){
-	    total_lab_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "generic-exp-feedback-v2.0"){
-	    total_exp_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "virtual-labs-feedback-v1.0"){
-	    total_generic_fbs += 1;	
+	 if(total_feedbacks[i]['_source']['version'] == "generic-exp-feedback-v2.0"){
+	    exp_fbs += 1;	            
 	}
     }
+  //  console.log("****************************");
+    //console.log(exp_fbs);
 var ctx = document.getElementById("genericExpChart");    
     var myBarChart = new Chart(ctx, {
 	type: 'bar',
 	data: {
-	    labels: ["open-edx-virtual-labs-v2.0_for_experiment", "open-edx-virtual-labs-v2.0_for_lab", "generic-lab-feedback-v2.0", "generic-exp-feedback-v2.0", "virtual-labs-feedback-v1.0"],
+	    labels: ["open-edx-v2.0_for_experiment", "open-edx-v2.0_for_lab", "generic-lab-feedback-v2.0", "generic-exp-feedback-v2.0", "virtual-labs-feedback-v1.0"],
 	    datasets: [
 		{
 		    label: "Feedbacks Dashboard",
@@ -283,7 +282,7 @@ var ctx = document.getElementById("genericExpChart");
 			'rgba(255, 51, 153, 1)'
 		    ],
 		    borderWidth: 1,
-		    data: [total_edx_exp_fbs, total_edx_lab_fbs, total_lab_fbs, total_exp_fbs, total_generic_fbs],
+		    data: [edx_exp_fbs, edx_lab_fbs, lab_fbs, exp_fbs, generic_fbs],
 		}
 	    ]
 	}
@@ -301,27 +300,21 @@ var ctx = document.getElementById("genericExpChart");
     console.log( "complete" );
   });
 
+
+
+
+
+//open edx
 var elastic_url = "http://10.4.12.46/vlabs/feedback/_search?q=version:open-edx-virtual-labs-v2.0_for_lab&size=10000";
 $.getJSON(elastic_url, function(data) {
     total_feedbacks = data['hits']['hits'];
-    console.log(total_feedbacks);
-    console.log(total_feedbacks.length);
+//    console.log(total_feedbacks);
+  //  console.log(total_feedbacks.length);
     for(var i=0;i<total_feedbacks.length;i++){
-	if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_experiment"){
-	    total_edx_exp_fbs += 1;	
+	if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_lab"){
+	    edx_lab_fbs += 1;	
 	}
-	else if(total_feedbacks[i]['_source']['version'] == "open-edx-virtual-labs-v2.0_for_lab"){
-	    total_edx_lab_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "generic-lab-feedback-v2.0"){
-	    total_lab_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "generic-exp-feedback-v2.0"){
-	    total_exp_fbs += 1;	
-	}
-	else if(total_feedbacks[i]['_source']['version'] == "virtual-labs-feedback-v1.0"){
-	    total_generic_fbs += 1;	
-	}
+	
     }
 var ctx = document.getElementById("openEdxLabChart");    
     var myBarChart = new Chart(ctx, {
@@ -348,7 +341,7 @@ var ctx = document.getElementById("openEdxLabChart");
 			'rgba(255, 51, 153, 1)'
 		    ],
 		    borderWidth: 1,
-		    data: [total_edx_exp_fbs, total_edx_lab_fbs, total_lab_fbs, total_exp_fbs, total_generic_fbs],
+		    data: [edx_exp_fbs, edx_lab_fbs, lab_fbs, exp_fbs, generic_fbs],
 		}
 	    ]
 	}
