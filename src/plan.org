@@ -37,10 +37,13 @@
   - Created horizontal tabs and based on the click on the horizontal tabs the
     graphs should be displayed on the screen.
     Worked on visualising data and designed UI
-  - With the help of balamma added accordion to the html page so when we click
+  - Linked the graphs with  horizontal tabs. Also data in the graphs are also
+    dynamically loaded from the base4.
+  - Added Legends to the graphs based on the versions.   
+  - Now next step is to add accordion to the horizontal tabs so that when we click
     on the version it drop downs the list of questions in that particular
     division.
-  - Linked dynamically on the version which scroll down the list of questions
-    and display the overall feedback graph.
-  - Struck with an error in linking the scrolled down list to display the graph.
+  - Later linking the questions with the graphs and load dynamically by taking data
+    from base4.
+
 
