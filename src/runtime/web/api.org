@@ -30,36 +30,36 @@
           <li>
             <a href="#a"  class="noclick nojs">Generic Feedback</a>
               <ul class="nojs">
-                <li><a href="#d">Sub menu 1</a></li>
-                <li><a href="#e">Sub menu 2</a></li>
+                <li><a href="#d">Question 1</a></li>
+                <li><a href="#e">Question 2</a></li>
               </ul>
           </li>
           <li>
             <a href="#b" class="noclick nojs">Lab Feedback</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Sub menu 1</a></li>
-                <li><a href="#e">Sub menu 2</a></li>
+                <li><a href="#d">Question 1</a></li>
+                <li><a href="#e">Question2</a></li>
               </ul>
           </li>
           <li>
             <a href="#c" class="noclick nojs">Exp Feedback</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Sub menu 1</a></li>
-                <li><a href="#e">Sub menu 2</a></li>
+                <li><a href="#d">Question 1</a></li>
+                <li><a href="#e">Question 2</a></li>
               </ul>
           </li>
           <li>
             <a href="#d" class="noclick nojs">Open Edx lab</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Sub menu 1</a></li>
-                <li><a href="#e">Sub menu 2</a></li>
+                <li><a href="#d">Question 1</a></li>
+                <li><a href="#e">Question 2</a></li>
               </ul>
           </li>
           <li>
             <a href="#e" class="noclick nojs">Open Edx Exp</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Sub menu 1</a></li>
-                <li><a href="#e">Sub menu 2</a></li>
+                <li><a href="#d">Question 1</a></li>
+                <li><a href="#e">Question2</a></li>
               </ul>
           </li>
         </ul>
