@@ -30,36 +30,60 @@
           <li>
             <a href="#a"  class="noclick nojs">Generic Feedback</a>
               <ul class="nojs">
-                <li><a href="#d">Question 1</a></li>
-                <li><a href="#e">Question 2</a></li>
+                <li><a href="#d">Designation</a></li>
+                <li><a href="#e">Attempt experiments </a></li>
+                <li><a href="#e">Rate experience</a></li>
+                <li><a href="#e">Other feedback</a></li> 
               </ul>
           </li>
           <li>
             <a href="#b" class="noclick nojs">Lab Feedback</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Question 1</a></li>
-                <li><a href="#e">Question2</a></li>
+                <li><a href="#d">Designation</a></li>
+                <li><a href="#e">Know about lab</a></li>
+                <li><a href="#e">Part of curriculum</a></li>
+                <li><a href="#e">Find any bugs</a></li>
+                <li><a href="#e">Understanding concept better</a></li>
+                <li><a href="#e">Recommend to others</a></li>
+                <li><a href="#e">Other feedback</a></li>
               </ul>
           </li>
           <li>
             <a href="#c" class="noclick nojs">Exp Feedback</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Question 1</a></li>
-                <li><a href="#e">Question 2</a></li>
+                 <li><a href="#d">Designation</a></li>
+                <li><a href="#e">Attempted experiment</a></li>
+                <li><a href="#e">Did experiment work</a></li>
+                <li><a href="#e">Find any bugs</a></li>
+                <li><a href="#e">Know experiment before</a></li>                
+                <li><a href="#e">Understanding concept better</a></li>
+                <li><a href="#e">Recommend to others</a></li>
+                <li><a href="#e">Other feedback</a></li>
               </ul>
           </li>
           <li>
             <a href="#d" class="noclick nojs">Open Edx lab</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Question 1</a></li>
-                <li><a href="#e">Question 2</a></li>
+                 <li><a href="#d">Designation</a></li>
+                <li><a href="#e">Know about lab</a></li>
+                <li><a href="#e">Part of curriculum</a></li>
+                <li><a href="#e">Find any bugs</a></li>
+                <li><a href="#e">Understanding concept better</a></li>
+                <li><a href="#e">Recommend to others</a></li>
+                <li><a href="#e">Other feedback</a></li>
               </ul>
           </li>
           <li>
             <a href="#e" class="noclick nojs">Open Edx Exp</a>
              <ul class="noclick nojs">
-                <li><a href="#d">Question 1</a></li>
-                <li><a href="#e">Question2</a></li>
+                 <li><a href="#d">Designation</a></li>
+                <li><a href="#e">Attempted experiment</a></li>
+                <li><a href="#e">Did experiment work</a></li>
+                <li><a href="#e">Find any bugs</a></li>
+                <li><a href="#e">Know experiment before</a></li>                
+                <li><a href="#e">Understanding concept better</a></li>
+                <li><a href="#e">Recommend to others</a></li>
+                <li><a href="#e">Other feedback</a></li>
               </ul>
           </li>
         </ul>
@@ -646,7 +670,7 @@ var ctx = document.getElementById("openEdxExpChart");
     display: none;    
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li li a {
-    margin-left: 5px;    
+   /* margin-left: 5px;   */ 
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
     margin-bottom: 0.2em;
