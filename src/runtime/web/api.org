@@ -24,25 +24,47 @@
               src="nav.js"></script>
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
      <div id="tabs">
-       <div style="float:left; width:30%;">
-        <ul>
+      
+ <div style="float:left; width:30%;">
+        <ul class="dropdown">
           <li>
-            <a href="#a">Generic Feedback</a>
+            <a href="#a"  class="noclick nojs">Generic Feedback</a>
+              <ul class="nojs">
+                <li><a href="#d">Sub menu 1</a></li>
+                <li><a href="#e">Sub menu 2</a></li>
+              </ul>
           </li>
           <li>
-            <a href="#b">Lab Feedback</a>
+            <a href="#b" class="noclick nojs">Lab Feedback</a>
+             <ul class="noclick nojs">
+                <li><a href="#d">Sub menu 1</a></li>
+                <li><a href="#e">Sub menu 2</a></li>
+              </ul>
           </li>
           <li>
-            <a href="#c">Exp Feedback</a>
+            <a href="#c" class="noclick nojs">Exp Feedback</a>
+             <ul class="noclick nojs">
+                <li><a href="#d">Sub menu 1</a></li>
+                <li><a href="#e">Sub menu 2</a></li>
+              </ul>
           </li>
           <li>
-            <a href="#d">Open Edx lab</a>
+            <a href="#d" class="noclick nojs">Open Edx lab</a>
+             <ul class="noclick nojs">
+                <li><a href="#d">Sub menu 1</a></li>
+                <li><a href="#e">Sub menu 2</a></li>
+              </ul>
           </li>
           <li>
-            <a href="#e">Open Edx Exp</a>
+            <a href="#e" class="noclick nojs">Open Edx Exp</a>
+             <ul class="noclick nojs">
+                <li><a href="#d">Sub menu 1</a></li>
+                <li><a href="#e">Sub menu 2</a></li>
+              </ul>
           </li>
         </ul>
       </div> 
+      </nav>
       <div style="float:left; width:70%;">
         <div id="a"  style= "width:764px; height:468px;">
           <canvas  id="myChart" style="display: block; height: 1074px; width: 768px;" width="1074" height="768"></canvas>
@@ -66,10 +88,20 @@
 
 
      <script>
-       $('#tabs')
-  .tabs()
-  .addClass('ui-tabs-vertical ui-helper-clearfix');
-</script>
+     $('#tabs')
+     .tabs()
+     .addClass('ui-tabs-vertical ui-helper-clearfix');
+
+     $('.dropdown li').click(function() {
+    //Hide all other drop downs that are visible, and remove the class 'selected'
+    $(this).siblings('.selected').removeClass('selected').find('ul:visible').slideUp('fast');
+
+    //Show/Hide dropdowns
+    $(this).toggleClass('selected');
+    $('ul:first', this).stop(true, true).slideToggle('fast');
+});
+
+  </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="../static/js/chart_display.js"></script>
 </body>
@@ -591,7 +623,6 @@ var ctx = document.getElementById("openEdxExpChart");
     width: 11em;
 /*  background: #CCC;*/
     padding: left;
-    margin-left:-44px;
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
     width: 100%;
@@ -603,13 +634,19 @@ var ctx = document.getElementById("openEdxExpChart");
     position: relative;
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
-    display: block;
     width: 100%;
     padding: 0.7em 1em;
     text-decoration:none !important;
+    display: block;
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
     cursor: pointer;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li ul {
+    display: none;    
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li li a {
+    margin-left: 5px;    
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
     margin-bottom: 0.2em;
@@ -628,7 +665,14 @@ var ctx = document.getElementById("openEdxExpChart");
     position: relative;
     left: -1px;
 }
-  
+.dropdown { padding:5px; overflow:hidden; }
+.dropdown > li { background:#efefef; border-right:#666 1px dotted; }
+.dropdown > li:hover { background:#eee; }
+.dropdown > li a { display:inline-block; padding:10px; }
+.dropdown > li.selected > a,
+.dropdown > li a:hover { background:#999; color:#fff; }
+.dropdown > li > ul { display:none; }
+.dropdown > li > ul a { padding:5px; } 
 
 #+END_SRC
 
