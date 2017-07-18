@@ -14,6 +14,7 @@
 *** The following will be represented with overall graphs.
     - Total number of workshops conducted.
     - Total number of feedback.
+    - Representing graphs of all questions as [[https://bl.ocks.org/mbostock/1157787][small multiple]].
 *** Considering the below stated as the end users the requirements are stated.
 **** Lab Developers
      - No. of work shops conducted and when was the workshop conducted.
