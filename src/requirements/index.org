@@ -14,7 +14,21 @@
 *** The following will be represented with overall graphs.
     - Total number of workshops conducted.
     - Total number of feedback.
-    - Representing graphs of all questions as [[https://bl.ocks.org/mbostock/1157787][small multiple]].
+      - There are currently running 6 versions of feedback.
+        - virtual labs feedback v1.0.
+        - generic virtual labs feedback v2.0.
+        - generic labs feedback v2.0.
+        - generic experiments feedback v2.0.
+        - Open-Edx labs feedback v2.0.
+        - Open-Edx experiments feedback v2.0.
+    - All the above 6 versions of feedback needs to be represented 
+      as [[https://bl.ocks.org/mbostock/1157787][small multiple]].
+    - For a specific version for example generic labs feedback, all the
+      questions of this versions again needs to be represented as small
+      multiple. 
+    - The individual graphs containing the specific set of questions for a
+      particular version would be displayed from the small multiple graphs for
+      all the 6 feedback versions. 
 *** Considering the below stated as the end users the requirements are stated.
 **** Lab Developers
      - No. of work shops conducted and when was the workshop conducted.
