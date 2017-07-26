@@ -34,11 +34,14 @@
 #+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
 var dataSet
 var  dict = {}
-var canvas = d3.select("#scatter").append("svg")
+var gap = 50
+
+var canvas  = d3.select("#scatter").append("svg")
 .attr({
   height : 1000,
   width : 1000
 });
+
 
 $.ajax({// Ajax call for URL
     	method: 'GET',
@@ -55,7 +58,7 @@ $.ajax({// Ajax call for URL
         year = dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] // extracting the year from the given date.
       }
         // if(typeof(dataSet["hits"]["hits"][index1]["_source"]["responses"]) != "undefined")
-        //  for(var index2 = 0; index2 < dataSet["hits"]["hits"][index1]["_source"]["responses"].length;index2++){ // this is the secondary level for accessing the responses and questions.
+        //  for(var index2 = 0; index2dataset.max() * gap < dataSet["hits"]["hits"][index1]["_source"]["responses"].length;index2++){ // this is the secondary level for accessing the responses and questions.
             /*
              this piece of code will maintain a dictionsary with year as key and number of repetetions as values.
              In if condition you are checking whether the year is present or not. If it is true, then we have to update the value of that year by incrementing by 1(that's done  else condition)
@@ -73,9 +76,10 @@ $.ajax({// Ajax call for URL
           // console.log(dataSet["hits"]["hits"][index1]["_source"]["date"])//["responses"][index2]["answers"][0]["name"])
         //  }// end of innner for loop
     }// ennd of outer for loop
+
     i = 0
     var max = -1
-    var maxHeight = canvas.attr("height") // defines the maximum height of you grpah you are trying to plot and fit the original data.
+    var maxHeight = canvas.attr("height")/2  // defines the maximum height of you grpah you are trying to plot and fit the original data.
     for (var key in dict){// loop to find the maximum number to define the scale
       if (  max < dict[key]) max = dict[key]
     }
@@ -83,27 +87,70 @@ $.ajax({// Ajax call for URL
     for (var index = 0; index < max;){ // adding scale to graph.
       canvas.append("text")
               .attr({
-                x : 25,
+                x : 30,
                 y : (max - index) * difference
               })
+              //.attr("transform","scale(0.5)")
               .text(index)
-              index += 500 // defines the differenc between each tick and also helps to decide how many ticks.
+              .attr("text-anchor", "end")
+              index += 100 // defines the differenc between each tick and also helps to decide how many ticks.
     }
+var xAxis = canvas.append("line")
+.attr("x1", gap-6)
+.attr("x2", (1+Object.keys(dict).length) * gap)
+.attr("y1", maxHeight + 7 )
+.attr("y2", maxHeight + 7)
+.attr("stroke-width", 2)
+.attr("stroke", "black")
+//.attr("transform", " scale(0.5)");
+var yAxis = canvas.append("line")
+.attr("x1", gap-6)
+.attr("x2", gap-6)
+.attr("y1",  0)
+.attr("y2", max * difference +6)
+.attr("stroke-width", 2)
+.attr("stroke", "black")
+
+
     for(var key in dict){
       i++;
       canvas.append("rect") // adding rectangles
+             .attr("x", i * gap)
+             .attr("width",gap-10)
+             .attr("y",max * difference)
+             .attr("height",0)
+             .transition()
+             .duration(function(){return dict[key]/2})
             .attr({
               id : "bars-year",
-              x : i * 40  ,
+              
               y : (max - dict[key]) * difference,
-              width :  25,
+              width :  gap - 10,
               height :dict[key] * difference,
               fill : "teal"
             })
-            .on("click",function(){console.log(key);})
-    }
+
+            canvas.append("text") 
+            .attr({
+              x : i * gap  ,
+              y : (max * difference) + 25
+            })
+            .text(key)
+
+            canvas.append("text") 
+            .attr({
+              x : (i * gap) + ((gap-10)/2)  ,
+              y : ((max - dict[key]) * difference) +15,
+              fill : "white"
+            })
+            .attr("text-anchor", "middle")
+            .text(dict[key])
+
+            }
     console.log(dict);
  	});
+
+
 
 //----------------------------------------------------------------------------------
 //dataSet["hits"]["hits"][0]["_source"]["responses"][0]["answers"][0]["name"]
