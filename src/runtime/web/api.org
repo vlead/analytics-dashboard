@@ -17,13 +17,17 @@
 <html>
 <head>
 <title>Dashboard</title>
+
 </head>
 <body>
-<div id="scatter"></div>
+<div class="container-fluid">
+<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4" align="center" id="scatter"></div>
+</div>
 </body>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/home/osboxes/vlabs/analytics-dashboard/build/code/runtime/web/static/js/chart_display.js"></script>
+<script src="/home/osboxes/Downloads/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 </html>
 
@@ -39,7 +43,7 @@ var gap = 50
 var canvas  = d3.select("#scatter").append("svg")
 .attr({
   height : 1000,
-  width : 1000
+  width : 500
 });
 
 
@@ -119,6 +123,11 @@ var yAxis = canvas.append("line")
              .attr("width",gap-10)
              .attr("y",max * difference)
              .attr("height",0)
+             .attr("rx",3)
+             .on("mouseover", function() {d3.select(this).transition()
+                                          .attr("fill", "#D3583D")})
+              .on("mouseout", function() {d3.select(this).transition()
+                                          .attr("fill", "teal")})
              .transition()
              .duration(function(){return dict[key]/2})
             .attr({
