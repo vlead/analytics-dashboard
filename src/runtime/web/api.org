@@ -92,12 +92,12 @@ $.ajax({// Ajax call for URL
     for (var index = 0; index < max;){ // adding scale to graph.
       canvas.append("text")
               .attr({
-                x : 30,
+                x : gap-31,
                 y : (max - index) * difference
               })
               //.attr("transform","scale(0.5)")
               .text(index)
-              .attr("text-anchor", "end")
+              .attr("text-anchor", "middle")
               index += 100 // defines the differenc between each tick and also helps to decide how many ticks.
     }
 var xAxis = canvas.append("line")
