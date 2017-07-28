@@ -12,6 +12,7 @@
   
 ** Requirements
 *** The following will be represented with overall graphs.
+    - Total number of feedbacks with respect to each year.
     - Total number of workshops conducted.
     - Total number of feedback.
       - There are currently running 6 versions of feedback.
