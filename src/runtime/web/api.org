@@ -125,9 +125,9 @@ var yAxis = canvas.append("line")
              .attr("height",0)
              .attr("rx",3)
              .on("mouseover", function() {d3.select(this).transition()
-                                          .attr("fill", "#D02316")})
+                                          .attr("fill", "#F56C4E")})
               .on("mouseout", function() {d3.select(this).transition()
-                                          .attr("fill", "teal")})
+                                          .attr("fill", "#8CD3DD")})
              .transition()
              .duration(function(){return dict[key]/2})
             .attr({
@@ -136,7 +136,7 @@ var yAxis = canvas.append("line")
               y : (max - dict[key]) * difference,
               width :  gap - 10,
               height :dict[key] * difference,
-              fill : "teal"
+              fill : "#8CD3DD"
             })
 
             canvas.append("text") 
