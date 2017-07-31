@@ -12,11 +12,10 @@ cd emacs-24.5
 ./configure
 make
 sudo checkinstall
-#+END_SRC
 
+#+END_SRC
 - Above commands are well tested on =Ubuntu12.04 X64= bit
 - For More documentation visit http://wiki.vlead.vlabs.ac.in/index.php/How_to_setup_emacs_and_org_8
-
 *** Install =org v8.3.6=
 #+BEGIN_SRC 
 mkdir -p ~/emacs/lisp
@@ -26,7 +25,7 @@ tar zxvf org-8.3.6.tar.gz
 ln -s org-8.3.6 org-8.2.10
 #+END_SRC
 
-*** Setup developement environment for analytics-dashboard to run
+*** Setup developement environment for analytics dashboard app to run
 - Clone the repository
 #+BEGIN_SRC 
 git clone https://github.com/vlead/analytics-dashboard.git
