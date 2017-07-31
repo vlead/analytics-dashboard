@@ -1,0 +1,39 @@
+*  Analytics Dashboard
+** Pre-requisites to build the sources on Ubunut12.04
+*** Install =emacs v24.5=
+
+#+BEGIN_SRC 
+sudo apt-get install checkinstall
+mkdir -p ~/src
+cd ~/src
+wget http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
+tar xf emacs-24.5.tar.gz
+cd emacs-24.5
+./configure
+make
+sudo checkinstall
+
+#+END_SRC
+- Above commands are well tested on =Ubuntu12.04 X64= bit
+- For More documentation visit http://wiki.vlead.vlabs.ac.in/index.php/How_to_setup_emacs_and_org_8
+*** Install =org v8.3.6=
+#+BEGIN_SRC 
+mkdir -p ~/emacs/lisp
+cd ~/emacs/lisp
+wget http://orgmode.org/org-8.3.6.tar.gz
+tar zxvf org-8.3.6.tar.gz
+ln -s org-8.3.6 org-8.2.10
+#+END_SRC
+
+*** Setup developement environment for analytics dashboard app to run
+- Clone the repository
+#+BEGIN_SRC 
+git clone https://github.com/vlead/analytics-dashboard.git
+cd analytics-dashboard
+make
+#+END_SRC
+- Build the sources
+#+BEGIN_SRC 
+cd analytics-dashboard
+make
+#+END_SRC
