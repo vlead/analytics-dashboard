@@ -1,5 +1,5 @@
 *  Analytics Dashboard
-** Pre-requisites to build the sources on Ubunut12.04
+** Pre-requisites to build the sources on Ubunut14.04
 *** Install =emacs v24.5=
 
 #+BEGIN_SRC 
@@ -14,7 +14,7 @@ make
 sudo checkinstall
 
 #+END_SRC
-- Above commands are well tested on =Ubuntu12.04 X64= bit
+- Above commands are well tested on =Ubuntu14.04 X64= bit
 - For More documentation visit http://wiki.vlead.vlabs.ac.in/index.php/How_to_setup_emacs_and_org_8
 *** Install =org v8.3.6=
 #+BEGIN_SRC 
@@ -32,8 +32,8 @@ git clone https://github.com/vlead/analytics-dashboard.git
 cd analytics-dashboard
 make
 #+END_SRC
-- Build the sources
+- Run application on local machine
 #+BEGIN_SRC 
-cd analytics-dashboard
-make
+cd build/code/runtime/web/templates
+firefox index.html
 #+END_SRC
