@@ -17,19 +17,13 @@
 <html>
 <head>
 <title>Dashboard</title>
-
 </head>
 <body>
-<div class="container-fluid">
-<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4" align="center" id="scatter"></div>
+<div id='dashboard'>
 </div>
-</body>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="../static/js/chart_display.js"></script>
-<!-- Write your comments here 
-<script src="/home/osboxes/Downloads/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script> -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
 </html>
 
 #+END_SRC
@@ -37,138 +31,388 @@
 
 ** JS
 #+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
-var dataSet
-var  dict = {}
-var gap = 50
 
-var canvas  = d3.select("#scatter").append("svg")
-.attr({
-  height : 1000,
-  width : 500
-});
+function dashboard(id, fData){
+    var barColor = 'steelblue';
+   
+    function segColor(c){ return {virtual_labs_feedback_v1_0:"#67b7dc", open_edx_virtual_labs_v2_0_for_lab:"#fdd400", generic_feedback_v2_0:"#84b761", open_edx_virtual_labs_v2_0_for_experiment:"#cc4748", generic_exp_feedback_v2_0:"#2f4074", generic_lab_feedback_v2_0:"#b7b83f"}[c]; }
+    
+    // compute total for each state.
+        
+    fData.forEach(function(d){
+
+        if(d.freq.virtual_labs_feedback_v1_0==0 || !d.freq.virtual_labs_feedback_v1_0){
+            d.freq.virtual_labs_feedback_v1_0=0
+        }
+        if(d.freq.open_edx_virtual_labs_v2_0_for_lab==0 || !d.freq.open_edx_virtual_labs_v2_0_for_lab){
+            d.freq.open_edx_virtual_labs_v2_0_for_lab=0
+        }
+        if(d.freq.open_edx_virtual_labs_v2_0_for_experiment==0 || !d.freq.open_edx_virtual_labs_v2_0_for_experiment){
+            d.freq.open_edx_virtual_labs_v2_0_for_experiment=0
+        }
+        if(d.freq.generic_feedback_v2_0==0 || !d.freq.generic_feedback_v2_0){
+            d.freq.generic_feedback_v2_0=0
+        }
+        if(d.freq.generic_exp_feedback_v2_0==0 || !d.freq.generic_exp_feedback_v2_0){
+            d.freq.generic_exp_feedback_v2_0=0
+        }
+        if(d.freq.generic_lab_feedback_v2_0==0 || !d.freq.generic_lab_feedback_v2_0){
+            d.freq.generic_lab_feedback_v2_0=0
+        }
+        d.total= parseInt(d.freq.virtual_labs_feedback_v1_0+ d.freq.open_edx_virtual_labs_v2_0_for_lab + d.freq.generic_feedback_v2_0 + d.freq.open_edx_virtual_labs_v2_0_for_experiment + d.freq.generic_exp_feedback_v2_0 + d.freq.generic_lab_feedback_v2_0);
+        
+    });
+    
+    // function to handle histogram.
+    function histoGram(fD){
+        var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
+        hGDim.w = 500 - hGDim.l - hGDim.r, 
+        hGDim.h = 300 - hGDim.t - hGDim.b;
+            
+        //create svg for histogram.
+        var hGsvg = d3.select(id).append("svg")
+            .attr("width", hGDim.w + hGDim.l + hGDim.r)
+            .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
+            .attr("transform", "translate(" + hGDim.l + "," + hGDim.t + ")");
+
+        // create function for x-axis mapping.
+        var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
+                .domain(fD.map(function(d) { return d[0]; }));
+
+        // Add x-axis to the histogram svg.
+        hGsvg.append("g").attr("class", "x axis")
+            .attr("transform", "translate(0," + hGDim.h + ")")
+            .call(d3.svg.axis().scale(x).orient("bottom"));
+
+        // Create function for y-axis map.
+        var y = d3.scale.linear().range([hGDim.h, 0])
+                .domain([0, d3.max(fD, function(d) { return d[1]; })]);
+
+        // Create bars for histogram to contain rectangles and freq labels.
+        var bars = hGsvg.selectAll(".bar").data(fD).enter()
+                .append("g").attr("class", "bar");
+        
+        //create the rectangles.
+        bars.append("rect")
+            .attr("x", function(d) { return x(d[0]); })
+            .attr("y", function(d) { return y(d[1]); })
+            .attr("width", x.rangeBand())
+            .attr("height", function(d) { return hGDim.h - y(d[1]); })
+            .attr('fill',barColor)
+            .on("click",mouseover)// mouseover is defined below.
+            // mouseout is defined below.
+            
+        //Create the frequency labels above the rectangles.
+        bars.append("text").text(function(d){ return d3.format(",")(d[1])})
+            .attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
+            .attr("y", function(d) { return y(d[1])-5; })
+            .attr("text-anchor", "middle");
+        
+        function mouseover(d){  // utility function to be called on mouseover.
+            // filter for selected state.
+            $('.pieChart').show();
+            $('table').show()
+            
+            
+            var st = fData.filter(function(s){ return s.State == d[0];})[0],
+                nD = d3.keys(st.freq).map(function(s){ return {type:s, freq:st.freq[s]};});
+               
+            // call update functions of pie-chart and legend.    
+            pC.update(nD,st);
+            leg.update(nD,st);
+        }
+        
+        function mouseout(d){    // utility function to be called on mouseout.
+            // reset the pie-chart and legend.    
+            pC.update(tF);
+            leg.update(tF);
+        }
+        
+        // create function to update the bars. This will be used by pie-chart.
+        hG.update = function(nD, color){
+            // update the domain of the y-axis map to reflect change in frequencies.
+            y.domain([0, d3.max(nD, function(d) { return d[1]; })]);
+            
+            // Attach the new data to the bars.
+            var bars = hGsvg.selectAll(".bar").data(nD);
+            
+            // transition the height and color of rectangles.
+            bars.select("rect").transition().duration(500)
+                .attr("y", function(d) {return y(d[1]); })
+                .attr("height", function(d) { return hGDim.h - y(d[1]); })
+                .attr("fill", color);
+
+            // transition the frequency labels location and change value.
+            bars.select("text").transition().duration(500)
+                .text(function(d){ return d3.format(",")(d[1])})
+                .attr("y", function(d) {return y(d[1])-5; });            
+        }        
+        return hG;
+    }
+    
+    // function to handle pieChart.
+    function pieChart(pD){
+        var pC ={},    pieDim ={w:250, h: 250};
+        pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
+                
+        // create svg for pie chart.
+        var piesvg = d3.select(id).append("svg").attr('class','pieChart')
+            .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
+            .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
+        
+        // create function to draw the arcs of the pie slices.
+        var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
+
+        // create a function to compute the pie slice angles.
+        var pie = d3.layout.pie().sort(null).value(function(d) { return d.freq; });
+
+        // Draw the pie slices.
+        piesvg.selectAll("path").data(pie(pD)).enter().append("path").attr("d", arc)
+            .each(function(d) { this._current = d; })
+            .style("fill", function(d) { return segColor(d.data.type); })
+            
+
+        // create function to update pie-chart. This will be used by histogram.
+        pC.update = function(nD){
+            piesvg.selectAll("path").data(pie(nD)).transition().duration(500)
+                .attrTween("d", arcTween);
+        }        
+        // Utility function to be called on mouseover a pie slice.
+        function mouseover(d){
+            // call the update function of histogram with new data.
+            hG.update(fData.map(function(v){ 
+                return [v.State,v.freq[d.data.type]];}),segColor(d.data.type));
+        }
+        //Utility function to be called on mouseout a pie slice.
+        function mouseout(d){
+            // call the update function of histogram with all data.
+            hG.update(fData.map(function(v){
+                return [v.State,v.total];}), barColor);
+        }
+        // Animating the pie-slice requiring a custom function which specifies
+        // how the intermediate paths should be drawn.
+        function arcTween(a) {
+            var i = d3.interpolate(this._current, a);
+            this._current = i(0);
+            return function(t) { return arc(i(t));    };
+        }    
+        return pC;
+    }
+    
+    // function to handle legend.
+    function legend(lD,hh){
+        var leg = {};
+            
+        // create table for legend.
+        var legend = d3.select(id).append("table").attr('class','legend').append('tr').append('td').attr('colspan','4').append('p').attr('text-align','center').attr("class",'legendFreq').text('Total');
+
+        // create one row per segment.
+        var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
+        
+            
+        // create the first column for each segment.
+        tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
+            .attr("width", '16').attr("height", '16')
+			.attr("fill",function(d){ return segColor(d.type); });
+            
+        // create the second column for each segment.
+        tr.append("td").text(function(d){ return d.type;});
+
+        // create the third column for each segment.
+        tr.append("td").attr("class",'legendFreq')
+            .text(function(d){ return d3.format(",")(d.freq);});
+
+        // create the fourth column for each segment.
+        tr.append("td").attr("class",'legendPerc')
+            .text(function(d){ return getLegend(d,lD);});
+
+        // Utility function to be used to update the legend.
+        leg.update = function(nD,stmu){
+            
+            // update the data attached to the row elements.
+            var l = legend.select("tbody").selectAll("tr").data(nD);
+
+            // update the frequencies.
+            l.select('.legenYear').text(stmu.State)
+            l.select(".legendFreq").text(function(d){ return d3.format(",")(d.freq);});
+
+            // update the percentage column.
+            l.select(".legendPerc").text(function(d){ return getLegend(d,nD);});        
+        }
+        
+        function getLegend(d,aD){ // Utility function to compute percentage.
+            return d3.format("%")(d.freq/d3.sum(aD.map(function(v){ return v.freq; })));
+        }
+
+        return leg;
+    }
+    
+    // calculate total frequency by segment for all state.
+    
+    var tF = ['virtual_labs_feedback_v1_0',' open_edx_virtual_labs_v2_0_for_lab','generic_feedback_v2_0','edx_virtual_labs_v2_0_for_experiment','generic_exp_feedback_v2_0','generic_lab_feedback_v2_0'].map(function(d){ 
+        return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
+    });    
+    
+    // calculate total frequency by state for all segment.
+    var sF = fData.map(function(d){return [d.State,d.total];});
+
+    var hG = histoGram(sF) // create the histogram.
+         // create the pie-chart.
+         pC = pieChart(tF)
+         
+            leg= legend(tF,sF); 
+            $('.pieChart').hide();
+            $('table').hide()
+
+         // create the legend.
+}
+
+/*var freqData=[
+{State:'2015',freq:{generic:4786, open1:1310, close:130,value4:0123, value5:4550, value6:123}}
+,{State:'2016',freq:{generic:2000, open1:1419, close:200,value4:255, value5:1122, value6:456}}
+,{State:'2017',freq:{generic:1000, open1:1519, close:257,value4:789, value5:1234, value6:249}}
+];*/
 
 
-$.ajax({// Ajax call for URL
-    	method: 'GET',
-    	url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
-    	type: 'json' // define type here
- 	})
- 	.done(function(data/*this is the data or response*/) {
-    var i = 0
-    dataSet = data// meh !! for no reason.. You can actually troubleshoot from console using this variable => scope: global
 
-    for(var index1 = 0; index1 < dataSet["hits"]["hits"].length; index1++){  //  iterates through first lebel
-      var year;
-      if(typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined" ){ // filters the undefined type to prevent stopping of execution
-        year = dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] // extracting the year from the given date.
-      }
-        // if(typeof(dataSet["hits"]["hits"][index1]["_source"]["responses"]) != "undefined")
-        //  for(var index2 = 0; index2dataset.max() * gap < dataSet["hits"]["hits"][index1]["_source"]["responses"].length;index2++){ // this is the secondary level for accessing the responses and questions.
-            /*
-             this piece of code will maintain a dictionsary with year as key and number of repetetions as values.
-             In if condition you are checking whether the year is present or not. If it is true, then we have to update the value of that year by incrementing by 1(that's done  else condition)
-             if year is a new entry then just intialize with 1.
-            */
-           if( !(year in dict)){
-             dict[year] = 1
-           }
-           else {
-             var temp = dict[year]
-             temp = temp + 1
-             dict[year] = temp
-           }
+  $.ajax({// Ajax call for URL
+      method: 'GET',
+      url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
+      type: 'json' // define type here
+    }).done(function (data/*this is the data or response*/) {
+        var i = 0
+    var Selectedversions;
+    
+    var freq={}
+    var dict={}
+    var dict2={}
+    var freqDataTemp=[]
+        dataSet = data// meh !! for no reason.. You can actually troubleshoot from console using this variable => scope: global
+
+        console.log(dataSet["hits"]["hits"])
+        var t=0
+       for(var curryear=2015 ;curryear<=2017; curryear++){
+
+        for (var index1 = 0; index1 < dataSet["hits"]["hits"].length; index1++) {  //  iterates through first lebel
+          var year;
+          if(dataSet.hits.hits[index1]._source.version)
+           {
+          
+          if (typeof (dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined") { // filters the undefined type to prevent stopping of execution
+            year = dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] // extracting the year from the given date.
+          }
+          // if(typeof(dataSet["hits"]["hits"][index1]["_source"]["responses"]) != "undefined")
+          //  for(var index2 = 0; index2dataset.max() * gap < dataSet["hits"]["hits"][index1]["_source"]["responses"].length;index2++){ // this is the secondary level for accessing the responses and questions.
+          /*
+           this piece of code will maintain a dictionsary with year as key and number of repetetions as values.
+           In if condition you are checking whether the year is present or not. If it is true, then we have to update the value of that year by incrementing by 1(that's done  else condition)
+           if year is a new entry then just intialize with 1.
+          */
+          if (!(year in dict)) {
+            dict[year] = 1
+          }
+          else {
+            var temp = dict[year]
+            temp = temp + 1
+            dict[year] = temp
+          }
 
           // console.log(dataSet["hits"]["hits"][index1]["_source"]["date"])//["responses"][index2]["answers"][0]["name"])
-        //  }// end of innner for loop
-    }// ennd of outer for loop
+          //  }// end of innner for loop
+        }// ennd of outer for loop
+        if (typeof (dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined" && dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] == curryear) {
 
-    i = 0
-    var max = -1
-    var maxHeight = canvas.attr("height")/2  // defines the maximum height of you grpah you are trying to plot and fit the original data.
-    for (var key in dict){// loop to find the maximum number to define the scale
-      if (  max < dict[key]) max = dict[key]
+
+                            if (typeof (dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined") { // filters the undefined type to prevent stopping of execution
+                                Selectedversions = dataSet["hits"]["hits"][index1]["_source"]["version"] // extracting the year from the given date.
+                            }
+                           
+                            if (!(Selectedversions in dict2)) {
+                                dict2[Selectedversions] = 1
+                            }
+                            else {
+                                var temp = dict2[Selectedversions]
+                                temp = temp + 1
+                                dict2[Selectedversions] = temp
+                            }
+
+                        }
+    
+      }
+      
+
+var freq= JSON.parse(JSON.stringify(dict2))
+console.log(freq)
+     freqDataTemp[t]={
+         State:''+curryear,
+         freq
+     }
+     t++
+     console.log(freqDataTemp[t])
     }
-    var difference = maxHeight/max // getting the difference to fit the original data onto new coordinate systems
-    for (var index = 0; index < max;){ // adding scale to graph.
-      canvas.append("text")
-              .attr({
-                x : gap-31,
-                y : (max - index) * difference
-              })
-              //.attr("transform","scale(0.5)")
-              .text(index)
-              .attr("text-anchor", "middle")
-              index += 100 // defines the differenc between each tick and also helps to decide how many ticks.
-    }
-var xAxis = canvas.append("line")
-.attr("x1", gap-6)
-.attr("x2", (1+Object.keys(dict).length) * gap)
-.attr("y1", maxHeight + 7 )
-.attr("y2", maxHeight + 7)
-.attr("stroke-width", 2)
-.attr("stroke", "black")
-//.attr("transform", " scale(0.5)");
-var yAxis = canvas.append("line")
-.attr("x1", gap-6)
-.attr("x2", gap-6)
-.attr("y1",  0)
-.attr("y2", max * difference +6)
-.attr("stroke-width", 2)
-.attr("stroke", "black")
+    
+    
+    var str = JSON.stringify(freqDataTemp);
+str = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
+str = str.replace(/open-edx-virtual-labs-v2.0_for_lab/g, 'open_edx_virtual_labs_v2_0_for_lab');
+str = str.replace(/generic-feedback-v2.0/g, 'generic_feedback_v2_0');
+str = str.replace(/open-edx-virtual-labs-v2.0_for_experiment/g, 'open_edx_virtual_labs_v2_0_for_experiment');
+str = str.replace(/generic-exp-feedback-v2.0/g, 'generic_exp_feedback_v2_0');
+str = str.replace(/generic-lab-feedback-v2.0/g, 'generic_lab_feedback_v2_0');
 
+     i = 0
+console.log(str)
+freqDataTemp = JSON.parse(str);
+       var max = -1
+        //var maxHeight = canvas.attr("height") / 2  // defines the maximum height of you grpah you are trying to plot and fit the original data.
+        for (var key in dict) {// loop to find the maximum number to define the scale
+          if (max < dict[key]) max = dict[key]
+        }
+       // var difference = maxHeight / max // getting the difference to fit the original data onto new coordinate systems
+        
+     
+   dashboard('#dashboard',freqDataTemp);
+        
+      });
 
-    for(var key in dict){
-      i++;
-      canvas.append("rect") // adding rectangles
-             .attr("x", i * gap)
-             .attr("width",gap-10)
-             .attr("y",max * difference)
-             .attr("height",0)
-             .attr("rx",3)
-             .on("mouseover", function() {d3.select(this).transition()
-                                          .attr("fill", "#F56C4E")})
-              .on("mouseout", function() {d3.select(this).transition()
-                                          .attr("fill", "#53b8c6")})
-             .transition()
-             .duration(function(){return dict[key]/2})
-            .attr({
-              id : "bars-year",
-              
-              y : (max - dict[key]) * difference,
-              width :  gap - 10,
-              height :dict[key] * difference,
-              fill : "#53b8c6"
-            })
-
-            canvas.append("text") 
-            .attr({
-              x : i * gap  ,
-              y : (max * difference) + 25
-            })
-            .text(key)
-
-            canvas.append("text") 
-            .attr({
-              x : (i * gap) + ((gap-10)/2)  ,
-              y : ((max - dict[key]) * difference) +15,
-              fill : "white"
-            })
-            .attr("text-anchor", "middle")
-            .text(dict[key])
-
-            }
-    console.log(dict);
- 	});
-
-
-
-//----------------------------------------------------------------------------------
-//dataSet["hits"]["hits"][0]["_source"]["responses"][0]["answers"][0]["name"]
 #+END_SRC
    
    
 ** CSS 
 #+BEGIN_SRC  css :tangle /static/css/tab.css :eval no :noweb yes
+body{
+    width:1060px;
+    margin:50px auto;
+}
+path {  stroke: #fff; }
+path:hover {  opacity:0.9; }
+rect:hover {  fill:blue; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+    margin-bottom:76px;
+    display:inline-block;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+.legend td{
+    padding:4px 5px;
+    vertical-align:bottom;
+}
+.legendFreq, .legendPerc{
+    align:right;
+    width:50px;
+}
 #+END_SRC
 
 
