@@ -17,13 +17,14 @@
 <html>
 <head>
 <title>Dashboard</title>
+<link rel="stylesheet" href="../static/css/tab.css" />
 </head>
 <body>
 <div id='dashboard'>
 </div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="/home/osboxes/vlabs/analytics-dashboard/build/code/runtime/web/static/js/chart_display.js"></script>
+<script src="../static/js/chart_display.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
   crossorigin="anonymous"></script>
 </body>
