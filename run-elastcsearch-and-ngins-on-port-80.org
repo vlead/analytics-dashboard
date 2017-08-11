@@ -16,8 +16,8 @@
 
 
 ** Setting up JVM
-#+BEGIN_EXAMPLE
    To install OpenJDK, run:
+#+BEGIN_EXAMPLE
    sudo add-apt-repository ppa:webupd8team/java
    sudo apt-get update
    sudo apt-get install openjdk-6-jre
@@ -192,8 +192,10 @@ will result in the below error.
    In the above config, we have only created the configuration. 
    To enable it, we need to create a symlink for this in
    /etc/nginx/sites-enabled.
+   
+   Run the following command in terminal 
 #+BEGIN_EXAMPLE
-   Run the following command in terminal   
+     
    sudo ln /etc/nginx/sites-available/elasticsearch /etc/nginx/sites-enabled/
 #+END_EXAMPLE
    Now we need to reload the nginx configuration for the new site to take
