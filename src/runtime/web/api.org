@@ -25,8 +25,6 @@
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../static/js/chart_display.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-  crossorigin="anonymous"></script>
 </body>
 </html>
 
@@ -39,12 +37,12 @@
 function dashboard(id, fData){
     var barColor = 'steelblue';
    
-    function segColor(c){ return {virtual_labs_feedback_v1_0:"#67b7dc", open_edx_virtual_labs_v2_0_for_lab:"#fdd400", generic_feedback_v2_0:"#84b761", open_edx_virtual_labs_v2_0_for_experiment:"#cc4748", generic_exp_feedback_v2_0:"#2f4074", generic_lab_feedback_v2_0:"#b7b83f"}[c]; }
+    function segColor(c){ return {virtual_labs_feedback_v1_0:"#cd82ad", open_edx_virtual_labs_v2_0_for_lab:"#cc4748", generic_feedback_v2_0:"#84b761", open_edx_virtual_labs_v2_0_for_experiment: "#fdd400", generic_exp_feedback_v2_0:"#67b7dc",generic_lab_feedback_v2_0:"#2f4074"}[c]; }
     
     // compute total for each state.
         
     fData.forEach(function(d){
-
+        
         if(d.freq.virtual_labs_feedback_v1_0==0 || !d.freq.virtual_labs_feedback_v1_0){
             d.freq.virtual_labs_feedback_v1_0=0
         }
@@ -76,6 +74,7 @@ function dashboard(id, fData){
         //create svg for histogram.
         var hGsvg = d3.select(id).append("svg")
             .attr("width", hGDim.w + hGDim.l + hGDim.r)
+            .attr("class",'histogramExample')
             .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
             .attr("transform", "translate(" + hGDim.l + "," + hGDim.t + ")");
 
@@ -114,8 +113,9 @@ function dashboard(id, fData){
         
         function mouseover(d){  // utility function to be called on mouseover.
             // filter for selected state.
-            $('.pieChart').show();
-            $('table').show()
+            $('.histogramExample').animate({'margin-left':'-10px'},1500)
+            $('.pieChart').delay(1000).show(1000);
+            $('table').delay(1000).show(1000);
             
             
             var st = fData.filter(function(s){ return s.State == d[0];})[0],
@@ -253,7 +253,7 @@ function dashboard(id, fData){
     
     // calculate total frequency by segment for all state.
     
-    var tF = ['virtual_labs_feedback_v1_0',' open_edx_virtual_labs_v2_0_for_lab','generic_feedback_v2_0','edx_virtual_labs_v2_0_for_experiment','generic_exp_feedback_v2_0','generic_lab_feedback_v2_0'].map(function(d){ 
+    var tF = ['virtual_labs_feedback_v1_0','open_edx_virtual_labs_v2_0_for_lab','generic_feedback_v2_0','open_edx_virtual_labs_v2_0_for_experiment','generic_exp_feedback_v2_0','generic_lab_feedback_v2_0'].map(function(d){ 
         return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
     });    
     
@@ -271,11 +271,11 @@ function dashboard(id, fData){
          // create the legend.
 }
 
-/*var freqData=[
+var freqData=[
 {State:'2015',freq:{generic:4786, open1:1310, close:130,value4:0123, value5:4550, value6:123}}
 ,{State:'2016',freq:{generic:2000, open1:1419, close:200,value4:255, value5:1122, value6:456}}
 ,{State:'2017',freq:{generic:1000, open1:1519, close:257,value4:789, value5:1234, value6:249}}
-];*/
+];
 
 
 
@@ -296,7 +296,7 @@ function dashboard(id, fData){
         console.log(dataSet["hits"]["hits"])
         var t=0
        for(var curryear=2015 ;curryear<=2017; curryear++){
-
+dict2={}
         for (var index1 = 0; index1 < dataSet["hits"]["hits"].length; index1++) {  //  iterates through first lebel
           var year;
           if(dataSet.hits.hits[index1]._source.version)
@@ -343,6 +343,7 @@ function dashboard(id, fData){
                         }
     
       }
+      
       
 
 var freq= JSON.parse(JSON.stringify(dict2))
@@ -418,6 +419,10 @@ rect:hover {  fill:blue; }
     align:right;
     width:50px;
 }
+.histogramExample{
+    margin-left: 20%;
+}
+
 #+END_SRC
 
 
