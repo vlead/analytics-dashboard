@@ -10,60 +10,15 @@
 * Introduction 
   The requirements of =feedback analytics dashboard= are listed here.
   
-** Requirements
-*** The following will be represented with overall graphs.
-    - Total number of feedbacks with respect to each year.
-    - Total number of workshops conducted.
-    - Total number of feedback.
-      - There are currently running 6 versions of feedback.
-        - virtual labs feedback v1.0.
-        - generic virtual labs feedback v2.0.
-        - generic labs feedback v2.0.
-        - generic experiments feedback v2.0.
-        - Open-Edx labs feedback v2.0.
-        - Open-Edx experiments feedback v2.0.
-    - All the above 6 versions of feedback needs to be represented 
-      as [[https://bl.ocks.org/mbostock/1157787][small multiple]].
-    - For a specific version for example generic labs feedback, all the
-      questions of this versions again needs to be represented as small
-      multiple. 
-    - The individual graphs containing the specific set of questions for a
-      particular version would be displayed from the small multiple graphs for
-      all the 6 feedback versions. 
-*** Considering the below stated as the end users the requirements are stated.
-**** Lab Developers
-     - No. of work shops conducted and when was the workshop conducted.
-     - No. of people participated and in which workshop.
-     - Feedback given by the participants for particular lab or experiment.
-     - Popularity of labs, experiments, domains and when(each consecutive year). Popularity of lab is
-       defined by the total numbers of usages of a lab by students/lab users.
-**** Outreach
-     - No. of Nodal centres based on states
-     - No. of Workshops conducted and when were they conducted.
-     - No. of students attended the workshop and when did they attend.
-     - Complete [[https://github.com/vlead/analytics/blob/develop/src/index.org#requirement-2][usage]] based on the region for a defined period of time(year).
-     - Popularity of  labs, experiments, domains and for which period of
-       time(year). 
-     - No. of feedback obtained from students and when.
-**** Administrator
-     - No. of workshops conducted and when are they conducted with respect to
-       administrator's nodal center/region.
-     - No. of students attended and when did they attend with respect to
-       administrator's nodal center/region.
-     - Complete usage based on the region and workshops conducted and when are
-       they conducted with respect to administrator's nodal center/region.
-     - No. of students gave feedback and when did they attend with respect to
-       administrator's nodal center/region.
-     - Popular lab, experiment, domain and when with respect to administrator's
-       nodal center/region.
-**** Vlead
-     - Usage of the end user(student) and instance of the time when this usage
-       is collected
-     - No. of workshops conducted and when are they conducted.
-     - No. of students who attended the workshop and when did they attend.
-     - No. of students who gave feedback and the corresponding time.
-**** MHRD
-     - MHRD will be required to all the aspects from all the end users(lab
-       developers, outreach, vlead, administrator).
-
-      
+* Requirements
+** Requirement
+   Provide analytics for the [[https://github.com/virtual-labs][virtual-labs]] organization in
+   terms of:
+   1. Total number of repositories
+   2. Total number of issues.
+   3. Total number of commits
+   4. Top active repos in terms:
+      1. Issues closed
+      2. Commits made in the last six months
+      3. number of different developers working on each repo.
+   5. List the languages used in this organization.
