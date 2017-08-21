@@ -271,14 +271,6 @@ function dashboard(id, fData){
          // create the legend.
 }
 
-var freqData=[
-{State:'2015',freq:{generic:4786, open1:1310, close:130,value4:0123, value5:4550, value6:123}}
-,{State:'2016',freq:{generic:2000, open1:1419, close:200,value4:255, value5:1122, value6:456}}
-,{State:'2017',freq:{generic:1000, open1:1519, close:257,value4:789, value5:1234, value6:249}}
-];
-
-
-
   $.ajax({// Ajax call for URL
       method: 'GET',
       url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
