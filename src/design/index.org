@@ -10,36 +10,4 @@
 * Introduction 
   The =design= of the =Analytics Dashboard= is captured here.  
 
-* Plan
-** Step 1
-   When we access the URL(to be decided after service goes on production) it
-   displays the graph of number of feedbacks with respect to each
-   year(starting from 2015 till date) as a [[https://bl.ocks.org/mbostock/3885304][Bar Graph]] with years on the X-Axis
-   and number of feedbacks on the Y-Axis.
-   [[https://docs.google.com/drawings/d/1LiEzNKWB3i-06YWg8b5Ea61aZv3D4xeEI6KCDXCEJp0/pub?w=960&h=720][Sample step1]]
-   
-** Step 2 
-   Once a rectangle of the bar graph for a particular year is clicked it
-   displays as [[https://bl.ocks.org/mbostock/3887235][Pie Chart]] or [[https://bl.ocks.org/mbostock/3887193][Donut Chart]]. The pie/donut chart displays the
-   number of different versions of the feedback service. We have the following
-   2 options for displaying the pie/donut chart:
-   
-    + Option 1: The current bar graph would slide to the left of the screen and
-    pie/donut chart would be displayed on the right side of the browser
-    window. The only constraint with this option would be when the X-Axis grows
-    with increase in the number of years, displaying the Pie/donut chart beside
-    the Bar Graph on the same window would be difficult. [[https://docs.google.com/drawings/d/1Pwx1CziCcCe5iPCQTsoXlZDIdyO9OW6Ug1sMqV1Nr50/pub?w=960&h=720][Sample graph]]
-    
-    + Option 2: The Bar Graph is completely replaced with the Pie/donut chart n
-    the browser window. For navigating back to the bar graph there would be a
-    small back button on the top left of the screen.[[https://docs.google.com/drawings/d/1xSio54wcLkKDY6jJFe13BNIC3kUDIfqK7STJq3KbbX0/pub?w=960&h=720][sample graph]]
-    
-** Step 3 
-   When a sector of pie/donut Chart is clicked it displays the questions of a
-   particular feedback version as selected in step 2. Inputs required from
-   Thirumal/Priya/Ravi Shankar/Devi Prasad on the layout of the feedback
-   questions on the browser window. [[https://docs.google.com/drawings/d/1BiJRkEYmdjxC8V4obRSInt1d6vZ3P2fT1pJEBcsty44/pub?w=960&h=720][Sample Graph]]
 
-*** Possible Layout suggestion
-   + Displaying all the graphs of feedback responses for each question as small
-     multiples. Clicking on a particular question enlarges that specific graph.
