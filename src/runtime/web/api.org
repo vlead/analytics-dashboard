@@ -113,7 +113,7 @@ function dashboard(id, fData){
         
         function mouseover(d){  // utility function to be called on mouseover.
             // filter for selected state.
-            $('.histogramExample').animate({'margin-left':'-10px'},1500)
+            $('.histogramExample').animate({'margin-left':'30px'},1500)
             $('.pieChart').delay(1000).show(1000);
             $('table').delay(1000).show(1000);
             
@@ -379,7 +379,7 @@ freqDataTemp = JSON.parse(str);
 #+BEGIN_SRC  css :tangle /static/css/tab.css :eval no :noweb yes
 
 body{
-    width:1060px;
+    width:100%;
     margin:50px auto;
 }
 path {  stroke: #fff; }
@@ -402,6 +402,7 @@ rect:hover {  fill:blue; }
     display:inline-block;
     border-collapse: collapse;
     border-spacing: 0px;
+    margin-left: 55%;
 }
 .legend td{
     padding:4px 5px;
@@ -412,7 +413,11 @@ rect:hover {  fill:blue; }
     width:50px;
 }
 .histogramExample{
-    margin-left: 20%;
+    margin-left: 30%;
+}
+.pieChart{
+    float:right;
+    margin-right:20%;
 }
 
 #+END_SRC
