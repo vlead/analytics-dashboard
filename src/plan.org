@@ -60,54 +60,48 @@
 
 
 
-
 * Plan ([[https://github.com/vlead/analytics-dashboard/milestone/2][Milestone 2]])
   :PROPERTIES:
   :CUSTOM_ID: plan-for-milestone2
   :END: 
   Dynamically display all feedbacks from the data stored in elastic search.
 
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|  S. | Tasks               | Github | Expected  | Actual |  Estimated |     Actual | Status   | Assignee  |
-|  NO |                     | Issues | Effort    | Effort |     Start, |     Start, |          |           |
-|     |                     |        | (in       | (in    |        End |        End |          |           |
-|     |                     |        | person    | person |      Dates |      Dates |          |           |
-|     |                     |        | hours)    | hours) |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|  1. | Display total       | [[https://github.com/vlead/analytics-dashboard/issues/22][#22]]    |           |        |            |            | Done     | Mrudhvika |
-|     | number of feedbacks |        |           |        |            |            |          |           |
-|     | on the top          |        |           |        |            |            |          |           |
-|     |                     |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|  2. | Dynamically display | [[https://github.com/vlead/analytics-dashboard/issues/23][#23]]    |           |        |            |            | Done     | Mrudhvika |
-|     | feedbacks yearly    |        |           |        |            |            |          | Reena     |
-|     | wise                |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|  3. | Display feedbacks of| [[https://github.com/vlead/analytics-dashboard/issues/24][#24]]    |           |        |            |            | Done     | Reena     |
-|     | a particular year   |        |           |        |            |            |          |           |
-|     | on the basis of lab,|        |           |        |            |            |          |           |
-|     | exp and generic     |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|  4. | Present feedbacks in| [[https://github.com/vlead/analytics-dashboard/issues/25][#25]]    |           |        |            |            | In       | Reena     |
-|     | further detail      |        |           |        |            |            | Progress |           |
-|     | depends on OL, NOL, |        |           |        |            |            |          |           |
-|     | OE, NOE and generic |        |           |        |            |            |          |           |
-|     |                     |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|  5. | Transisions of all  | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |           |        |            |            | In       | Reena     |
-|     | the graphs and      |        |           |        |            |            | Progress |           |
-|     | arrange them        |        |           |        |            |            |          |           |
-|     | properly in a page  |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|     |                     |        |           |        |            |            |          |           |
-|     |                     |        |           |        |            |            |          |           |
-|     |                     |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|     |                     |        |           |        |            |            |          |           |
-|     |                     |        |           |        |            |            |          |           |
-|     |                     |        |           |        |            |            |          |           |
-|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
-|     |                     |        |           |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    S. | Tasks                | Github | Expected | Actual |  Estimated |     Actual | Status   | Assignee  |
+|    NO |                      | Issues | Effort   | Effort |     Start, |     Start, |          |           |
+|       |                      |        | (in      | (in    |        End |        End |          |           |
+|       |                      |        | person   | person |      Dates |      Dates |          |           |
+|       |                      |        | hours)   | hours) |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    1. | Display total        | [[https://github.com/vlead/analytics-dashboard/issues/22][#22]]    | 12       | 12     | 27-08-2017 | 27-08-2017 | Done     | Mrudhvika |
+|       | number of feedbacks  |        |          |        | 28-08-2017 | 28-08-2017 |          |           |
+|       | on the top           |        |          |        |            |            |          |           |
+|       |                      |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    2. | Dynamically display  | [[https://github.com/vlead/analytics-dashboard/issues/23][#23]]    | 32       | 36     | 21-07-2017 | 21-07-2017 | Done     | Mrudhvika |
+|       | feedbacks yearly     |        |          |        | 24-07-2017 | 25-07-2017 |          | Reena     |
+|       | wise                 |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    3. | Display feedbacks of | [[https://github.com/vlead/analytics-dashboard/issues/24][#24]]    |          |        |            |            | Done     | Reena     |
+|       | a particular year    |        |          |        |            |            |          |           |
+|       | on the basis of lab, |        |          |        |            |            |          |           |
+|       | exp and generic      |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    4. | Present feedbacks in | [[https://github.com/vlead/analytics-dashboard/issues/25][#25]]    |          |        |            |            | In       | Reena     |
+|       | further detail       |        |          |        |            |            | Progress |           |
+|       | depends on OL, NOL,  |        |          |        |            |            |          |           |
+|       | OE, NOE and generic  |        |          |        |            |            |          |           |
+|       |                      |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    5. | Transisions of all   | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |          |        |            |            | In       | Reena     |
+|       | the graphs and       |        |          |        |            |            | Progress |           |
+|       | arrange them         |        |          |        |            |            |          |           |
+|       | properly in a page   |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+| Total |                      |        | 44       |        |            |            |          |           |
+|     ^ |                      |        | total    |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+#+TBLFM: $total=vsum(@II+1..@-1)
 
 * Realization 
     :PROPERTIES:
