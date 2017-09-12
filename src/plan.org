@@ -1,3 +1,15 @@
+#+TITLE: Plan for Analytics Dashboard
+#+AUTHOR: VLEAD
+#+DATE: [2017-09-12 Tue]
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+SETUPFILE: ../org-templates/level-1.org
+#+options: ^:nil
+#+LATEX: Literal LaTeX code for export
+
+* Introduction
+  - This document briefly explains plan for =analytics-dashboard= project.
+
 * Feedback Visualization 
   - Initially created a container on base4 to request on port 80. Posted 
     edited format of data in the elastic search and made visualization in kibana.
@@ -47,3 +59,60 @@
     from base4.
 
 
+
+
+* Plan ([[https://github.com/vlead/analytics-dashboard/milestone/2][Milestone 2]])
+  :PROPERTIES:
+  :CUSTOM_ID: plan-for-milestone2
+  :END: 
+  Dynamically display all feedbacks from the data stored in elastic search.
+
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|  S. | Tasks               | Github | Expected  | Actual |  Estimated |     Actual | Status   | Assignee  |
+|  NO |                     | Issues | Effort    | Effort |     Start, |     Start, |          |           |
+|     |                     |        | (in       | (in    |        End |        End |          |           |
+|     |                     |        | person    | person |      Dates |      Dates |          |           |
+|     |                     |        | hours)    | hours) |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|  1. | Display total       | [[https://github.com/vlead/analytics-dashboard/issues/22][#22]]    |           |        |            |            | Done     | Mrudhvika |
+|     | number of feedbacks |        |           |        |            |            |          |           |
+|     | on the top          |        |           |        |            |            |          |           |
+|     |                     |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|  2. | Dynamically display | [[https://github.com/vlead/analytics-dashboard/issues/23][#23]]    |           |        |            |            | Done     | Mrudhvika |
+|     | feedbacks yearly    |        |           |        |            |            |          | Reena     |
+|     | wise                |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|  3. | Display feedbacks of| [[https://github.com/vlead/analytics-dashboard/issues/24][#24]]    |           |        |            |            | Done     | Reena     |
+|     | a particular year   |        |           |        |            |            |          |           |
+|     | on the basis of lab,|        |           |        |            |            |          |           |
+|     | exp and generic     |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|  4. | Present feedbacks in| [[https://github.com/vlead/analytics-dashboard/issues/25][#25]]    |           |        |            |            | In       | Reena     |
+|     | further detail      |        |           |        |            |            | Progress |           |
+|     | depends on OL, NOL, |        |           |        |            |            |          |           |
+|     | OE, NOE and generic |        |           |        |            |            |          |           |
+|     |                     |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|  5. | Transisions of all  | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |           |        |            |            | In       | Reena     |
+|     | the graphs and      |        |           |        |            |            | Progress |           |
+|     | arrange them        |        |           |        |            |            |          |           |
+|     | properly in a page  |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|     |                     |        |           |        |            |            |          |           |
+|     |                     |        |           |        |            |            |          |           |
+|     |                     |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|     |                     |        |           |        |            |            |          |           |
+|     |                     |        |           |        |            |            |          |           |
+|     |                     |        |           |        |            |            |          |           |
+|-----+---------------------+--------+-----------+--------+------------+------------+----------+-----------|
+|     |                     |        |           |        |            |            |          |           |
+
+* Realization 
+    :PROPERTIES:
+    :CUSTOM_ID: 
+    :END:    
+  Implementing the above plan will result into the following -
+- Able to display total number of feedbacks.
+- Display feedbacks year, percentage and version wise.
