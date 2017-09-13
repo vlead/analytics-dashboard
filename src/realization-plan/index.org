@@ -57,8 +57,8 @@
 |       | OE, NOE and generic  |        |          |        |            |            |          |           |
 |       |                      |        |          |        |            |            |          |           |
 |-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
-|    5. | Transisions of all   | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |       10 |        | 14-09-2017 |            | In       | Reena     |
-|       | the graphs and       |        |          |        | 15-09-2017 |            | Progress |           |
+|    5. | Transisions of all   | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |       10 |        | 14-09-2017 |            | Backlog  | Reena     |
+|       | the graphs and       |        |          |        | 15-09-2017 |            |          |           |
 |       | arrange them         |        |          |        |            |            |          |           |
 |       | properly in a page   |        |          |        |            |            |          |           |
 |-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
