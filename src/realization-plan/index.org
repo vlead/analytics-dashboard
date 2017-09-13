@@ -12,7 +12,7 @@
     implementing =analytics-dashboard= using =feedback
     analytics= data.
 
-* Plan ([[https://github.com/vlead/analytics-dashboard/milestone/2][Milestone])
+* Plan ([[https://github.com/vlead/analytics-dashboard/milestone/2][Milestone]])
   :PROPERTIES:
   :CUSTOM_ID: plan-for-milestone2
   :END: 
