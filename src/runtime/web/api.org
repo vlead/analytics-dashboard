@@ -21,7 +21,7 @@ This displays the visualization of the feedbacks given by the users.
 <body>
 <div class = "main">
 <div id='dashboard' class="bottom">
-  <svg id="fillgauge1" width="63%" height="250"></svg>
+  <svg id="fillgauge1" width="55%" height="230"></svg>
 </div>
 </div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -35,6 +35,7 @@ This displays the visualization of the feedbacks given by the users.
 
 ** JS
 #+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
+
     var count = 0;
 $.ajax({ // Ajax call for URL
   method: 'GET',
@@ -44,7 +45,7 @@ $.ajax({ // Ajax call for URL
   
       
   var data = data;
-  console.log(data.count);
+  
   count = data.count;
   loadLiquidFillGauge("fillgauge1", count)
 
@@ -265,31 +266,66 @@ function loadLiquidFillGauge(elementId, value, config) {
 }
 
 function dashboard(id, fData) {
+  var self =this;
+  self.yearSelected=''
   var barColor = 'steelblue';
 
   function segColor(c) {
+    console.log('c',c)
     return {
-      generic: "#cd82ad",
-      experiment: "#cc4748",
+     experiment: "#cc4748",
+      generic: "#cd82ad",            
       lab: "#84b761",
+      generic_exp_feedback_v2_0: "#cd82ad",
+      open_edx_virtual_labs_v2_0_for_experiment: "#cc4748",
+      generic_lab_feedback_v2_0: "#84b761",
+      generic_feedback_v2_0: '#cd65cc',
+      open_edx_virtual_labs_v2_0_for_lab:'#aa65cc'
       }[c];
   }
 
   // compute total for each state.
 
   fData.forEach(function(d) {
-
-    if (d.freq.generic == 0 || !d.freq.generic) {
-      d.freq.generic = 0
-    }
     if (d.freq.experiment == 0 || !d.freq.experiment) {
       d.freq.experiment = 0
     }
+    if (d.freq.generic == 0 || !d.freq.generic) {
+      d.freq.generic = 0
+    }    
     if (d.freq.lab == 0 || !d.freq.lab) {
       d.freq.lab = 0
     }
+    if (d.freq.virtual_labs_feedback_v1_0 == 0 || !d.freq.virtual_labs_feedback_v1_0) {
+      d.freq.virtual_labs_feedback_v1_0 = 0
+    }
+    if (d.freq.open_edx_virtual_labs_v2_0_for_lab == 0 || !d.freq.open_edx_virtual_labs_v2_0_for_lab) {
+      d.freq.open_edx_virtual_labs_v2_0_for_lab = 0
+    }
+    if (d.freq.generic_feedback_v2_0 == 0 || !d.freq.generic_feedback_v2_0) {
+      d.freq.generic_feedback_v2_0 = 0
+    }
     
-    d.total = parseInt(d.freq.generic + d.freq.experiment + d.freq.lab);
+    if (d.freq.open_edx_virtual_labs_v2_0_for_experiment == 0 || !d.freq.open_edx_virtual_labs_v2_0_for_experiment) {
+      d.freq.open_edx_virtual_labs_v2_0_for_experiment = 0
+    }
+    if (d.freq.generic_exp_feedback_v2_0 == 0 || !d.freq.generic_exp_feedback_v2_0) {
+      d.freq.generic_exp_feedback_v2_0 = 0
+    }
+    if (d.freq.generic_lab_feedback_v2_0 == 0 || !d.freq.generic_lab_feedback_v2_0) {
+      d.freq.generic_lab_feedback_v2_0 = 0
+    }
+    
+ /*
+r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
+  str = str.replace(/open-edx-virtual-labs-v2.0_for_lab/g, 'open_edx_virtual_labs_v2_0_for_lab');
+  str = str.replace(/generic-feedback-v2.0/g, 'generic_feedback_v2_0');
+  str = str.replace(/open-edx-virtual-labs-v2.0_for_experiment/g, 'open_edx_virtual_labs_v2_0_for_experiment');
+  str = str.replace(/generic-exp-feedback-v2.0/g, 'generic_exp_feedback_v2_0');
+  str = str.replace(/generic-lab-feedback-v2.0/g, 'generic_lab_feedback_v2_0');
+
+*/   
+    d.total = parseInt(d.freq.generic + d.freq.experiment + d.freq.lab + d.freq.virtual_labs_feedback_v1_0 + d.freq.open_edx_virtual_labs_v2_0_for_lab + d.freq.generic_feedback_v2_0 + d.freq.open_edx_virtual_labs_v2_0_for_experiment + d.freq.generic_exp_feedback_v2_0 + d.freq.generic_lab_feedback_v2_0);
 
   });
 
@@ -363,25 +399,30 @@ function dashboard(id, fData) {
 
     function mouseover(d) { // utility function to be called on mouseover.
       // filter for selected state.
-      $('.histogramExample').animate({
-        'margin-left': '4%'
-      }, 1500)
-      $('.pieChart').delay(1000).show(1000);
-      $('table').delay(1000).show(1000);
+      
+      $('.pieChart').delay(1000).show();
+      $('table').delay(1000).show();
 
 
       var st = fData.filter(function(s) {
+        
           return s.State == d[0];
         })[0],
         nD = d3.keys(st.freq).map(function(s) {
+          
           return {
             type: s,
             freq: st.freq[s]
           };
         });
+        
+        console.log(st)
+        self.yearSelected = st.State
+
 
       // call update functions of pie-chart and legend.    
       pC.update(nD, st);
+      
       leg.update(nD, st);
     }
     
@@ -403,7 +444,7 @@ function dashboard(id, fData) {
       var bars = hGsvg.selectAll(".bar").data(nD);
 
       // transition the height and color of rectangles.
-      bars.select("rect").transition().duration(500)
+      bars.select("rect").transition().duration(2000)
         .attr("y", function(d) {
           return y(d[1]);
         })
@@ -413,7 +454,7 @@ function dashboard(id, fData) {
         .attr("fill", color);
 
       // transition the frequency labels2ocation and change value.
-      bars.select("text").transition().duration(500)
+      bars.select("text").transition().duration(2000)
         .text(function(d) {
           return d3.format(",")(d[1])
         })
@@ -425,22 +466,21 @@ function dashboard(id, fData) {
   }
 
   // function to handle pieChart.
-  function pieChart(pD) {
+  self.pieChart = function(pD) {
     var pC = {},
       pieDim = {
-        w: 250,
-        h: 250
+        w: 230,
+        h: 230
       };
     pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
 
     // create svg for pie chart.
+    
+    console.log("$('.pieChart').length",$('.pieChart').length)
+   if($('.pieChart').length==0){ 
     var piesvg = d3.select(id).append("svg").attr('class', 'pieChart')
       .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
       .attr("transform", "translate(" + pieDim.w / 2 + "," + pieDim.h / 2 + ")")
-      
-
-      
-
     // create function to draw the arcs of the pie slices.
     var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
 
@@ -453,9 +493,48 @@ function dashboard(id, fData) {
     piesvg.selectAll("path").data(pie(pD)).enter().append("path").attr("d", arc)
       .each(function(d) {
         this._current = d;
-      }).on("click", function(d){
-    
+      }).on("click", function(d){ 
+        
+        self.secondpie(d)
     })
+      .style("fill", function(d) {
+        
+        console.log('d-->', d)
+        return segColor(d.data.type);
+      });
+    // create function to update pie-chart. This will be used by histogram.
+    pC.update = function(nD) {
+        piesvg.selectAll("path").data(pie(nD)).transition().duration(500)
+          .attrTween("d", arcTween);
+      }
+      // Utility function to be called on mouseover a pie slice.
+    // how the intermediate paths should be drawn.
+    function arcTween(a) {
+      var i = d3.interpolate(this._current, a);
+      this._current = i(0);
+      return function(t) {
+        return arc(i(t));
+      };
+    }
+    return pC;
+   }else if($('.pieChart').length==1){
+     $('.pieChart1').remove()
+     var piesvg = d3.select(id).append("svg").attr('class', 'pieChart').attr('class', 'pieChart1')
+      .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
+      .attr("transform", "translate(" + pieDim.w / 2 + "," + pieDim.h / 2 + ")")
+    // create function to draw the arcs of the pie slices.
+    var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
+
+    // create a function to compute the pie slice angles.
+    var pie = d3.layout.pie().sort(null).value(function(d) {
+      return d.freq;
+    });
+
+    // Draw the pie slices.
+    piesvg.selectAll("path").data(pie(pD)).enter().append("path").attr("d", arc)
+      .each(function(d) {
+        this._current = d;
+      })
       .style("fill", function(d) {
         return segColor(d.data.type);
       })
@@ -467,22 +546,6 @@ function dashboard(id, fData) {
           .attrTween("d", arcTween);
       }
       // Utility function to be called on mouseover a pie slice.
-    function mouseover(d) {
-      // call the update function of histogram with new data.
-      hG.update(fData.map(function(v) {
-        return [v.State, v.freq[d.data.type]];
-      }), segColor(d.data.type));
-    }
-    //Utility function to be called on mouseout a pie slice.
-    function mouseout(d) {
-      // call the update function of histogram with all data.
-      hG.update(fData.map(function(v) {
-        return [v.State, v.total];
-      }), barColor);
-    }
-    
-
-    // Animating the pie-slice requiring a custom function which specifies
     // how the intermediate paths should be drawn.
     function arcTween(a) {
       var i = d3.interpolate(this._current, a);
@@ -492,37 +555,38 @@ function dashboard(id, fData) {
       };
     }
     return pC;
+   } else{
+
+   }
+    
   }
 
   // function to handle legend.
-  function legend(lD, hh) {
-    var leg = {};
-
+  self.legend = function(lD, hh) {
+    
+    if($('.legend').length==0){
+      var leg = {};
     // create table for legend.
+    
     var legend = d3.select(id).append("table").attr('class', 'legend').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
-
     // create one row per segment.
     var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
-
-
     // create the first column for each segment.
     tr.append("td").append("svg").attr("width", '15').attr("height", '15').append("rect")
       .attr("width", '15').attr("height", '15')
       .attr("fill", function(d) {
+        
         return segColor(d.type);
       });
-
     // create the second column for each segment.
     tr.append("td").text(function(d) {
       return d.type;
     });
-
     // create the third column for each segment.
     tr.append("td").attr("class", 'legendFreq')
       .text(function(d) {
         return d3.format(",")(d.freq);
       });
-
     // create the fourth column for each segment.
     tr.append("td").attr("class", 'legendPerc')
       .text(function(d) {
@@ -554,33 +618,96 @@ function dashboard(id, fData) {
     }
 
     return leg;
+    }
+    else if($('.legend').length==1){
+      $('.legend1').remove()
+      var leg = {};
+    // create table for legend.
+    var legend = d3.select(id).append("table").attr('class', 'legend').attr('class', 'legend1').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
+    // create one row per segment.
+    var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
+    // create the first column for each segment.
+    tr.append("td").append("svg").attr("width", '15').attr("height", '15').append("rect")
+      .attr("width", '15').attr("height", '15')
+      .attr("fill", function(d) {
+        return segColor(d.type);
+      });
+    // create the second column for each segment.
+    tr.append("td").text(function(d) {
+      return d.type;
+    });
+    // create the third column for each segment.
+    tr.append("td").attr("class", 'legendFreq')
+      .text(function(d) {
+        return d3.format(",")(d.freq);
+      });
+    // create the fourth column for each segment.
+    tr.append("td").attr("class", 'legendPerc')
+      .text(function(d) {
+        return getLegend(d, lD);
+      });
+
+    // Utility function to be used to update the legend.
+    leg.update = function(nD, stmu) {
+
+      // update the data attached to the row elements.
+      var l = legend.select("tbody").selectAll("tr").data(nD);
+
+      // update the frequencies.
+      l.select('.legenYear').text(stmu.State)
+      l.select(".legendFreq").text(function(d) {
+        return d3.format(",")(d.freq);
+      });
+
+      // update the percentage column.
+      l.select(".legendPerc").text(function(d) {
+        return getLegend(d, nD);
+      });
+    }
+
+    function getLegend(d, aD) { // Utility function to compute percentage.
+      return d3.format("%")(d.freq / d3.sum(aD.map(function(v) {
+        return v.freq;
+      })));
+    }
+
+    return leg;
+    }
+    else{
+
+    }
+    
   }
 
   // calculate total frequency by segment for all state.
 
-  var tF = ['lab', 'generic', 'experiment'].map(function(d) {
+  var tF = ['experiment','generic','lab' ].map(function(d) {
     return {
       type: d,
       freq: d3.sum(fData.map(function(t) {
+               
           
-          console.log(t.freq[d]+t.freq[d+1])
-        return t.freq[d]+t.freq[d+1];
+        return t.freq[d];
       }))
     };
   });
 
+
   // calculate total frequency by state for all segment.
   var sF = fData.map(function(d) {
+        
     return [d.State, d.total];
   });
 
   var hG = histoGram(sF) // create the histogram.
     // create the pie-chart.
-  pC = pieChart(tF)
+  pC = self.pieChart(tF)
 
-  leg = legend(tF, sF);
+  leg = self.legend(tF, sF);
   $('.pieChart').hide();
-  $('table').hide()
+ // $('.histogramExample').hide();
+  $('table').hide();
+  
 
   // create the legend.
 }
@@ -592,16 +719,152 @@ $.ajax({ // Ajax call for URL
   method: 'GET',
   url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
   type: 'json' // define type here
-}).done(function(data /*this is the data or response*/ ) {
-  $('.top').animate({
-        'margin-left': '-14%',
-
-      }, 1500);
+}).done(function(data /*this is the data or response*/ ) { 
   $('#fillgauge1').animate({
-        'margin-left': '-14%',
+        'margin-left': '-18%',
 
-      }, 1500);
+      }, 1000);
+      
+      
+var piechart1 = dashboardFunction(data);
+  // var difference = maxHeight / max // getting the difference to fit the original data onto new coordinate systems
 
+  dashboard('#dashboard', piechart1);
+
+});
+self.secondpie = function(Selectedversions){
+  
+  console.log(self.yearSelected)
+  $.ajax({ // Ajax call for URL
+  method: 'GET',
+  url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
+  type: 'json' // define type here
+}).done(function(data /*this is the data or response*/ ) {
+  var piechart2 = dashboardFunction(data,Selectedversions.data.type);
+  console.log('piechart2',piechart2)
+  if(Selectedversions.data.type == "generic"){
+/*
+Selectedversions=="generic-feedback-v2.0" || Selectedversions=="virtual-labs-feedback-v1.0"
+OL = Open-Edx labs feedback v2.0 (onclick of lab)
+NOL = generic labs feedback v2.0 (onclick of lab)
+
+*/
+var tF = ['generic_feedback_v2_0','virtual_labs_feedback_v1_0'].map(function(d) {
+    return {
+      type: d,
+      freq: d3.sum(piechart2.map(function(t) {          
+          if(t.State==self.yearSelected){
+            return t.freq[d];
+          }else{
+            return 0
+          }
+          
+        
+      }))
+    };
+  });
+}else if(Selectedversions.data.type == "experiment"){/*
+
+OL = Open-Edx labs feedback v2.0 (onclick of lab)
+NOL = generic labs feedback v2.0 (onclick of lab)
+
+*/
+var tF = ['generic_exp_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experiment'].map(function(d) {
+    return {
+      type: d,
+      freq: d3.sum(piechart2.map(function(t) {
+        
+          if(t.State==self.yearSelected){
+            return t.freq[d];
+          }else{
+            return 0
+          }        
+        
+      }))
+    };
+  });
+} else if(Selectedversions.data.type == "lab"){
+/*
+Selectedversions=="generic-lab-feedback-v2.0" || Selectedversions=="open-edx-virtual-labs-v2.0_for_lab"
+OL = Open-Edx labs feedback v2.0 (onclick of lab)
+NOL = generic labs feedback v2.0 (onclick of lab)
+
+*/
+
+var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experiment'].map(function(d) {
+    return {
+      type: d,
+      freq: d3.sum(piechart2.map(function(t) {
+          
+         if(t.State==self.yearSelected){
+            return t.freq[d];
+          }else{
+            return 0
+          }
+      }))
+    };
+  });
+} else{
+
+}
+piechart2.forEach(function(d) {
+if (d.freq.experiment == 0 || !d.freq.experiment) {
+      d.freq.experiment = 0
+    }
+    if (d.freq.generic == 0 || !d.freq.generic) {
+      d.freq.generic = 0
+    }
+    
+    if (d.freq.lab == 0 || !d.freq.lab) {
+      d.freq.lab = 0
+    }
+
+    if (d.freq.virtual_labs_feedback_v1_0 == 0 || !d.freq.virtual_labs_feedback_v1_0) {
+      d.freq.virtual_labs_feedback_v1_0 = 0
+    }
+    if (d.freq.open_edx_virtual_labs_v2_0_for_lab == 0 || !d.freq.open_edx_virtual_labs_v2_0_for_lab) {
+      d.freq.open_edx_virtual_labs_v2_0_for_lab = 0
+    }
+    if (d.freq.generic_feedback_v2_0 == 0 || !d.freq.generic_feedback_v2_0) {
+      d.freq.generic_feedback_v2_0 = 0
+    }
+    
+    if (d.freq.open_edx_virtual_labs_v2_0_for_experiment == 0 || !d.freq.open_edx_virtual_labs_v2_0_for_experiment) {
+      d.freq.open_edx_virtual_labs_v2_0_for_experiment = 0
+    }
+    if (d.freq.generic_exp_feedback_v2_0 == 0 || !d.freq.generic_exp_feedback_v2_0) {
+      d.freq.generic_exp_feedback_v2_0 = 0
+    }
+    if (d.freq.generic_lab_feedback_v2_0 == 0 || !d.freq.generic_lab_feedback_v2_0) {
+      d.freq.generic_lab_feedback_v2_0 = 0
+    }
+    
+ /*
+r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
+  str = str.replace(/open-edx-virtual-labs-v2.0_for_lab/g, 'open_edx_virtual_labs_v2_0_for_lab');
+  str = str.replace(/generic-feedback-v2.0/g, 'generic_feedback_v2_0');
+  str = str.replace(/open-edx-virtual-labs-v2.0_for_experiment/g, 'open_edx_virtual_labs_v2_0_for_experiment');
+  str = str.replace(/generic-exp-feedback-v2.0/g, 'generic_exp_feedback_v2_0');
+  str = str.replace(/generic-lab-feedback-v2.0/g, 'generic_lab_feedback_v2_0');
+
+*/   
+    d.total = parseInt(d.freq.generic + d.freq.experiment + d.freq.lab + d.freq.virtual_labs_feedback_v1_0 + d.freq.open_edx_virtual_labs_v2_0_for_lab + d.freq.generic_feedback_v2_0 + d.freq.open_edx_virtual_labs_v2_0_for_experiment + d.freq.generic_exp_feedback_v2_0 + d.freq.generic_lab_feedback_v2_0);
+
+  });
+ var sF = piechart2.map(function(d) {
+    
+    return [d.State, d.total];
+  });
+console.log('sF',sF)
+console.log('tF', tF)
+self.pieChart(tF)
+self.legend(tF, sF)
+})
+
+}
+
+function dashboardFunction(dataset,typeofPie){
+  
   var i = 0
   var Selectedversions;
 
@@ -609,15 +872,13 @@ $.ajax({ // Ajax call for URL
   var dict = []
   var dict2 = {}
   var freqDataTemp = []
-  dataSet = data // meh !! for no reason.. You can actually troubleshoot from console using this variable => scope: global
+  dataSet = dataset // meh !! for no reason.. You can actually troubleshoot from console using this variable => scope: global
 
-  console.log(dataSet["hits"]["hits"])
   var t = 0
   var counter = 0;
   for (var index1 = 0; index1 < dataSet["hits"]["hits"].length; index1++) { //  iterates through first lebel
     var year;
     if (dataSet.hits.hits[index1]._source.version) {
-      2
       if (typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined") { // filters the undefined type to prevent stopping of execution
         year = dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] // extracting the year from the given date.
       }
@@ -628,7 +889,6 @@ $.ajax({ // Ajax call for URL
        In if condition you arew +checking whether the year is present or not. If it is true, then we have to update the value of that year by incrementing by 1(that's done  else condition)
        if year is a new entry then just intialize with 1.
       */
-      3
       if (!(year in dict)) {
         dict[counter] = parseInt(year)
         counter++
@@ -653,6 +913,7 @@ $.ajax({ // Ajax call for URL
   console.log('points', dict)
   for (var curryear = 0; curryear < dict.length; curryear++) {
     dict2 = {}
+    var secondPieObject = {};
     for (var index1 = 0; index1 < dataSet["hits"]["hits"].length; index1++) { //  iterates through first lebel
       var year;
       if (dataSet.hits.hits[index1]._source.version) {
@@ -669,6 +930,43 @@ $.ajax({ // Ajax call for URL
         if (typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined") { // filters the undefined type to prevent stopping of execution
           Selectedversions = dataSet["hits"]["hits"][index1]["_source"]["version"] // extracting the year from the given date.
         }
+if(typeofPie!=='' && typeofPie){
+
+  if(typeofPie == 'lab'  && (Selectedversions =='open-edx-virtual-labs-v2.0_for_lab' || Selectedversions == 'generic-lab-feedback-v2.0' )) {
+    if (!(Selectedversions in secondPieObject)) {
+          secondPieObject[Selectedversions] = 1
+        } else {
+          var temp = secondPieObject[Selectedversions]
+          temp = temp + 1
+          
+          secondPieObject[Selectedversions] = temp
+        }
+  } else if(typeofPie == 'generic' && (Selectedversions == 'generic-feedback-v2.0' || Selectedversions=="virtual-labs-feedback-v1.0")){
+    if (!(Selectedversions in secondPieObject)) {
+          secondPieObject[Selectedversions] = 1
+        } else {
+          var temp = secondPieObject[Selectedversions]
+          temp = temp + 1
+          
+          secondPieObject[Selectedversions] = temp
+        }
+
+  } else if(typeofPie == 'experiment' && (Selectedversions == 'open-edx-virtual-labs-v2.0_for_experiment' || Selectedversions == 'generic-exp-feedback-v2.0')){
+    if (!(Selectedversions in secondPieObject)) {
+          secondPieObject[Selectedversions] = 1
+        } else {
+          var temp = secondPieObject[Selectedversions]
+          temp = temp + 1
+          
+          secondPieObject[Selectedversions] = temp
+        }
+
+  }
+
+}
+else{
+ 
+
 
 if(Selectedversions=="generic-exp-feedback-v2.0" || Selectedversions=="open-edx-virtual-labs-v2.0_for_experiment"){
 
@@ -681,7 +979,7 @@ if(Selectedversions=="generic-exp-feedback-v2.0" || Selectedversions=="open-edx-
           dict2['experiment'] = temp
         }
 }
-if(Selectedversions=="generic-feedback-v2.0" || Selectedversions=="virtual-labs-feedback-v1.0"){
+ if(Selectedversions=="generic-feedback-v2.0" || Selectedversions=="virtual-labs-feedback-v1.0"){
 
         if (!('generic' in dict2)) {
           dict2['generic'] = 1
@@ -704,20 +1002,30 @@ if(Selectedversions=="generic-lab-feedback-v2.0" || Selectedversions=="open-edx-
         }
 }
 
+
+}//else
       }
 
     }
 
 
 
-    var freq = JSON.parse(JSON.stringify(dict2))
+var freq={}
+
+if(typeofPie!=='' && typeofPie){
+ freq = JSON.parse(JSON.stringify(secondPieObject))
+}else{
+ freq = JSON.parse(JSON.stringify(dict2))
+}
+   
+
     console.log(freq)
     freqDataTemp[t] = {
       State: '' + dict[curryear],
       freq
     }
     t++
-    console.log('freqDataTemp[t]', freqDataTemp[t])
+  
   }
 
 
@@ -738,21 +1046,8 @@ if(Selectedversions=="generic-lab-feedback-v2.0" || Selectedversions=="open-edx-
   for (var key in dict) { // loop to find the maximum number to define the scale
     if (max < dict[key]) max = dict[key]
   }
-  // var difference = maxHeight / max // getting the difference to fit the original data onto new coordinate systems
-
-function secondpie(Selectedversions){
-  $.ajax({ // Ajax call for URL
-  method: 'GET',
-  url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
-  type: 'json' // define type here
-}).done(function(data /*this is the data or response*/ ) {
-
-})
-
+ return freqDataTemp;
 }
-  dashboard('#dashboard', freqDataTemp);
-
-});
 
 #+END_SRC
    
@@ -762,7 +1057,7 @@ function secondpie(Selectedversions){
 
 body{
     width:100%;
-    margin:10px auto;
+    margin:0px auto;
 }
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
@@ -770,6 +1065,9 @@ rect:hover {  fill:#ee5c42; }
 .axis {  font: 10px sans-serif; }
 .legend tr{    border-bottom:1px solid grey; }
 .legend tr:first-child{    border-top:1px solid grey; }
+
+.legend1 tr{    border-bottom:1px solid grey; }
+.legend1 tr:first-child{    border-top:1px solid grey; }
 
 .axis path,
 .axis line {
@@ -783,23 +1081,33 @@ rect:hover {  fill:#ee5c42; }
     display: inline-block;
     border-collapse: collapse;
     border-spacing: 0px;
-    margin-left: 7%;
+    margin-left: 1%;
     margin-bottom: 4%;
 }
 .legend td{
     padding:4px 5px;
     vertical-align:bottom;
 }
-.legendFreq, .legendPerc{
-    align:right;
-    width:50px;
+
+.legend1 td{
+    padding:4px 5px;
+    vertical-align:bottom;
 }
 .histogramExample{
     display: inline-block;
 }
 .pieChart{
-   margin-left: 9%;
-    margin-top: 5%;
+   margin-left: 2%;
+   
+}
+.pieChart1{
+    margin-left: 6%;
+}
+.legend1{
+  display: inline-block;
+    margin-bottom: 6%;
+    border-collapse: collapse;
+    border-spacing: 0px;
 }
 .liquidFillGaugeText {
     font-family: Helvetica;
@@ -818,8 +1126,11 @@ rect:hover {  fill:#ee5c42; }
     height : 60%;
     width : 100%;
 }
+.histogramExample{
+  margin-left: 8%
+}
 #fillgauge1{
-    display: inline-block;
+  display: inline-block;
 }
 
 #+END_SRC
