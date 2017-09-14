@@ -18,15 +18,17 @@
   :END: 
   Once this milestone is realized, the following are done to
   the Analytics Dashboard:
-  1. dynamically displaying the total number of feedbacks on
-     whole.
-  2. dynamically display yearly wise graphs.
-  3. dynamically visualize feedback responses of particular
-     year w.r.t lab, exp and generic feedbacks.
-  4. dynamically visualize feedback responses w.r.t OL, NOL,
-     OE, NOE and generic feedbacks.
+  1. The total number of feedbacks can be displayed.
+  2. Year wise graphs can be displayed dynamically.
+  3. Visualize feedback responses of particular year w.r.t
+     labs, experiments and generic feedbacks can be
+     dynamically done.
+  4. Visualize feedback responses w.r.t Open-edx Lab, Non
+     Open-edx Lab, Open-edx Experiment, Non Open-edx
+     Experiment and generic feedbacks can be dynamically
+     done.
   5. Transition of graphs and arrange them properly in a
-     single page.
+     single page can be done.
 
 #+caption:  realization-plan
 #+name: tbl-realization-plan
