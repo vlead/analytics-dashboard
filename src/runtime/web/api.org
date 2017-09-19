@@ -35,7 +35,6 @@ This displays the visualization of the feedbacks given by the users.
 
 ** JS
 #+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
-
     var count = 0;
 $.ajax({ // Ajax call for URL
   method: 'GET',
@@ -50,7 +49,7 @@ $.ajax({ // Ajax call for URL
   loadLiquidFillGauge("fillgauge1", count)
 
 });
-console.log(count);;
+
 
 
 
@@ -399,6 +398,8 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
 
     function mouseover(d) { // utility function to be called on mouseover.
       // filter for selected state.
+      $('.pieChart1').remove();
+      $('.legend1').remove();
       
       $('.pieChart').delay(1000).show();
       $('table').delay(1000).show();
@@ -416,14 +417,21 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
           };
         });
         
-        console.log(st)
+        console.log('st',st)
+        console.log('nd',nD)
         self.yearSelected = st.State
+        var kD=[]
+        kD[0]=nD[2];
+        kD[1]=nD[0];
+        kD[2]=nD[1]
 
 
-      // call update functions of pie-chart and legend.    
-      pC.update(nD, st);
+      // call update functions of pie-chart and legend.  
       
-      leg.update(nD, st);
+            
+      pC.update(kD, st);
+      
+      leg.update(kD, st);
     }
     
 
@@ -475,9 +483,10 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
 
     // create svg for pie chart.
-    
+    pD.sort(dynamicSort("type"));
     console.log("$('.pieChart').length",$('.pieChart').length)
    if($('.pieChart').length==0){ 
+     debugger
     var piesvg = d3.select(id).append("svg").attr('class', 'pieChart')
       .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
       .attr("transform", "translate(" + pieDim.w / 2 + "," + pieDim.h / 2 + ")")
@@ -494,12 +503,13 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       .each(function(d) {
         this._current = d;
       }).on("click", function(d){ 
-        
+        debugger
+        console.log(d.data.type)
         self.secondpie(d)
     })
       .style("fill", function(d) {
         
-        console.log('d-->', d)
+        
         return segColor(d.data.type);
       });
     // create function to update pie-chart. This will be used by histogram.
@@ -562,12 +572,14 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
   }
 
   // function to handle legend.
+  
   self.legend = function(lD, hh) {
     
     if($('.legend').length==0){
       var leg = {};
     // create table for legend.
-    
+  
+  lD.sort(dynamicSort("type"));
     var legend = d3.select(id).append("table").attr('class', 'legend').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
     // create one row per segment.
     var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
@@ -623,6 +635,7 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       $('.legend1').remove()
       var leg = {};
     // create table for legend.
+    debugger
     var legend = d3.select(id).append("table").attr('class', 'legend').attr('class', 'legend1').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
     // create one row per segment.
     var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
@@ -665,7 +678,8 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       });
     }
 
-    function getLegend(d, aD) { // Utility function to compute percentage.
+    function getLegend(d, aD) { 
+      debugger// Utility function to compute percentage.
       return d3.format("%")(d.freq / d3.sum(aD.map(function(v) {
         return v.freq;
       })));
@@ -681,7 +695,7 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
 
   // calculate total frequency by segment for all state.
 
-  var tF = ['experiment','generic','lab' ].map(function(d) {
+  var tF = ['lab','experiment','generic' ].map(function(d) {
     return {
       type: d,
       freq: d3.sum(fData.map(function(t) {
@@ -734,14 +748,14 @@ var piechart1 = dashboardFunction(data);
 });
 self.secondpie = function(Selectedversions){
   
-  console.log(self.yearSelected)
+
   $.ajax({ // Ajax call for URL
   method: 'GET',
   url: "http://feedback-analytics.vlabs.ac.in/vlabs/feedback/_search?size=10000", // Keep URL here
   type: 'json' // define type here
 }).done(function(data /*this is the data or response*/ ) {
   var piechart2 = dashboardFunction(data,Selectedversions.data.type);
-  console.log('piechart2',piechart2)
+  
   if(Selectedversions.data.type == "generic"){
 /*
 Selectedversions=="generic-feedback-v2.0" || Selectedversions=="virtual-labs-feedback-v1.0"
@@ -750,6 +764,7 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 var tF = ['generic_feedback_v2_0','virtual_labs_feedback_v1_0'].map(function(d) {
+  debugger
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {          
@@ -770,6 +785,7 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 var tF = ['generic_exp_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experiment'].map(function(d) {
+  debugger
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {
@@ -791,7 +807,8 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 
-var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experiment'].map(function(d) {
+var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_lab'].map(function(d) {
+  debugger
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {
@@ -808,6 +825,12 @@ var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experimen
 
 }
 piechart2.forEach(function(d) {
+  console.log(d)
+  debugger
+
+   if (d.freq.lab == 0 || !d.freq.lab) {
+      d.freq.lab = 0
+    }
 if (d.freq.experiment == 0 || !d.freq.experiment) {
       d.freq.experiment = 0
     }
@@ -815,9 +838,7 @@ if (d.freq.experiment == 0 || !d.freq.experiment) {
       d.freq.generic = 0
     }
     
-    if (d.freq.lab == 0 || !d.freq.lab) {
-      d.freq.lab = 0
-    }
+   
 
     if (d.freq.virtual_labs_feedback_v1_0 == 0 || !d.freq.virtual_labs_feedback_v1_0) {
       d.freq.virtual_labs_feedback_v1_0 = 0
@@ -855,12 +876,22 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     
     return [d.State, d.total];
   });
-console.log('sF',sF)
-console.log('tF', tF)
+  debugger
 self.pieChart(tF)
 self.legend(tF, sF)
 })
 
+}
+this.dynamicSort=function(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
 }
 
 function dashboardFunction(dataset,typeofPie){
@@ -910,7 +941,7 @@ function dashboardFunction(dataset,typeofPie){
   dict.sort(function(a, b) {
     return a - b
   });
-  console.log('points', dict)
+  
   for (var curryear = 0; curryear < dict.length; curryear++) {
     dict2 = {}
     var secondPieObject = {};
@@ -938,8 +969,9 @@ if(typeofPie!=='' && typeofPie){
         } else {
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
-          
+          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
           secondPieObject[Selectedversions] = temp
+          
         }
   } else if(typeofPie == 'generic' && (Selectedversions == 'generic-feedback-v2.0' || Selectedversions=="virtual-labs-feedback-v1.0")){
     if (!(Selectedversions in secondPieObject)) {
@@ -948,7 +980,8 @@ if(typeofPie!=='' && typeofPie){
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
           
-          secondPieObject[Selectedversions] = temp
+          secondPieObject[Selectedversions] = temp;
+          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
         }
 
   } else if(typeofPie == 'experiment' && (Selectedversions == 'open-edx-virtual-labs-v2.0_for_experiment' || Selectedversions == 'generic-exp-feedback-v2.0')){
@@ -957,6 +990,7 @@ if(typeofPie!=='' && typeofPie){
         } else {
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
+          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
           
           secondPieObject[Selectedversions] = temp
         }
@@ -965,9 +999,6 @@ if(typeofPie!=='' && typeofPie){
 
 }
 else{
- 
-
-
 if(Selectedversions=="generic-exp-feedback-v2.0" || Selectedversions=="open-edx-virtual-labs-v2.0_for_experiment"){
 
         if (!('experiment' in dict2)) {
@@ -1019,7 +1050,7 @@ if(typeofPie!=='' && typeofPie){
 }
    
 
-    console.log(freq)
+    
     freqDataTemp[t] = {
       State: '' + dict[curryear],
       freq
@@ -1040,7 +1071,7 @@ if(typeofPie!=='' && typeofPie){
   i = 0
 
   freqDataTemp = JSON.parse(str);
-  console.log('str', freqDataTemp)
+  
   var max = -1
     //var maxHeight = canvas.attr("height") / 2  // defines the maximum height of you grpah you are trying to plot and fit the original data.
   for (var key in dict) { // loop to find the maximum number to define the scale
