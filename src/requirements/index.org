@@ -11,7 +11,6 @@
   The requirements of =feedback analytics dashboard= are listed here.
   
 * Requirements
-** Requirement
    Provide analytics for the [[https://github.com/virtual-labs][virtual-labs]] organization in
    terms of:
    1. Total number of repositories
