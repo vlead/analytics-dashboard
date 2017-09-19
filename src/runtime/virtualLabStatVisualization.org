@@ -1,0 +1,68 @@
+#+Title: Virtuallab_Data
+#+AUTHOR: VLEAD
+#+DATE: [2016-07-26 Tue]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  :PROPERTIES: ...
+  links 
+
+* Implementation
+
+#+BEGIN_SRC python :tangle vir.py
+
+from flask import Flask, flash, redirect, render_template, request, session, abort
+import os
+import json
+import requests
+import html
+from Repository import getReposHistoryData
+from Repository import getRepoLanguageData
+from Repository import getRepoLanguageDataAsJSON
+#from Repository import RepositoryList
+ 
+tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app = Flask(__name__, template_folder=tmpl_dir)
+ 
+def getRepoHistory():
+    #virtualLabs = RepositoryList('Virtual-Labs')
+    return getReposHistoryData()
+
+def getRepoLangData():
+    return getRepoLanguageData()
+
+def getRepoLangDataAsJSON():
+    return getRepoLanguageDataAsJSON()
+ 
+@app.route("/")
+def index():
+    repoData = getRepoHistory()
+    repoLangData = getRepoLanguageData()
+    return render_template('visualize.html',**locals())      
+ 
+@app.route("/hello")
+def hello():
+    return "Hello World!"
+
+@app.route("/d3visualize")
+def d3visualize():
+    #repoData = getRepoHistory()
+    repoLangDataAsJSON = json.dumps(getRepoLangDataAsJSON())
+    #repoLangDataAsJSON = html.unescape(repoLangDataAsJSON)
+    print("repoLangDataAsJSON : " , repoLangDataAsJSON)
+    return render_template('d3visualize.html',**locals())
+
+@app.route("/test")
+def test():
+    #repoData = getRepoHistory()
+    repoLangData2 = getRepoLanguageDataAsJSON()
+    return render_template('test.html',**locals())
+ 
+ 
+if __name__ == "__main__":
+    app.run()
+
+#+END_SRC
