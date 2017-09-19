@@ -270,7 +270,6 @@ function dashboard(id, fData) {
   var barColor = 'steelblue';
 
   function segColor(c) {
-    console.log('c',c)
     return {
      experiment: "#cc4748",
       generic: "#cd82ad",            
@@ -417,8 +416,6 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
           };
         });
         
-        console.log('st',st)
-        console.log('nd',nD)
         self.yearSelected = st.State
         var kD=[]
         kD[0]=nD[2];
@@ -484,9 +481,7 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
 
     // create svg for pie chart.
     pD.sort(dynamicSort("type"));
-    console.log("$('.pieChart').length",$('.pieChart').length)
    if($('.pieChart').length==0){ 
-     debugger
     var piesvg = d3.select(id).append("svg").attr('class', 'pieChart')
       .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
       .attr("transform", "translate(" + pieDim.w / 2 + "," + pieDim.h / 2 + ")")
@@ -503,8 +498,6 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       .each(function(d) {
         this._current = d;
       }).on("click", function(d){ 
-        debugger
-        console.log(d.data.type)
         self.secondpie(d)
     })
       .style("fill", function(d) {
@@ -635,7 +628,6 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       $('.legend1').remove()
       var leg = {};
     // create table for legend.
-    debugger
     var legend = d3.select(id).append("table").attr('class', 'legend').attr('class', 'legend1').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
     // create one row per segment.
     var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
@@ -679,7 +671,7 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     }
 
     function getLegend(d, aD) { 
-      debugger// Utility function to compute percentage.
+      // Utility function to compute percentage.
       return d3.format("%")(d.freq / d3.sum(aD.map(function(v) {
         return v.freq;
       })));
@@ -764,7 +756,6 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 var tF = ['generic_feedback_v2_0','virtual_labs_feedback_v1_0'].map(function(d) {
-  debugger
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {          
@@ -785,7 +776,6 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 var tF = ['generic_exp_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experiment'].map(function(d) {
-  debugger
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {
@@ -808,7 +798,6 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 */
 
 var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_lab'].map(function(d) {
-  debugger
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {
@@ -825,8 +814,6 @@ var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_lab'].map
 
 }
 piechart2.forEach(function(d) {
-  console.log(d)
-  debugger
 
    if (d.freq.lab == 0 || !d.freq.lab) {
       d.freq.lab = 0
@@ -876,7 +863,6 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     
     return [d.State, d.total];
   });
-  debugger
 self.pieChart(tF)
 self.legend(tF, sF)
 })
@@ -928,7 +914,6 @@ function dashboardFunction(dataset,typeofPie){
 
       }
 
-      // console.log(dataSet["hits"]["hits"][index1]["_source"]["date"])//["responses"][index2]["answers"][0]["name"])
       //  }// end of innner for loop
     } // ennd of outer for loop
 
@@ -952,7 +937,6 @@ function dashboardFunction(dataset,typeofPie){
         if (typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined") { // filters the undefined type to prevent stopping of execution
           year = dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] // extracting the year from the given date.
         }
-        // console.log(dataSet["hits"]["hits"][index1]["_source"]["date"])//["responses"][index2]["answers"][0]["name"])
         //  }// end of innner for loop
       } // ennd of outer for loop
       if (typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined" && dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] == dict[curryear]) {
@@ -969,7 +953,6 @@ if(typeofPie!=='' && typeofPie){
         } else {
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
-          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
           secondPieObject[Selectedversions] = temp
           
         }
@@ -981,7 +964,6 @@ if(typeofPie!=='' && typeofPie){
           temp = temp + 1
           
           secondPieObject[Selectedversions] = temp;
-          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
         }
 
   } else if(typeofPie == 'experiment' && (Selectedversions == 'open-edx-virtual-labs-v2.0_for_experiment' || Selectedversions == 'generic-exp-feedback-v2.0')){
@@ -990,7 +972,6 @@ if(typeofPie!=='' && typeofPie){
         } else {
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
-          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
           
           secondPieObject[Selectedversions] = temp
         }
