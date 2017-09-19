@@ -1,0 +1,217 @@
+#+Title: D3JS
+#+AUTHOR: VLEAD
+#+DATE: [2016-07-26 Tue]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  : PROPERTIES:...
+  Tells how to plot the information in a graphiical way
+
+* Implementation
+
+#+BEGIN_SRC html :tangle test.html
+<script src="https://d3js.org/d3.v3.min.js"></script>
+
+
+
+<html>
+  <body>
+
+      <!--<div class="widget">
+        <div class="header">Browser Market Share</div>
+        <div id="chart" class="chart-container"></div>
+      </div>-->
+        <div id="chart"  style="width: 900px; height: 900px;" class="chart-container"></div>
+
+  </body>
+ <head>
+
+
+    <script type="text/javascript">//<![CDATA[ 
+/*var dataset = [
+    { name: 'AAAAAA', percent: 29.10 },
+    { name: 'Chrome', percent: 20.51 },
+    { name: 'Safari', percent: 10.68 },
+    { name: 'Firefox', percent: 4.71 },
+    { name: 'Onyx', percent: 4.01 },
+    { name: 'Edge', percent: 10.00 },
+    { name: 'Samsung', percent: 12.00 },
+    { name: 'Sony', percent: 3.00 },
+    { name: 'Breeze', percent: 4.00 },
+    { name: 'Others', percent: 2.00 }
+];*/
+//alert("repoLangDataAsJSON : " + {{repoLangDataAsJSON}});
+var dataset = {{repoLangDataAsJSON | safe}};
+//alert("dataset : " + dataset);
+
+
+var pie=d3.layout.pie()
+  .value(function(d){return d.percent})
+  .sort(null)
+  .padAngle(.03);
+
+var w=600,h=600;
+ 
+var outerRadius=w/4;
+var innerRadius=40;
+
+var color = d3.scale.category10();
+
+var arc=d3.svg.arc()
+  .outerRadius(outerRadius)
+  .innerRadius(innerRadius);
+
+var svg=d3.select("#chart")
+  .append("svg")
+  .attr({
+      width:w,
+      height:h,
+      class:'shadow'
+  }).append('g')
+  .attr({
+      transform:'translate('+w/3+','+h/3+')'
+  });
+
+var path=svg.selectAll('path')
+  .data(pie(dataset))
+  .enter()
+  .append('path')
+  .attr({
+      d:arc,
+      fill:function(d,i){
+          return color(d.data.lang);
+      }
+  });
+ 
+path.transition()
+  .duration(1000)
+  .attrTween('d', function(d) {
+      var interpolate = d3.interpolate({startAngle: 0, endAngle: 0}, d);
+      return function(t) {
+          return arc(interpolate(t));
+      };
+  });
+ 
+ 
+var restOfTheData=function(){
+    var text=svg.selectAll('text')
+        .data(pie(dataset))
+        .enter()
+        .append("text")
+        .transition()
+        .duration(200)
+        .attr("transform", function (d) {
+            return "translate(" + arc.centroid(d) + ")";
+        })
+        .attr("dy", ".4em")
+        .attr("text-anchor", "middle")
+        .text(function(d){
+            return d.data.percent+"%";
+        })
+        .style({
+            fill:'#ffffff',
+ 
+            'font-size':'10px'
+        });
+ 
+    var legendRectSize=12;
+    var legendSpacing=12;
+    var legendHeight=legendRectSize+legendSpacing;
+ 
+ 
+    var legend=svg.selectAll('.legend')
+        .data(color.domain())
+        .enter()
+        .append('g')
+        .attr({
+            class:'legend',
+            transform:function(d,i){
+                //Just a calculation for x & y position
+                return 'translate(225,' + ((i*legendHeight)-125) + ')';
+            }
+        });
+    legend.append('rect')
+        .attr({
+            width:legendRectSize,
+            height:legendRectSize,
+            rx:20,
+            ry:20
+        })
+        .style({
+            fill:color,
+            stroke:color
+        });
+ 
+    legend.append('text')
+        .attr({
+            x:30,
+            y:10
+        })
+        .text(function(d){
+            return d;
+        }).style({
+            fill:'#929DAF',
+            /*fill:'#000000',*/
+            'font-size':'10px'
+            
+        });
+};
+
+setTimeout(restOfTheData,1000);
+//]]>
+    </script>
+    
+
+
+
+</head>
+
+  <style media="screen" type="text/css">
+
+body {
+    background-color: #FFFFFF;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+}
+
+
+.widget {
+    margin: 0 auto;
+    width:950px;
+    margin-top:150px;
+    background-color: #222D3A;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 0px #06060d;
+
+}
+
+.header{
+    background-color: #29384D;
+    height:40px;
+    color:#929DAF;
+    text-align: center;
+    line-height: 40px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    font-weight: 400;
+    font-size: 1.5em;
+    text-shadow: 1px 1px #06060d;
+}
+
+.chart-container{
+    padding:25px;
+}
+
+.shadow {
+    -webkit-filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+    filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+}
+
+</style>
+ 
+</html>
+#+END_SRC
