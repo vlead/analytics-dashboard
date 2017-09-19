@@ -1,0 +1,13 @@
+#+TITLE : Minutes of meeting with client 1
+#+AUTHOR : SSAD54
+#+DATE : [08-08-2017]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* MOM_1_CLIENT
+** We were introduced to the project and were given a general overview of what we have to do. 
+** We discussed the timings in which we are free to meet the client in every week.
+** It was decided that we should first we should read about data visualisation and about languages we need to use for the project.
+** Start learning about data visualisation by reffering to 'DATAVISUALISATIONZOO'.

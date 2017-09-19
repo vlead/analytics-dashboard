@@ -1,0 +1,12 @@
+#+TITLE : Minutes of meeting with client 3
+#+AUTHOR : SSAD54
+#+DATE : [08-08-2017]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* MOM_3_CLIENT
+** we discussed about how to extract the information from a given link
+** learning about extracting the information from a given link and also about scope of datavisualisation
+** Client told to install Virtual box and Vagrant in our Pc.
