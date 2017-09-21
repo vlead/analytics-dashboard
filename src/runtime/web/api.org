@@ -35,6 +35,7 @@ This displays the visualization of the feedbacks given by the users.
 
 ** JS
 #+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
+
     var count = 0;
 $.ajax({ // Ajax call for URL
   method: 'GET',
@@ -278,7 +279,8 @@ function dashboard(id, fData) {
       open_edx_virtual_labs_v2_0_for_experiment: "#cc4748",
       generic_lab_feedback_v2_0: "#84b761",
       generic_feedback_v2_0: '#cd65cc',
-      open_edx_virtual_labs_v2_0_for_lab:'#aa65cc'
+      open_edx_virtual_labs_v2_0_for_lab:'#aa65cc',
+      virtual_labs_feedback_v1_0:'#ddaa00'
       }[c];
   }
 
@@ -425,10 +427,13 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
 
       // call update functions of pie-chart and legend.  
       
-            
-      pC.update(kD, st);
-      
+       if(self.yearSelected==2017){
+      pC.update(nD, st);      
+      leg.update(nD, st);
+       }else{
+      pC.update(kD, st);      
       leg.update(kD, st);
+       }
     }
     
 
