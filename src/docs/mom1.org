@@ -8,6 +8,6 @@ Read about data visualisation and learn languages we need to use for the project
 |------------------+---------+-------------------------------------------------------------------+-------------+---|
 | Item             | Issue   | Artifact                                                          | Status      |   |
 |------------------+---------+-------------------------------------------------------------------+-------------+---|
-| Implement filter | Link to |{{{[[https://github.com/Sushmitha98/analytics-dashboard/blob/master| In progress |   |
-|                  | issue   |/src/docs/visualizationzoo.pdf][visualizationzoo]]}}}              |             |   |
+| Implement filter | Link to |[[https://github.com/Sushmitha98/analytics-dashboard/blob/master\/s| In progress |   |
+|                  | issue   |rc/docs/visualizationzoo.pdf][visualizationzoo]]                   |             |   |
 |------------------+---------+-------------------------------------------------------------------+-------------+---|
