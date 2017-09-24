@@ -8,6 +8,6 @@ Read about data visualisation and learn languages we need to use for the project
 |------------------+---------+-------------------------------------------------------------------+-------------+---|
 | Item             | Issue   | Artifact                                                          | Status      |   |
 |------------------+---------+-------------------------------------------------------------------+-------------+---|
-| - | -  |[[https://github.com/Sushmitha98/analytics-dashboard/blob/master/src/docs/visualizationzoo.pdf][visualizationzoo]]  | In progress |   |
+| Reference | -  |[[https://github.com/Sushmitha98/analytics-dashboard/blob/master/src/docs/visualizationzoo.pdf][visualizationzoo]]  | In progress |   |
 |                  |   |                  |             |   |
 |------------------+---------+-------------------------------------------------------------------+-------------+---|
