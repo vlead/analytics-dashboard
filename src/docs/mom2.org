@@ -10,7 +10,7 @@ Understanding requirements
 |------------------+---------+--------------+-------------+---|
 | Item             | Issue   | Artifact     | Status      |   |
 |------------------+---------+--------------+-------------+---|
-| Data to be analysed| - | [https://github.com/virtual-labs[virtual-labs]] | Analysed data |   |
+| Data to be analysed| - |[[https://github.com/virtual-labs][virtual-labs]]| Analysed data |   |
 |                  |   |  |             |   |
 |------------------+---------+--------------+-------------+---|
 
