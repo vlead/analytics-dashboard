@@ -1,12 +1,14 @@
-#+TITLE : Minutes of meeting with client 3
-#+AUTHOR : SSAD54
-#+DATE : [08-08-2017]
-#+SETUPFILE: ../../org-templates/level-2.org
-#+TAGS: boilerplate(b)
-#+EXCLUDE_TAGS: boilerplate
-#+OPTIONS: ^:nil
 
-* MOM_3_CLIENT
-** we discussed about how to extract the information from a given link
-** learning about extracting the information from a given link and also about scope of datavisualisation
-** Client told to install Virtual box and Vagrant in our Pc.
+* [2017-24-09 Sun]
+** Agenda
+Learning about extracting the information from a given link
+** Discussion Points
+Discussed about how to extract the information from a given link.
+Learning extraction of the information from a given link and also about scope of datavisualisation.
+** Action
+|------------------+---------+--------------+-------------+---|
+| Item             | Issue   | Artifact     | Status      |   |
+|------------------+---------+--------------+-------------+---|
+| Setting up dev environment | - | [[https://github.com/vlead/vlead-onboarding/blob/master/src/set-up-vlead-dev-vagrant-box.org][dev-environment]]| In progress |   |
+|                  |            | |             |   |
+|------------------+---------+--------------+-------------+---|
