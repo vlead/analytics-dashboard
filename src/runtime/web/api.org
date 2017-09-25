@@ -21,7 +21,9 @@ This displays the visualization of the feedbacks given by the users.
 <body>
 <div class = "main">
 <div id='dashboard' class="bottom">
-  <svg id="fillgauge1" width="55%" height="230"></svg>
+  <div id="fillgaugeContainer">
+  <svg id="fillgauge1" width="100%" height="230"></svg>
+</div>
 </div>
 </div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -271,6 +273,7 @@ function dashboard(id, fData) {
   var barColor = 'steelblue';
 
   function segColor(c) {
+    console.log('c',c)
     return {
      experiment: "#cc4748",
       generic: "#cd82ad",            
@@ -338,11 +341,13 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
         b: 30,
         l: 0
       };
-    hGDim.w = 450 - hGDim.l - hGDim.r,
+    hGDim.w = 300 - hGDim.l - hGDim.r,
       hGDim.h = 300 - hGDim.t - hGDim.b;
 
     //create svg for histogram.
-    var hGsvg = d3.select(id).append("svg")
+    //$('div').attr('id','barChartExample').appendTo(id);
+    $(id).append('<div id="barChartExample"></div>');
+    var hGsvg = d3.select('#barChartExample').append("svg")
       .attr("width", hGDim.w + hGDim.l + hGDim.r)
       .attr("class", 'histogramExample')
       .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
@@ -402,8 +407,8 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       $('.pieChart1').remove();
       $('.legend1').remove();
       
-      $('.pieChart').delay(1000).show();
-      $('table').delay(1000).show();
+      $('#firstPieChart').delay(1000).show();
+      
 
 
       var st = fData.filter(function(s) {
@@ -418,6 +423,8 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
           };
         });
         
+        console.log('st',st)
+        console.log('nd',nD)
         self.yearSelected = st.State
         var kD=[]
         kD[0]=nD[2];
@@ -428,9 +435,11 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       // call update functions of pie-chart and legend.  
       
        if(self.yearSelected==2017){
+console.log(self.yearSelected)
       pC.update(nD, st);      
       leg.update(nD, st);
        }else{
+         console.log(self.yearSelected)
       pC.update(kD, st);      
       leg.update(kD, st);
        }
@@ -486,8 +495,11 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
 
     // create svg for pie chart.
     pD.sort(dynamicSort("type"));
+    console.log("$('.pieChart').length",$('.pieChart').length)
    if($('.pieChart').length==0){ 
-    var piesvg = d3.select(id).append("svg").attr('class', 'pieChart')
+     
+     $(id).append('<div id="firstPieChart"></div>');
+    var piesvg = d3.select('#firstPieChart').append("svg").attr('class', 'pieChart')
       .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
       .attr("transform", "translate(" + pieDim.w / 2 + "," + pieDim.h / 2 + ")")
     // create function to draw the arcs of the pie slices.
@@ -503,6 +515,8 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       .each(function(d) {
         this._current = d;
       }).on("click", function(d){ 
+        
+        console.log(d.data.type)
         self.secondpie(d)
     })
       .style("fill", function(d) {
@@ -527,7 +541,9 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     return pC;
    }else if($('.pieChart').length==1){
      $('.pieChart1').remove()
-     var piesvg = d3.select(id).append("svg").attr('class', 'pieChart').attr('class', 'pieChart1')
+     
+     $(id).append('<div id="secondPieChart"></div>');
+     var piesvg = d3.select('#secondPieChart').append("svg").attr('class', 'pieChart').attr('class', 'pieChart1')
       .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
       .attr("transform", "translate(" + pieDim.w / 2 + "," + pieDim.h / 2 + ")")
     // create function to draw the arcs of the pie slices.
@@ -576,9 +592,9 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     if($('.legend').length==0){
       var leg = {};
     // create table for legend.
-  
+   
   lD.sort(dynamicSort("type"));
-    var legend = d3.select(id).append("table").attr('class', 'legend').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
+    var legend = d3.select('#firstPieChart').append("table").attr('class', 'legend').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
     // create one row per segment.
     var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
     // create the first column for each segment.
@@ -633,7 +649,8 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
       $('.legend1').remove()
       var leg = {};
     // create table for legend.
-    var legend = d3.select(id).append("table").attr('class', 'legend').attr('class', 'legend1').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
+    
+    var legend = d3.select('#secondPieChart').append("table").attr('class', 'legend').attr('class', 'legend1').append('tr').append('td').attr('colspan', '4').append('p').attr('text-align', 'center').attr("class", 'legendFreq').text('Total');
     // create one row per segment.
     var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
     // create the first column for each segment.
@@ -715,9 +732,10 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
   pC = self.pieChart(tF)
 
   leg = self.legend(tF, sF);
-  $('.pieChart').hide();
+
+  $('#firstPieChart').hide();
  // $('.histogramExample').hide();
-  $('table').hide();
+  //$('table').hide();
   
 
   // create the legend.
@@ -732,7 +750,7 @@ $.ajax({ // Ajax call for URL
   type: 'json' // define type here
 }).done(function(data /*this is the data or response*/ ) { 
   $('#fillgauge1').animate({
-        'margin-left': '-18%',
+        
 
       }, 1000);
       
@@ -761,6 +779,7 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 var tF = ['generic_feedback_v2_0','virtual_labs_feedback_v1_0'].map(function(d) {
+  
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {          
@@ -781,6 +800,7 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 
 */
 var tF = ['generic_exp_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_experiment'].map(function(d) {
+  
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {
@@ -803,6 +823,7 @@ NOL = generic labs feedback v2.0 (onclick of lab)
 */
 
 var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_lab'].map(function(d) {
+  
     return {
       type: d,
       freq: d3.sum(piechart2.map(function(t) {
@@ -819,6 +840,8 @@ var tF = ['generic_lab_feedback_v2_0', 'open_edx_virtual_labs_v2_0_for_lab'].map
 
 }
 piechart2.forEach(function(d) {
+  console.log(d)
+  
 
    if (d.freq.lab == 0 || !d.freq.lab) {
       d.freq.lab = 0
@@ -868,6 +891,7 @@ r = str.replace(/virtual-labs-feedback-v1.0/g, 'virtual_labs_feedback_v1_0');
     
     return [d.State, d.total];
   });
+  
 self.pieChart(tF)
 self.legend(tF, sF)
 })
@@ -919,6 +943,7 @@ function dashboardFunction(dataset,typeofPie){
 
       }
 
+      // console.log(dataSet["hits"]["hits"][index1]["_source"]["date"])//["responses"][index2]["answers"][0]["name"])
       //  }// end of innner for loop
     } // ennd of outer for loop
 
@@ -942,6 +967,7 @@ function dashboardFunction(dataset,typeofPie){
         if (typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined") { // filters the undefined type to prevent stopping of execution
           year = dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] // extracting the year from the given date.
         }
+        // console.log(dataSet["hits"]["hits"][index1]["_source"]["date"])//["responses"][index2]["answers"][0]["name"])
         //  }// end of innner for loop
       } // ennd of outer for loop
       if (typeof(dataSet["hits"]["hits"][index1]["_source"]["date"]) != "undefined" && dataSet["hits"]["hits"][index1]["_source"]["date"].split("-")[2] == dict[curryear]) {
@@ -958,6 +984,7 @@ if(typeofPie!=='' && typeofPie){
         } else {
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
+          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
           secondPieObject[Selectedversions] = temp
           
         }
@@ -969,6 +996,7 @@ if(typeofPie!=='' && typeofPie){
           temp = temp + 1
           
           secondPieObject[Selectedversions] = temp;
+          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
         }
 
   } else if(typeofPie == 'experiment' && (Selectedversions == 'open-edx-virtual-labs-v2.0_for_experiment' || Selectedversions == 'generic-exp-feedback-v2.0')){
@@ -977,6 +1005,7 @@ if(typeofPie!=='' && typeofPie){
         } else {
           var temp = secondPieObject[Selectedversions]
           temp = temp + 1
+          console.log('secondPieObject['+Selectedversions+']',secondPieObject[Selectedversions])
           
           secondPieObject[Selectedversions] = temp
         }
@@ -1091,6 +1120,47 @@ rect:hover {  fill:#ee5c42; }
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+#firstPieChart,#secondPieChart,#barChartExample
+{
+  display: inline-block
+}
+#barChartExample{
+
+  margin-left: 3%;
+  border: 1px solid #000;
+  width: 350px;
+  box-shadow: 2px 2px 9px #8e8e6f;
+  border-radius: 7px;
+}
+#firstPieChart,#secondPieChart{
+  
+  margin-top: 10px;
+  box-shadow: 2px 2px 9px #8e8e6f;
+  border-radius: 7px;
+  border: 1px solid #000;
+  margin-left: 6px;
+
+}
+#firstPieChart{   
+   width: 446px;
+  padding: 0px 10px 0 10px;
+  }
+#secondPieChart{ width: 686px;
+  margin-left: 47px;
+  padding: 0px 10px 0 10px;
+    }
+#fillgaugeContainer{  
+  box-shadow: 2px 2px 9px #8e8e6f;
+  border-radius: 7px;
+  border: 1px solid #000;
+  margin-left: 13%;
+  display: inline-block;
+  padding: 66px;
+  padding-bottom: 1px;
+  width: 332px;
+  margin-bottom: 13px;
+
 }
 
 .x.axis path {  display: none; }
