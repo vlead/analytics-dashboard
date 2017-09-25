@@ -1139,14 +1139,14 @@ rect:hover {  fill:#ee5c42; }
   box-shadow: 2px 2px 9px #8e8e6f;
   border-radius: 7px;
   border: 1px solid #000;
-  margin-left: 6px;
+  margin-left: 2%;
 
 }
 #firstPieChart{   
    width: 446px;
   padding: 0px 10px 0 10px;
   }
-#secondPieChart{ width: 686px;
+#secondPieChart{ width: 720px;
   margin-left: 47px;
   padding: 0px 10px 0 10px;
     }
@@ -1184,11 +1184,11 @@ rect:hover {  fill:#ee5c42; }
     display: inline-block;
 }
 .pieChart{
-   margin-left: 2%;
+   margin-left: -2%;
    
 }
 .pieChart1{
-    margin-left: 6%;
+    margin-left: 0%;
 }
 .legend1{
   display: inline-block;
