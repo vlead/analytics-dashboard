@@ -1,0 +1,100 @@
+#+Title: D3JS
+#+AUTHOR: VLEAD
+#+DATE: [2016-07-26 Tue]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
+  : PROPERTIES:...
+  Tells how to plot the information in a graphical way
+
+* Implementation
+#+BEGIN_SRC html :tangle visualize.html
+<html>
+ <head>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+ 
+ 
+<script type='text/javascript'>//<![CDATA[ 
+ 
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawBasic);
+ 
+function drawBasic() {
+ 
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'Repo Count', { role: 'style' }],
+        ['{{repoData[0][0]}}', {{repoData[0][1]}}, 'gold'],
+        ['{{repoData[1][0]}}', {{repoData[1][1]}}, 'green'],
+        ['{{repoData[2][0]}}', {{repoData[2][1]}}, 'brown'],
+        ['{{repoData[3][0]}}', {{repoData[3][1]}}, 'orange'],
+        ['{{repoData[4][0]}}', {{repoData[4][1]}}, '#e12393'],
+        ['{{repoData[5][0]}}', {{repoData[5][1]}}, 'silver'],
+        ['{{repoData[6][0]}}', {{repoData[6][1]}}, 'red']
+      ]);
+   
+ 
+      var options = {
+        title: 'Virtual-Labs Github Details',
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: '',
+          minValue: 0
+        },
+        vAxis: {
+          title: ''
+        }
+      };
+ 
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+ 
+      chart.draw(data, options);
+    }
+//]]>  
+ 
+</script>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Language', 'Repository count based on Technology used'],
+          ['{{repoLangData[0][0]}}', {{repoLangData[0][1]}}],
+          ['{{repoLangData[1][0]}}', {{repoLangData[1][1]}}],
+          ['{{repoLangData[2][0]}}', {{repoLangData[2][1]}}],
+          ['{{repoLangData[3][0]}}', {{repoLangData[3][1]}}],
+          ['{{repoLangData[4][0]}}', {{repoLangData[4][1]}}],
+          ['{{repoLangData[5][0]}}', {{repoLangData[5][1]}}],
+          ['{{repoLangData[6][0]}}', {{repoLangData[6][1]}}],
+          ['{{repoLangData[7][0]}}', {{repoLangData[7][1]}}],
+          ['{{repoLangData[8][0]}}', {{repoLangData[8][1]}}],
+          ['{{repoLangData[9][0]}}', {{repoLangData[9][1]}}],
+          ['{{repoLangData[10][0]}}', {{repoLangData[10][1]}}]
+        ]);
+
+        var options = {
+          title: 'Virutual-Labs Repos based on Technology',
+          pieHole: 0.2,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+</head>
+  <body>
+    <div id="chart_div"  style="width: 900px; height: 300px;"></div>
+    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+  </body>
+ 
+</html>
+#+END_SRC
