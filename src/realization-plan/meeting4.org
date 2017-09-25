@@ -1,0 +1,15 @@
+* [2017-09-19 Mon]
+** Agenda
+Understanding directory structure and design of the project.
+** Discussion Points
+Discussed about where the different files (meeting minutes, code and other documents) should go in the repository.
+Need to design state machine.
+Need to add meeting minutes to realization-plan directory.
+** Action
+
+      |------------------+---------+--------------+-------------+---|
+     | Item             | Issue   | Artifact     | Status      |   |
+     |------------------+---------+--------------+-------------+---|
+     | Write meeting minutes | - | [[https://github.com/Sushmitha98/analytics-dashboard/tree/master/src/realization-plan][meeting minutes]] | Done |   |
+     |                  |   |   |             |   |
+     |------------------+---------+--------------+-------------+---|
