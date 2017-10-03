@@ -1,7 +1,68 @@
-#+TITLE: 
-#+AUTHOR:VLEAD
-#+DATE:
-#+SETUPFILE: ./org-templates/level-0.org
+#+TITLE : PROJECT_PLAN
+#+AUTHOR : SSAD54
+#+DATE : [08-08-2017]
+#+SETUPFILE: ../../org-templates/level-2.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
+* Project plan
+** Plan
+|----------------+----------------------------------------------------------------------------------------- 
+| PROJECT_NUMBER : 54                                                                                     |
+|----------------+-----------------------------------------------------------------------------------------
+| PROJECT_TITLE  : DATA VISUALIZATION                                                                     |
+|----------------+-----------------------------------------------------------------------------------------
+| CREATION_DATE  : 7-9-2017                                                                               |
+| ---------------+-----------------------------------------------------------------------------------------
+| CREATED_BY     : Kaushik komallapalli , Hiteshwar reddy , Sushmitha Rajeswari                           |
+| ---------------+-----------------------------------------------------------------------------------------
+| CLIENT         : Client: Devi  Prasad. Research center: Virtual Labs Engineering, Architecture and Design|
+|----------------+-----------------------------------------------------------------------------------------
+
+* Brief problem statement 
+** We need to provide analytics for the virtual-labs(https://github.com/virtual-labs) organization in terms of:
+*** Total number of repositories
+*** Total number of issues.
+*** Total number of commits
+*** Top active repositories in terms of:
+**** Issues closed
+**** Commits made in the last six months
+**** number of different developers working on each repository.
+*** List the languages used in this organization.
+** Version of python to be used: 2.7
+** Data is available in https://github.com/virtual-labs
+** Project does not need Ansible
+** Need to use literate style of programming.
+** The analytics should be expressed in terms of  bar graphs , pie charts etc ,whichever form user can easily understand from pictures. The details of above mentioned analytics are to be shown like a beautiful story with “Visualization Zoo” as a reference. We also need to use d3.js for this project.
+* Team members
+** Sushmitha Rajeswari : 
+***   Bar graph representing number of repositories and pie chart showing different languages used in virtual-labs.
+** Hiteswar Reddy : 
+*** Visualize number of commits and issues using appropriate graphs in python using flask.
+** Kaushik :
+*** Top active repositories in every year.
+* Team communication
+** We meet once a week to discuss the progress in project . We discuss some issues which we have in our project.
+* Develop environment
+** Vagrant 
+** Virtual box
+** We can install ubuntu 14.04 instead of virtual box and vagrant . 
+** D3.js
+** Python 2.7 is the programming language used.
+** To code in python “PyCharm” IDE is used.
+** Flask microframework
+* Milestone schedule
+** Milestones
+|---------------------------------------------------------------------------+--------------+--------------
+|                              Milestones                                   | Due date     | Release     | 
+|---------------------------------------------------------------------------+ -------------+-------------+
+| Visualize number of commits, issues using Git API.                        |   4-10-17    |  R1         |
+|---------------------------------------------------------------------------+--------------+-------------+   
+| Visualize number of repositories created each year using Git API.         |   4-10-17    |  R1         |
+|---------------------------------------------------------------------------+--------------+-------------+ 
+| Visualize various languages used in different repositories using Git API. |   4-10-17    |  R1         |
+|-------------------------------------------------------------------------- +------------- +------------ + 
+| Visualize various languages used in different repositories using Git API. |   4-10-17    |  R1         |
+|-------------------------------------------------------------------------- +------------- +------------ +
+| Visualize other data using API provided by the client.                    |   31-10-17   |  R2         |
+|---------------------------------------------------------------------------+--------------+-------------+ 

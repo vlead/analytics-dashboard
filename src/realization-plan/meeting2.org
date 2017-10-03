@@ -1,0 +1,17 @@
+* [2017-17-08 Fri]
+** Agenda
+Understanding requirements
+** Discussion Points
+ Version of python to be used: 2.7
+ Project does not need Ansible
+ Need to use literate programming.
+ Setup development environment(vagrant box).
+** Action
+|------------------+---------+--------------+-------------+---|
+| Item             | Issue   | Artifact     | Status      |   |
+|------------------+---------+--------------+-------------+---|
+| Data to be analysed| - |[[https://github.com/virtual-labs][virtual-labs]]| Analysed data |   |
+|                  |   |  |             |   |
+|------------------+---------+--------------+-------------+---|
+
+    

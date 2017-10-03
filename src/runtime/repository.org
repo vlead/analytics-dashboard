@@ -1,0 +1,165 @@
+#+Title: EXTRACTING DATA
+#+AUTHOR: VLEAD
+#+DATE: [2016-07-26 Tue]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  : PROPERTIES:... 
+  This document tells how to extract data.
+* Implementation
+
+#+BEGIN_SRC python :tangle rep.py 
+
+import time
+import datetime
+import requests
+import json
+import html
+from requests.auth import HTTPBasicAuth
+
+##class RepositoryList():
+##    organization=''
+##
+##    def __init__(self, name):
+##        self.organization = name
+
+def authnticate(user, passwd):
+    auth=HTTPBasicAuth(user, passwd)
+    return auth
+        
+def getReposHistoryData():
+    repoData1 = []
+    currYear = time.strftime("%Y")
+    dict = {}
+    t=0    
+    for _ in range (0, 7):
+        year = int(currYear) - t
+        dict[str(year)]=0
+        t += 1
+
+    auth=HTTPBasicAuth('python-user', 'python123')
+    url = 'https://api.github.com/orgs/virtual-labs/repos?page=1&per_page=100&sort=name&direction=asc'
+    url2 = 'https://api.github.com/orgs/virtual-labs/repos?page=2&per_page=100&sort=name&direction=asc'
+    response = requests.get(url, auth)
+    response1 = requests.get(url2, auth)
+    data = json.loads(response.text) 
+    data += json.loads(response1.text)
+
+    for item in data:
+        #2014-09-16T11:17:01Z
+        localDatetime = time.strptime(item['created_at'], '%Y-%m-%dT%H:%M:%SZ')
+        #print(localDatetime)
+        localYear = localDatetime.tm_year
+        dict[str(localYear)] += 1
+
+    print(dict)
+    j=0
+
+    for rdItem in dict:
+        #print(rdItem)
+        repoData1.append([])
+        repoData1[j].append(rdItem)
+        repoData1[j].append(dict[rdItem])
+        j += 1
+        
+    print("repoData : ", repoData1)
+    return repoData1  
+    
+
+
+def getRepoLanguageData():
+    repoLangData1 = []
+
+    dict = {}
+
+    auth=HTTPBasicAuth('python-user', 'python123')
+    url = 'https://api.github.com/orgs/virtual-labs/repos?page=1&per_page=100&sort=name&direction=asc'
+    url2 = 'https://api.github.com/orgs/virtual-labs/repos?page=2&per_page=100&sort=name&direction=asc'
+    response = requests.get(url, auth)
+    response1 = requests.get(url2, auth)
+    data = json.loads(response.text) 
+    data += json.loads(response1.text)
+
+    for item in data:
+        #print('language : ',item['language'])
+        #print('keys : ', dict.keys())
+        if item['language'] is None:
+            checkItem = 'NULL'
+        else:
+            checkItem = item['language']
+        if checkItem in dict.keys():
+            #print('language if: ',checkItem) 
+            #repoLangData1[checkItem].append(item)
+            dict[checkItem] += 1
+        else:
+            #print('language else: ',checkItem)
+            dict[checkItem] = 1
+
+    j=0
+
+    for rdItem in dict:
+        #print(rdItem)
+        repoLangData1.append([])
+        repoLangData1[j].append(rdItem)
+        repoLangData1[j].append(dict[rdItem])
+        j += 1
+        
+    print("repoLangData : ", repoLangData1)
+    return repoLangData1
+    
+
+def getRepoLanguageDataAsJSON():
+    repoLangData2 = []
+
+    dict = {}
+ 
+    auth=HTTPBasicAuth('python-user', 'python123')
+    url = 'https://api.github.com/orgs/virtual-labs/repos?page=1&per_page=100&sort=name&direction=asc'
+    url2 = 'https://api.github.com/orgs/virtual-labs/repos?page=2&per_page=100&sort=name&direction=asc'
+    response = requests.get(url, auth)
+    response1 = requests.get(url2, auth)
+    data = json.loads(response.text) 
+    data += json.loads(response1.text)
+
+    for item in data:
+        #print('language : ',item['language'])
+        #print('keys : ', dict.keys())
+        if item['language'] is None:
+            checkItem = 'NULL'
+        else:
+            checkItem = item['language']
+        if checkItem in dict.keys():
+            dict[checkItem] += 1
+        else:
+            dict[checkItem] = 1
+
+    j=0
+
+    print("dictionary : ", dict)
+
+    totalRepos = 0
+
+    for rdItem in dict:
+        totalRepos += dict[rdItem]
+
+    for rdItem in dict:
+        
+        print(rdItem)
+        jdata = {
+                   'lang' : rdItem,
+                   'percent' : round(100*dict[rdItem]/totalRepos, 0)
+                }
+        json_str = json.dumps(jdata)
+        repoLangData2.insert(j, json.loads(json_str))
+
+        j += 1
+
+    #repoLangData2 = json.dumps(repoLangData2)
+    print("repoLangDataxxx : ", repoLangData2)
+    return repoLangData2
+
+#+END_SRC
+
