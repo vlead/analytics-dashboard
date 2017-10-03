@@ -1,24 +1,25 @@
-#+TITLE : PROJECT_PLAN
-#+AUTHOR : SSAD54
-#+DATE : [08-08-2017]
-#+SETUPFILE: ../../org-templates/level-2.org
+#+TITLE: PROJECT_PLAN
+#+AUTHOR: SSAD54
+# #+DATE: [08-08-2017]
+#+SETUPFILE: ../org-templates/level-1.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
 
+
 * Project synopsis
 ** Synopsis
-|----------------+-----------------------------------------------------------------------------------------+--
-| PROJECT_NUMBER : 54                                                                                        |
-|----------------+-----------------------------------------------------------------------------------------+--                                                                                      
-| PROJECT_TITLE  : DATA VISUALIZATION                                                                        |
-|----------------+-----------------------------------------------------------------------------------------+--                                                                      
-| CREATION_DATE  : 7-9-2017                                                                                  |
-|----------------+-----------------------------------------------------------------------------------------+--                                                                                
-| CREATED_BY     : Kaushik komallapalli , Hiteshwar reddy , Sushmitha Rajeswari                              |
-|----------------+-----------------------------------------------------------------------------------------+--
-| CLIENT         : Client: Devi  Prasad. Research center: Virtual Labs Engineering, Architecture and Design  |
-|----------------+-----------------------------------------------------------------------------------------+--
+|-----------------------------------------------------------------------------------------------------------|
+| PROJECT_NUMBER : 54                                                                                       |
+|-----------------------------------------------------------------------------------------------------------|
+| PROJECT_TITLE  : DATA VISUALIZATION                                                                       |
+|-----------------------------------------------------------------------------------------------------------|
+| CREATION_DATE  : 7-9-2017                                                                                 |
+|-----------------------------------------------------------------------------------------------------------|
+| CREATED_BY     : Kaushik komallapalli , Hiteshwar reddy , Sushmitha Rajeswari                             |
+|-----------------------------------------------------------------------------------------------------------|
+| CLIENT         : Client: Devi  Prasad. Research center: Virtual Labs Engineering, Architecture and Design |
+|-----------------------------------------------------------------------------------------------------------|
 
 * Description
 ** We need to provide analytics for the virtual-labs(https://github.com/virtual-labs) organization in terms of:

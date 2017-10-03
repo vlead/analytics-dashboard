@@ -1,0 +1,22 @@
+#+TITLE: Minutes of meetings
+#+AUTHOR: VLEAD
+#+DATE: [2017-10-03 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
+  This document contains minutes of all the meetings
+
+* [2017-10-03 Tue]
+
+** Agenda
+** Discussion 
+** Action 
+   1. Move all meetings to this file. 
+   2. Set your auto fill mode to column width 60.  Refer
+      this [[https://github.com/vlead/vlead-onboarding/issues/2][issue]]. 
+      
+
