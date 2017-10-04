@@ -22,7 +22,7 @@ This displays the visualization of the feedbacks given by the users.
 <div class = "main">
 <div id='dashboard' class="bottom">
   <div id="fillgaugeContainer">
-  <svg id="fillgauge1" width="100%" height="230"></svg>
+  <svg id="fillgauge1" width="100%" height="240"></svg>
 </div>
 </div>
 </div>
@@ -1111,10 +1111,8 @@ rect:hover {  fill:#ee5c42; }
 .axis {  font: 10px sans-serif; }
 .legend tr{    border-bottom:1px solid grey; }
 .legend tr:first-child{    border-top:1px solid grey; }
-
 .legend1 tr{    border-bottom:1px solid grey; }
 .legend1 tr:first-child{    border-top:1px solid grey; }
-
 .axis path,
 .axis line {
   fill: none;
@@ -1126,31 +1124,27 @@ rect:hover {  fill:#ee5c42; }
   display: inline-block
 }
 #barChartExample{
-
   margin-left: 3%;
   border: 1px solid #000;
-  width: 350px;
+  width: 29%;
   box-shadow: 2px 2px 9px #8e8e6f;
   border-radius: 7px;
 }
 #firstPieChart,#secondPieChart{
-  
   margin-top: 10px;
   box-shadow: 2px 2px 9px #8e8e6f;
   border-radius: 7px;
   border: 1px solid #000;
   margin-left: 2%;
-
 }
-#firstPieChart{   
-   width: 446px;
+#firstPieChart{
+   width: 35%;
   padding: 0px 10px 0 10px;
   }
-#secondPieChart{ width: 720px;
-  margin-left: 47px;
+#secondPieChart{ width: 56%;
   padding: 0px 10px 0 10px;
     }
-#fillgaugeContainer{  
+#fillgaugeContainer{
   box-shadow: 2px 2px 9px #8e8e6f;
   border-radius: 7px;
   border: 1px solid #000;
@@ -1160,9 +1154,7 @@ rect:hover {  fill:#ee5c42; }
   padding-bottom: 1px;
   width: 332px;
   margin-bottom: 13px;
-
 }
-
 .x.axis path {  display: none; }
 .legend{
     display: inline-block;
@@ -1175,7 +1167,6 @@ rect:hover {  fill:#ee5c42; }
     padding:4px 5px;
     vertical-align:bottom;
 }
-
 .legend1 td{
     padding:4px 5px;
     vertical-align:bottom;
@@ -1185,7 +1176,6 @@ rect:hover {  fill:#ee5c42; }
 }
 .pieChart{
    margin-left: -2%;
-   
 }
 .pieChart1{
     margin-left: 0%;
@@ -1204,20 +1194,76 @@ rect:hover {  fill:#ee5c42; }
     height : 100%;
     width : 100%;
 }
-.top{
-    height : 40%;
-    width : 100%;
-    display: inline-block;
-}
 .bottom{
     height : 60%;
     width : 100%;
+    margin-top:2%;
 }
 .histogramExample{
   margin-left: 8%
 }
 #fillgauge1{
   display: inline-block;
+}
+
+/* ----------- 950px - 1400px ----------- */
+@media screen
+  and (min-width: 900px)
+  and (max-width: 1400px){
+
+#fillgaugeContainer{
+  margin-left: 16%;
+  width: 20%;
+  padding-left: 4%;
+  margin-bottom: 1%;
+}
+.histogramExample {
+    margin-left: 16%;
+    height:300px;
+}
+#barChartExample{
+  margin-left: 3%;
+  width: 32%;
+  margin-bottom: 2%;
+}
+.pieChart {
+    margin-left: -3%;
+}
+.pieChart1 {
+    margin-left: 1%;
+}
+}
+
+/* ----------- 1400px + ----------- */
+@media screen 
+  and (min-width: 1401px){
+
+#fillgaugeContainer{
+  margin-left: 22%;
+  width: 18%;
+  padding-left: 7%;
+  margin-bottom: 2%;
+}
+.histogramExample {
+    margin-left: 18%;
+    height:370px;
+}
+#barChartExample{
+  margin-bottom: 2%;
+}
+.pieChart {
+    margin-left: 12%;
+}
+.pieChart1 {
+    margin-left: 14%;
+}
+#fillgauge1{
+  margin-bottom: 18%;
+}
+#firstPieChart, #secondPieChart{
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
 }
 
 #+END_SRC
