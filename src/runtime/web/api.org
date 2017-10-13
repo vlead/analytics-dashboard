@@ -8,11 +8,15 @@
 #+OPTIONS: ^:nil
 
 * Introduction
-
-This displays the visualization of the feedbacks given by the users.
+  :PROPERTIES:
+  :CUSTOM_ID: introduction
+  :END: 
+  This "literate mode" displays the visualization of the feedbacks given by the users.
 * WebApp
-** Index HTML
-#+BEGIN_SRC  html :tangle templates/index.html :eval no :noweb yes
+** Structure of html
+#+NAME: main-html
+#+BEGIN_SRC html 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Dashboard</title>
@@ -31,12 +35,12 @@ This displays the visualization of the feedbacks given by the users.
 <script src="../static/js/chart_display.js"></script>
 </body>
 </html>
-
 #+END_SRC
 
-
-** JS
-#+BEGIN_SRC  javascript :tangle /static/js/chart_display.js :eval no :noweb yes
+** Liquid Fill Gauge Default Settings
+   Following function contain liquid fill gauge default settings
+#+NAME: liquidfillgauge-defaultsettings
+#+BEGIN_SRC html 
 
     var count = 0;
 $.ajax({ // Ajax call for URL
@@ -52,9 +56,6 @@ $.ajax({ // Ajax call for URL
   loadLiquidFillGauge("fillgauge1", count)
 
 });
-
-
-
 
 function liquidFillGaugeDefaultSettings() {
   return {
@@ -80,7 +81,12 @@ function liquidFillGaugeDefaultSettings() {
     waveTextColor: "#A4DBf8" // The color of the value text when the wave overlaps it.
   };
 }
+#+END_SRC
 
+** Load Liquid Fill Gauge
+   Following function calls when liquid fill gauge function gets load
+#+NAME: load-liquidfillgauge
+#+BEGIN_SRC html 
 function loadLiquidFillGauge(elementId, value, config) {
   if (config == null) config = liquidFillGaugeDefaultSettings();
 
@@ -266,7 +272,11 @@ function loadLiquidFillGauge(elementId, value, config) {
       });
   }
 }
+#+END_SRC
 
+** Dashboard
+#+NAME: main-dashboard
+#+BEGIN_SRC html
 function dashboard(id, fData) {
   var self =this;
   self.yearSelected=''
@@ -484,7 +494,8 @@ console.log(self.yearSelected)
     return hG;
   }
 
-  // function to handle pieChart.
+  // Function to handle pieChart.
+
   self.pieChart = function(pD) {
     var pC = {},
       pieDim = {
@@ -707,7 +718,7 @@ console.log(self.yearSelected)
     
   }
 
-  // calculate total frequency by segment for all state.
+  // Calculate total frequency by segment for all state.
 
   var tF = ['lab','experiment','generic' ].map(function(d) {
     return {
@@ -720,8 +731,8 @@ console.log(self.yearSelected)
     };
   });
 
+  // Calculate total frequency by state for all segment.
 
-  // calculate total frequency by state for all segment.
   var sF = fData.map(function(d) {
         
     return [d.State, d.total];
@@ -738,11 +749,15 @@ console.log(self.yearSelected)
   //$('table').hide();
   
 
-  // create the legend.
 }
+#+END_SRC
+
+** Create legend
+   Create the legend.
+#+NAME: create-legend
+#+BEGIN_SRC html
 
 var totalYear = []
-
 
 $.ajax({ // Ajax call for URL
   method: 'GET',
@@ -843,10 +858,10 @@ piechart2.forEach(function(d) {
   console.log(d)
   
 
-   if (d.freq.lab == 0 || !d.freq.lab) {
+    if (d.freq.lab == 0 || !d.freq.lab) {
       d.freq.lab = 0
     }
-if (d.freq.experiment == 0 || !d.freq.experiment) {
+    if (d.freq.experiment == 0 || !d.freq.experiment) {
       d.freq.experiment = 0
     }
     if (d.freq.generic == 0 || !d.freq.generic) {
@@ -908,6 +923,12 @@ this.dynamicSort=function(property) {
         return result * sortOrder;
     }
 }
+#+END_SRC
+
+** Dashboard function
+
+#+NAME: dashboard-function
+#+BEGIN_SRC html
 
 function dashboardFunction(dataset,typeofPie){
   
@@ -1096,11 +1117,10 @@ if(typeofPie!=='' && typeofPie){
 }
 
 #+END_SRC
-   
-   
-** CSS 
-#+BEGIN_SRC  css :tangle /static/css/tab.css :eval no :noweb yes
 
+** CSS   
+#+NAME: style-sheets
+#+BEGIN_SRC html 
 body{
     width:100%;
     margin:0px auto;
@@ -1268,4 +1288,23 @@ rect:hover {  fill:#ee5c42; }
 
 #+END_SRC
 
+* Tangle 
+** sources
+*** Javascript
+#+BEGIN_SRC javascript :tangle static/js/chart_display.js :eval no :noweb yes 
+<<liquidfillgauge-defaultsettings>>
+<<load-liquidfillgauge>>
+<<main-dashboard>>
+<<create-legend>>
+<<dashboard-function>>
 
+#+END_SRC
+*** HTML
+#+BEGIN_SRC html :tangle templates/index.html :eval no :noweb yes
+<<main-html>>
+#+END_SRC
+
+*** CSS
+#+BEGIN_SRC css :tangle static/css/tab.css :eval no :noweb yes 
+<<style-sheets>>
+#+END_SRC
