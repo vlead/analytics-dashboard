@@ -1,4 +1,6 @@
 *  Analytics Dashboard
+   It shows visualization of feedback counts dynamically in the form of fluid liquid guage, bar graph and pie charts using D3.js
+
 ** Pre-requisites to build the sources on Ubunut14.04
 *** Install =emacs v24.5=
 
@@ -34,6 +36,6 @@ make
 #+END_SRC
 - Run application on local machine
 #+BEGIN_SRC 
-cd build/code/runtime/web/templates
+cd build/code/runtime/templates
 firefox index.html
 #+END_SRC
