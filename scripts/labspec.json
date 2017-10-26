@@ -1,0 +1,98 @@
+{
+  "lab": {
+    "description": {
+      "name": "Analytics Dashboard",
+      "id": "analytics-dashboard",
+      "status": "working code",
+      "discipline": [],
+      "type": "",
+      "server-side": true,
+      "developer": [
+	{
+          "name": "Reena Madamwar",
+          "title": "",
+          "role": "Project Engineer",
+          "organization": "VLEAD",
+          "institute": "IIIT Hyderabad",
+          "web": "",
+          "department": "Software Engg Research Lab (SERL)",
+          "contact": {
+            "email": "reena@vlabs.ac.in",
+            "alternate_email": "",
+            "mobile_number": "",
+            "office_number": ""
+          }
+        },
+        {
+          "name": "Mrudhvika",
+          "title": "",
+          "role": "Software Engineer",
+          "organization": "VLEAD",
+          "institute": "IIIT Hyderabad",
+          "web": "",
+          "department": "Software Engg Research Lab (SERL)",
+          "contact": {
+            "email": "mrudhvika@vlabs.ac.in",
+            "alternate_email": "",
+            "mobile_number": "",
+            "office_number": ""
+          }
+        }
+      ]
+     },
+    "build_requirements": {
+      "platform": {
+        "os": "ubuntu",
+        "osVersion": "14.04",
+        "arch": "x64",
+        "service_pack": "",
+        "installer": [
+        ],
+        "build_steps": {
+          "configure": [],
+          "pre_build": [],
+          "build": [
+            "cd ../;make build"
+          ],
+          "post_build": [
+            "cp -R ../build/code/* /var/www/",
+            "chmod -R 755 /var/www"
+          ],
+          "status": []
+        }
+      }
+    },
+    "runtime_requirements": {
+      "platform": {
+        "os": "ubuntu",
+        "osVersion": "14.04",
+        "arch": "x64",
+        "servicepack": "",
+        "hosting": "dedicated",
+        "memory": {
+          "max_required": "4gb",
+          "min_required": "2gb"
+        },
+        "storage": {
+          "min_required": "10gb"
+        },
+        "installer": [
+        ],
+        "lab_actions": {
+          "init"    : [],
+          "shutdown": [],
+          "pause"   : [],
+          "resume"  : [],
+          "start"   : ["./start"],
+          "stop"    : ["./stop"],
+          "backup"  : ["./backup"],
+          "restore" : ["./restore"],
+          "clean"   : [],
+          "stats"   : [],
+          "publish" : []
+        }
+      }
+    }
+  },
+  "template": "1.0"
+}
