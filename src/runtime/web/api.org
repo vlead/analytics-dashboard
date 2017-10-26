@@ -275,6 +275,7 @@ function loadLiquidFillGauge(elementId, value, config) {
 #+END_SRC
 
 ** Dashboard
+   It contains template of bar graph and two pie charts showing every detail of feedback counts filter by year, lab, experiments, generic.
 #+NAME: main-dashboard
 #+BEGIN_SRC html
 function dashboard(id, fData) {
@@ -753,7 +754,7 @@ console.log(self.yearSelected)
 #+END_SRC
 
 ** Create legend
-   Create the legend.
+   It create legends in the form of the tables which shows feedback counts in numbers as well as in percentage for both the pie charts.
 #+NAME: create-legend
 #+BEGIN_SRC html
 
@@ -926,7 +927,7 @@ this.dynamicSort=function(property) {
 #+END_SRC
 
 ** Dashboard function
-
+   It control function of bar graph and two pie charts so that it works dynamically.
 #+NAME: dashboard-function
 #+BEGIN_SRC html
 
@@ -1118,7 +1119,8 @@ if(typeofPie!=='' && typeofPie){
 
 #+END_SRC
 
-** CSS   
+** CSS
+   It contains css for for complete service which makes the service responsive.
 #+NAME: style-sheets
 #+BEGIN_SRC html 
 body{
