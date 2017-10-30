@@ -52,7 +52,7 @@
             ], 
             "discipline": [], 
             "id": "", 
-            "integration_level": , 
+            "integration_level":"", 
             "name": "", 
             "server-side": true, 
             "status": "", 
