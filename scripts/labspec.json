@@ -51,11 +51,11 @@
                 }
             ], 
             "discipline": [], 
-            "id": "", 
-            "integration_level":"", 
-            "name": "", 
+            "id": "feedback", 
+            "integration_level": 4, 
+            "name": "Analytics Dashboard", 
             "server-side": true, 
-            "status": "", 
+            "status": "Work in Progress", 
             "type": ""
         }, 
         "runtime_requirements": {
