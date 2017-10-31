@@ -1,10 +1,57 @@
 #!/bin/bash
-# Restore Script for analytics dashboard service
 
-# Restore Script restores the backup of the data used by the lab.
-# Since there is no data being used by analytics dashboard service, 
-# the script does nothing. 
-# Usage of the script
 
-# To use restore script, run the command
-# ./scripts/restore
+DB_NAME="analyticsdashboard"
+DB_PASS="root"
+VERSION="v1.0.0"
+
+BACKUP_FILE=$1
+
+usage() {
+  echo "Usage:"
+  echo "$0 <path/to/the/backup/file.tar>"
+}
+
+if [ -z $BACKUP_FILE ]; then
+  echo "Error: No arguments were passed!!"
+  echo "Error: The path to the backup file must be passed."
+  usage
+  exit 1;
+fi
+
+# untar the $BACKUP_FILE file
+
+tar -xvf $BACKUP_FILE
+if [ $? -ne 0 ]; then
+  echo "Error: Something went wrong while untaring."
+  echo "Aborting restore."
+  exit 1;
+fi
+
+# restore from the dump folder
+
+mysql -u root -p$DB_PASS -e "drop database $DB_NAME"
+if [ $? -ne 0 ]; then
+  echo "Error: in droping database name $DB_NAME"
+  echo "Aborting"
+
+fi
+
+mysql -u root -p$DB_PASS -e "create database $DB_NAME"
+if [ $? -ne 0 ]; then
+  echo "Error: in droping database name $DB_NAME"
+  echo "Aborting"
+  exit 1;
+fi
+
+mysql -u root -p$DB_PASS $DB_NAME < $DB_NAME.sql
+if [ $? -ne 0 ]; then
+  echo "Error: Something went wrong while restoring db dump."
+  echo "Aborting restore."
+  exit 1;
+else
+    echo "################"
+    echo "Restore successful."
+    echo "###############"
+fi
+exit 0;
