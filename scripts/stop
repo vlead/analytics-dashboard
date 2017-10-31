@@ -5,6 +5,6 @@
 # To use stop.sh, run the command
 # ./scripts/stop.sh
 
-# stops the Apache service
-service apache2 stop
+# stops the Nginx service
+service nginx stop
 
