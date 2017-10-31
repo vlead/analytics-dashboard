@@ -1,94 +1,121 @@
 {
-    "lab": {
-        "build_requirements": {
-            "platform": {
-                "arch": "x64", 
-                "build_steps": {
-                    "build": ["cd ../;make build"], 
-                    "configure": [], 
-                    "post_build": ["cp -R ../build/code/* /var/www/",
-"chmod -R 755 /var/www"], 
-                    "pre_build": [], 
-                    "status": []
-                }, 
-                "installer": [], 
-                "os": "ubuntu", 
-                "osVersion": "14.04", 
-                "service_pack": ""
-            }
-        }, 
-        "description": {
-            "developer": [
-                {
-                    "contact": {
-                        "alternate_email": "", 
-                        "email": "reena@vlabs.ac.in", 
-                        "mobile_number": "", 
-                        "office_number": ""
-                    }, 
-                    "department": "Software Engg Research Lab (SERL)", 
-                    "institute": "IIIT Hyderabad", 
-                    "name": "Reena Madamwar", 
-                    "organization": "VLEAD", 
-                    "role": "Project Engineer", 
-                    "title": "", 
-                    "web": ""
-                }, 
-                {
-                    "contact": {
-                        "alternate_email": "", 
-                        "email": "mrudhvika@vlabs.ac.in", 
-                        "mobile_number": "", 
-                        "office_number": ""
-                    }, 
-                    "department": "Software Engg Research Lab (SERL)", 
-                    "institute": "IIIT Hyderabad", 
-                    "name": "Mrudhvika", 
-                    "organization": "VLEAD", 
-                    "role": "Project Engineer", 
-                    "title": "", 
-                    "web": ""
-                }
-            ], 
-            "discipline": [], 
-            "id": "feedback", 
-            "integration_level": 4, 
-            "name": "Analytics Dashboard", 
-            "server-side": true, 
-            "status": "Work in Progress", 
-            "type": ""
-        }, 
-        "runtime_requirements": {
-            "platform": {
-                "arch": "x64", 
-                "hosting": "dedicated", 
-                "installer": ["sudo apt-get update",
-                "sudo apt-get install -y php5 apache2"], 
-                "lab_actions": {
-                    "backup": ["./backup"], 
-                    "clean": [], 
-                    "init": [], 
-                    "pause": [], 
-                    "publish": [], 
-                    "restore": ["./restore"], 
-                    "resume": [], 
-                    "shutdown": [], 
-                    "start": ["./start"],  
-                    "stats": [], 
-                    "stop": ["./stop"]
-                }, 
-                "memory": {
-                    "max_required": "2gb", 
-                    "min_required": "256mb"
-                }, 
-                "os": "ubuntu", 
-                "osVersion": "14.04", 
-                "servicepack": "", 
-                "storage": {
-                    "min_required": "10gb"
-                }
-            }
+  "lab": {
+    "description": {
+      "name": "Analytics Dashboard",
+      "id": "analytics-dashboard",
+      "status": "working code",
+      "discipline": [],
+      "type": "",
+      "server-side": true,
+      "integration_level": 6,
+      "developer": [
+        {
+          "name": "Reena Madamwar",
+          "title": "",
+          "role": "Project Engineer",
+          "organization": "VLEAD",
+          "institute": "IIIT Hyderabad",
+          "web": "",
+          "department": "Software Engg Research Lab (SERL)",
+          "contact": {
+            "email": "reena@vlabs.ac.in",
+            "alternate_email": "",
+            "mobile_number": "",
+            "office_number": ""
+          }
+        },
+	{
+          "name": "Mrudhvika Sharma",
+          "title": "",
+          "role": "Software Engineer",
+          "organization": "VLEAD",
+          "institute": "IIIT Hyderabad",
+          "web": "",
+          "department": "Software Engg Research Lab (SERL)",
+          "contact": {
+            "email": "mrudhvika@vlabs.ac.in",
+            "alternate_email": "",
+            "mobile_number": "",
+            "office_number": ""
+          }
+        },
+        {
+          "name": "Madhavi Puliraju",
+          "title": "",
+          "role": "Software Engineer",
+          "organization": "VLEAD",
+          "institute": "IIIT Hyderabad",
+          "web": "",
+          "department": "Software Engg Research Lab (SERL)",
+          "contact": {
+            "email": "madhavi@vlabs.ac.in",
+	    "alternate_email": "",
+            "mobile_number": "",
+            "office_number": ""
+          }
         }
-    }, 
-    "template": "1.0"
+      ]
+     },
+    "build_requirements": {
+      "platform": {
+        "os": "ubuntu",
+        "osVersion": "14.04",
+        "arch": "x64",
+        "service_pack": "",
+        "installer": [
+        ],
+        "build_steps": {
+          "configure": [],
+          "pre_build": [],
+          "build": [
+            "cd ../;make build"
+          ],
+          "post_build": [
+            "cp -R ../build/code/* /var/www/",
+            "chmod -R 755 /var/www",
+            "mkdir /var/www/logs",
+            "chmod -R 777 /var/www/logs"
+          ],
+          "status": []
+        }
+      }
+    },
+    "runtime_requirements": {
+      "platform": {
+        "os": "ubuntu",
+        "osVersion": "14.04",
+        "arch": "x64",
+        "servicepack": "",
+        "hosting": "dedicated",
+        "memory": {
+          "max_required": "4gb",
+          "min_required": "2gb"
+        },
+        "storage": {
+          "min_required": "10gb"
+        },
+        "installer": [
+          "bash /var/www/deployment/setup.sh",
+          "python /var/www/deployment/setup.py install",
+          "bash /var/www/deployment/configure.sh",
+          "python /var/www/runtime/rest/cert.py",
+          "PYTHONPATH=/var/www python /var/www/deployment/db_setup.py"
+        ],
+        "lab_actions": {
+          "init"    : [],
+          "shutdown": [],
+          "pause"   : [],
+          "resume"  : [],
+          "start"   : ["./start"],
+          "stop"    : ["./stop"],
+          "backup"  : ["./backup"],
+          "restore" : ["./restore"],
+          "clean"   : [],
+          "stats"   : [],
+          "publish" : []
+        }
+      }
+    }
+  },
+  "template": "1.0"
 }
