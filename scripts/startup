@@ -7,6 +7,6 @@
 # To use startup.sh, run the command
 # ./scripts/startup.sh
 
-# starts the Apache service
-service apache2 start
+# starts the Nginx service
+service nginx start
 
