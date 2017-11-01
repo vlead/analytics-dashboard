@@ -53,18 +53,42 @@
 |       | on the basis of lab, |        |          |        |            |            |          |           |
 |       | exp and generic      |        |          |        |            |            |          |           |
 |-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
-|    4. | Present feedbacks in | [[https://github.com/vlead/analytics-dashboard/issues/25][#25]]    |       40 |        | 06-09-2017 |            | In       | Reena     |
-|       | further detail       |        |          |        | 13-09-2017 |            | Progress |           |
+|    4. | Present feedbacks in | [[https://github.com/vlead/analytics-dashboard/issues/25][#25]]    |       40 |        | 06-09-2017 | 06-09-2017 | Done     | Reena     |
+|       | further detail       |        |          |        | 13-09-2017 | 15-09-2017 |          |           |
 |       | depends on OL, NOL,  |        |          |        |            |            |          |           |
 |       | OE, NOE and generic  |        |          |        |            |            |          |           |
-|       |                      |        |          |        |            |            |          |           |
 |-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
-|    5. | Transisions of all   | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |       10 |        | 14-09-2017 |            | Backlog  | Reena     |
-|       | the graphs and       |        |          |        | 15-09-2017 |            |          |           |
+|    5. | Transisions of all   | [[https://github.com/vlead/analytics-dashboard/issues/26][#26]]    |          |        | 18-09-2017 | 18-09-2017 | Done     | Reena     |
+|       | the graphs and       |        |          |        | 20-09-2017 | 20-09-2017 |          |           |
 |       | arrange them         |        |          |        |            |            |          |           |
 |       | properly in a page   |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    6. | Setup vagrant box    | [[https://github.com/vlead/analytics-dashboard/issues/28][#28]]    |          |        | 21-09-2017 |            | Backlog  | Reena     |
+|       | with ADS             |        |          |        | 26-09-2017 |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    7. | Need to make         | [[https://github.com/vlead/analytics-dashboard/issues/33][#33]]    |          |        | 03-10-2017 | 03-10-2017 | Done     | Reena     |
+|       | implementation       |        |          |        | 06-10-2017 | 10-10-2017 |          |           |
+|       | responsive           |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    8. | Need to make         | [[https://github.com/vlead/analytics-dashboard/issues/34][#34]]    |          |        | 11-10-2017 | 11-10-2017 | Done     | Reena     |
+|       | implementation       |        |          |        | 13-10-2017 | 13-10-2017 |          |           |
+|       | in literate mode     |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    9. | Need to create       | [[https://github.com/vlead/analytics-dashboard/issues/37][#37]]    |          |        | 26-10-2017 | 26-10-2017 | In       | Reena     |
+|       | complete script      |        |          |        | 30-10-2017 | 31-10-2017 | Progress |           |
+|       | folder               |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    10.| Need to remove       | [[https://github.com/vlead/analytics-dashboard/issues/36][#36]]    |          |        |            |            | In       | Mrudhvika |
+|       | empty box bug        |        |          |        |            |            | Progress |           |
+|       |                      |        |          |        |            |            |          |           |
+|-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
+|    11.| Deploy manually      |        |          |        |            |            |          |           |
+|       | on local machine     |        |          |        |            |            |          |           |
+|       |                      |        |          |        |            |            |          |           |
 |-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
 | Total |                      |        |      121 |        |            |            |          |           |
 |     ^ |                      |        |    total |        |            |            |          |           |
 |-------+----------------------+--------+----------+--------+------------+------------+----------+-----------|
 #+TBLFM: $total=vsum(@II+1..@-1)
+
+ [[https://github.com/vlead/analytics-dashboard/issues/36][#36]]
