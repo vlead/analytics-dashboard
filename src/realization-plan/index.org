@@ -1,7 +1,59 @@
-#+TITLE: 
-#+AUTHOR:VLEAD
-#+DATE:
-#+SETUPFILE: ./org-templates/level-0.org
-#+TAGS: boilerplate(b)
-#+EXCLUDE_TAGS: boilerplate
-#+OPTIONS: ^:nil
+#+TITLE: Realization plan for Vlabs Analytics Dashboard
+#+AUTHOR: VLEAD
+#+DATE: [2017-09-11 Mon]
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+SETUPFILE: ../org-templates/level-1.org
+#+options: ^:nil
+#+LATEX: Literal LaTeX code for export
+
+* Introduction
+  This document contains the realization plan for
+  implementing the VLABS Analytics Dashboard.
+
+* Milestones Snapshot
+
+  |---+----+----+-----+---------------------------+------+--------+-----+-----+--------+---|
+  |   | S. | Mi | Req | Milestone                 | Plan | Status | Est | Act | Issues |   |
+  |   | no | no | Map |                           |      |        | hrs | hrs |        |   |
+  |---+----+----+-----+---------------------------+------+--------+-----+-----+--------+---|
+  |   | 1. | [[https://github.com/vlead/analytics-dashboard/milestone/5][5]]  |     | [[https://github.com/vlead/analytics-dashboard/milestone/5][Design feedback analytics]] |      | Open   |     |     | [[https://github.com/vlead/analytics-dashboard/milestone/5][ref]]    |   |
+  |---+----+----+-----+---------------------------+------+--------+-----+-----+--------+---|
+  |   |    |    |     | Total                     |      |        | 0   | 0   |        |   |
+  | ^ |    |    |     |                           |      |        | est | act |        |   |
+  |---+----+----+-----+---------------------------+------+--------+-----+-----+--------+---|
+  #+TBLFM: $est=vsum(@II+1..@-1)
+  #+TBLFM: $act=vsum(@II+1..@-1)
+
+* Detailed Plan 
+  Once this milestone is realized, the following tasks will
+  be completed. 
+
+  1. Finalize on what to view from the feedback data
+  2. Finalize on the layout and design of the front end
+  3. Finalize on the technologies to be used
+  4. Design the dashboard as a single page application
+     realized as a state machine.
+
+#+caption:  realization-plan-milestone-5
+#+name: tbl-rlz-pln-ml-5
+|---+-------+------------+--------+----------+--------+-----------+--------+---------+----------|
+|   | S.    | Tasks      | Github | Expected | Actual | Estimated | Actual | Status  | Assignee |
+|   | NO    |            | Issues | Effort   | Effort | Start,    | Start/ |         |          |
+|   |       |            |        | (in      | (in    | End       | End    |         |          |
+|   |       |            |        | person   | person | Dates     | Dates  |         |          |
+|   |       |            |        | hours)   | hours) |           |        |         |          |
+|---+-------+------------+--------+----------+--------+-----------+--------+---------+----------|
+|   | 1.    | Design the | [[https://github.com/vlead/analytics-dashboard/issues/38][#38]]    |          |        |           |        | backlog |          |
+|   |       | layout     |        |          |        |           |        |         |          |
+|   |       |            |        |          |        |           |        |         |          |
+|---+-------+------------+--------+----------+--------+-----------+--------+---------+----------|
+|   | Total |            |        | 0        | 0      |           |        |         |          |
+| ^ |       |            |        | est      | act    |           |        |         |          |
+|---+-------+------------+--------+----------+--------+-----------+--------+---------+----------|
+#+TBLFM: $est=vsum(@II+1..@-1)
+#+TBLFM: $act=vsum(@II+1..@-1)
+
+
+
+
