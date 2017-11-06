@@ -9,8 +9,24 @@
 
 * Introduction 
   The requirements of =feedback analytics dashboard= are listed here.
-
-** Requirements
-*** Ability to view the total feedbacks
-*** Ability to view the offline and online feedbacks
-*** Ability to view total feedbacks for given question
+  
+* Requirements
+** Req 1
+   Provide a mechanism to view and analyze feedback data. 
+** Req 2
+   Provide a mechanism to view and analyze usage data.
+** Req 3
+   Show the total number virtual lab users
+** Req 4
+   Show the number of live users using virtual labs
+** Req 5
+   Provide analytics for the [[https://github.com/virtual-labs][virtual-labs]] organization in
+   terms of:
+   1. Total number of repositories
+   2. Total number of issues.
+   3. Total number of commits
+   4. Top active repos in terms:
+      1. Issues closed
+      2. Commits made in the last six months
+      3. number of different developers working on each repo.
+   5. List the languages used in this organization.
