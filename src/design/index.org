@@ -1,6 +1,6 @@
 #+TITLE: Analytics-Dashboard
 #+AUTHOR: VLEAD
-#+DATE: [2017-05-01 Friday]
+#+DATE: [2017-11-17 Friday]
 #+SETUPFILE: ../org-templates/level-1.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
@@ -11,35 +11,98 @@
   The =design= of the =Analytics Dashboard= is captured here.  
 
 * Plan
-** Step 1
-   When we access the URL(to be decided after service goes on production) it
-   displays the graph of number of feedbacks with respect to each
-   year(starting from 2015 till date) as a [[https://bl.ocks.org/mbostock/3885304][Bar Graph]] with years on the X-Axis
-   and number of feedbacks on the Y-Axis.
-   [[https://docs.google.com/drawings/d/1LiEzNKWB3i-06YWg8b5Ea61aZv3D4xeEI6KCDXCEJp0/pub?w=960&h=720][Sample step1]]
-   
-** Step 2 
-   Once a rectangle of the bar graph for a particular year is clicked it
-   displays as [[https://bl.ocks.org/mbostock/3887235][Pie Chart]] or [[https://bl.ocks.org/mbostock/3887193][Donut Chart]]. The pie/donut chart displays the
-   number of different versions of the feedback service. We have the following
-   2 options for displaying the pie/donut chart:
-   
-    + Option 1: The current bar graph would slide to the left of the screen and
-    pie/donut chart would be displayed on the right side of the browser
-    window. The only constraint with this option would be when the X-Axis grows
-    with increase in the number of years, displaying the Pie/donut chart beside
-    the Bar Graph on the same window would be difficult. [[https://docs.google.com/drawings/d/1Pwx1CziCcCe5iPCQTsoXlZDIdyO9OW6Ug1sMqV1Nr50/pub?w=960&h=720][Sample graph]]
-    
-    + Option 2: The Bar Graph is completely replaced with the Pie/donut chart n
-    the browser window. For navigating back to the bar graph there would be a
-    small back button on the top left of the screen.[[https://docs.google.com/drawings/d/1xSio54wcLkKDY6jJFe13BNIC3kUDIfqK7STJq3KbbX0/pub?w=960&h=720][sample graph]]
-    
-** Step 3 
-   When a sector of pie/donut Chart is clicked it displays the questions of a
-   particular feedback version as selected in step 2. Inputs required from
-   Thirumal/Priya/Ravi Shankar/Devi Prasad on the layout of the feedback
-   questions on the browser window. [[https://docs.google.com/drawings/d/1BiJRkEYmdjxC8V4obRSInt1d6vZ3P2fT1pJEBcsty44/pub?w=960&h=720][Sample Graph]]
 
-*** Possible Layout suggestion
-   + Displaying all the graphs of feedback responses for each question as small
-     multiples. Clicking on a particular question enlarges that specific graph.
+   When we access the URL(to be decided after service goes on production) it
+   displays the dashboard of number of feedbacks with respect to each
+   year(starting from 2015 till date).
+   
+   Below are the 3 sample designs
+   + [[docs/design1.png][Design 1]]
+   + [[docs/design2.png][Design 2]]
+   + [[docs/design3.png][Design 3]]
+
+** Technology Stack
+
+*** Front-end tech stack
+    The front-end is the visual part of your application that users will see 
+    and interact with. This interaction can happen through a web browser or a 
+    mobile app. When building for the web, the front-end tech stack is made up of:
+
+    + Editor
+    + Version Control Systems
+    + CSS Framework (Style Sheet Language)
+    + JavaScript Framework (Scripting Language)
+    + D3.js (Scripting Framework for charts and graphs)
+    + Rest Api Calls
+    + Server to host
+
+**** Editor
+     Before we start our work with the front-end, we must choose the tool 
+     in which we will start to create the code. 
+     Emacs has over 10,000 built-in commands and its user interface allows 
+     the user to combine these commands into macros to automate work. Additionally, 
+     implementations of Emacs typically feature a dialect of the Lisp programming 
+     language that provides a deep extension capability, allowing users and developers 
+     to write new commands and applications for the editor. Extensions have been written 
+     to manage email, files, outlines, and RSS feeds, as well as clones of ELIZA, Pong, 
+     Conway's Life, Snake and Tetris.
+
+**** Version Control Systems
+     If we want to prevent a sudden loss of our code and to simplify collaboration 
+     with other team members, we should use a Version Control System. Such a tool will 
+     allow us to store code in a repository so that it can be shared with others. 
+     It will also help us to merge our changes with changes made by someone else. 
+     Another important advantage of these types of tools is the ability to revert the 
+     current version of code to the old one (e.g. if the current version contains errors).
+     Currently the most popular version control systems are:
+
+     + [[https://git-scm.com/][Git]]
+     + [[https://www.mercurial-scm.org/][Mercurial]]
+     + [[https://subversion.apache.org/][SVN]]
+     
+     However, I should mention that Git is at present the most popular and most widely used.
+
+**** CSS frameworks
+     These tools can give rise to controversy. I think that supporters and opponents
+     of these solutions are distributed evenly… The general assumption of CSS framework
+     is to help in the creation of a responsive HTML structure using predefined CSS classes. 
+     On top of this, we get a set of classes which can be used to easily build various 
+     elements of the site such as menus, forms, etc.
+     In fact, there is only one framework which divides and rules these days (Bootstrap) 
+     but we can also find some interesting alternatives:
+
+     + [[http://getbootstrap.com/][Bootstrap]]
+     + [[https://zurb.com/university/foundation-intro][ZURB Foundation]]
+     + [[https://semantic-ui.com/][Semantic UI]]
+
+**** JavaScript frameworks
+     We finally got to the most important part of this post. JavaScript framework is a
+     tool on which we want to build our application. It has to provide us with instruments
+     to easily modularise the solution and to enable separation of concerns. 
+     That’s why JavaScript frameworks are usually based on MVC or MVVM patterns. 
+     We can divide them into two groups: one group contains frameworks which provide us 
+     everything we need to create a single page application (e.g. AngularJS); the second 
+     group contains frameworks which provide only a core solution and the remaining parts 
+     have been moved to external libraries (e.g. BackboneJS). Before we start a project we 
+     have to think about our needs and choose if the first (all in one) or the second
+     (more work at the beginning but better capability to adjust) approach would be better for us.
+     As usual at the end I provide you with a couple of examples of the most popular JavaScript frameworks:
+
+     + [[https://angularjs.org/][Angular]]
+     + [[http://backbonejs.org/][Backbone]]
+     + [[http://knockoutjs.com/][Knockout]]
+     + [[https://reactjs.org/][React]]
+
+**** D3 JS framework
+     D3 is often the first name that comes up for any kind of data visualization. 
+     It’s a really powerful open source project that lets you create stunning visual 
+     effects and graphics by dynamically updating the DOM. In a way, it brings data to life
+     using HTML, SVG and CSS.
+     It conforms to the W3C web standards and is compatible across browsers. Developers 
+     tend to love it for the range of features it brings, things like “Enter and Exit” and
+     powerful transitions. You can see some [[https://github.com/d3/d3/wiki/Gallery][examples built with D3 over here]].
+     The caveat is that it does not ship with pre-built charts, and has a pretty steep 
+     learning curve to get even basic charts up. But developers are an innovative bunch and 
+     have come up with quite a few out-of-the-box charting libraries, based on D3. We’ll cover some 
+     of the best ones later.
+     
