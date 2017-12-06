@@ -20,18 +20,31 @@
 <html>
 <head>
 <title>Dashboard</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="../static/css/tab.css" />
 </head>
 <body>
+<div class="centerssss"><i class="fa fa-spinner" aria-hidden="true"></i></div>
 <div class = "main">
+<div class="top">
+</div>
+<div class="row">
+<div class="col-sm-3 parts part1"><p>Total number of lab feedbacks</p><div><i class="fa fa-line-chart" aria-hidden="true"></i> 1500</div> </div>
+<div class="col-sm-3 parts part2"><p>Total number of generic feedbacks</p><div><i class="fa fa-line-chart" aria-hidden="true"></i> 1500</div></div>
+<div class="col-sm-3 parts part3"><p>Total number of Experiment feedbacks</p><div><i class="fa fa-line-chart" aria-hidden="true"></i> 1500</div></div>
+<div class="col-sm-2 parts part4"><p>Total number of feedbacks</p><div><i class="fa fa-line-chart" aria-hidden="true"></i> 1500</div></div>
+</div>
 <div id='dashboard' class="bottom">
   <div id="fillgaugeContainer">
-  <svg id="fillgauge1" width="100%" height="240"></svg>
-</div>
+    
+  <svg id="fillgauge1" width="100%" height="230"></svg>
+  </div>
 </div>
 </div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 <script src="../static/js/chart_display.js"></script>
 </body>
 </html>
@@ -41,7 +54,8 @@
    Following function contain liquid fill gauge default settings
 #+NAME: liquidfillgauge-defaultsettings
 #+BEGIN_SRC html 
-
+$('.centerssss').show();
+$('.main').hide();
     var count = 0;
 $.ajax({ // Ajax call for URL
   method: 'GET',
@@ -1125,16 +1139,41 @@ if(typeofPie!=='' && typeofPie){
 #+BEGIN_SRC html 
 body{
     width:100%;
+    height: 100%;
     margin:0px auto;
+    background: -moz-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; ; /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, #08A3A3)) no-repeat center center fixed; ; /* safari4+,chrome */
+    background: -webkit-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; ; /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed ; /* opera 11.10+ */
+    background: -ms-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) ; /* ie10+ */
+    background: linear-gradient(137deg, rgba(153,218,255,1) 0%, #08A3A3 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#008080',GradientType=0 ); /* ie6-9 */    
+    background-position: center center fixed;     
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
-rect:hover {  fill:#ee5c42; }
+rect:hover {  fill:#fff; }
 .axis {  font: 10px sans-serif; }
 .legend tr{    border-bottom:1px solid grey; }
 .legend tr:first-child{    border-top:1px solid grey; }
+
 .legend1 tr{    border-bottom:1px solid grey; }
 .legend1 tr:first-child{    border-top:1px solid grey; }
+#fillgaugeContainer,#firstPieChart,#secondPieChart,#barChartExample{
+  background: rgba(255,255,255,0.4);
+}
+#barChartExample p,#firstPieChart p,#secondPieChart p{
+  background: #1b1717cc;
+  margin-top: 0;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  padding: 6px 10px;
+}
 .axis path,
 .axis line {
   fill: none;
@@ -1146,37 +1185,38 @@ rect:hover {  fill:#ee5c42; }
   display: inline-block
 }
 #barChartExample{
+
   margin-left: 3%;
-  border: 1px solid #000;
-  width: 29%;
-  box-shadow: 2px 2px 9px #8e8e6f;
-  border-radius: 7px;
-}
+  width: 350px;
+  }
 #firstPieChart,#secondPieChart{
+  
   margin-top: 10px;
   box-shadow: 2px 2px 9px #8e8e6f;
   border-radius: 7px;
-  border: 1px solid #000;
-  margin-left: 2%;
+  margin-left: 6px;
+
 }
-#firstPieChart{
-   width: 35%;
-  padding: 0px 10px 0 10px;
+#firstPieChart{   
+   width: 446px;
+  
   }
-#secondPieChart{ width: 56%;
-  padding: 0px 10px 0 10px;
+#secondPieChart{ width: 686px;
+  margin-left: 47px;
     }
-#fillgaugeContainer{
+#fillgaugeContainer{  
   box-shadow: 2px 2px 9px #8e8e6f;
   border-radius: 7px;
   border: 1px solid #000;
-  margin-left: 13%;
+  margin-left: 9px;
   display: inline-block;
   padding: 66px;
   padding-bottom: 1px;
   width: 332px;
   margin-bottom: 13px;
+
 }
+
 .x.axis path {  display: none; }
 .legend{
     display: inline-block;
@@ -1189,6 +1229,7 @@ rect:hover {  fill:#ee5c42; }
     padding:4px 5px;
     vertical-align:bottom;
 }
+
 .legend1 td{
     padding:4px 5px;
     vertical-align:bottom;
@@ -1197,10 +1238,11 @@ rect:hover {  fill:#ee5c42; }
     display: inline-block;
 }
 .pieChart{
-   margin-left: -2%;
+   margin-left: 2%;
+   
 }
 .pieChart1{
-    margin-left: 0%;
+    margin-left: 6%;
 }
 .legend1{
   display: inline-block;
@@ -1216,10 +1258,14 @@ rect:hover {  fill:#ee5c42; }
     height : 100%;
     width : 100%;
 }
+.top{
+    height : 40%;
+    width : 100%;
+    display: inline-block;
+}
 .bottom{
     height : 60%;
     width : 100%;
-    margin-top:2%;
 }
 .histogramExample{
   margin-left: 8%
@@ -1227,65 +1273,72 @@ rect:hover {  fill:#ee5c42; }
 #fillgauge1{
   display: inline-block;
 }
+.part1{
+margin-left: 1%
+}
+.parts{
+  margin-right: 1%;
+  background:rgba(255,255,255,0.4);
+  display: inline-block;
+  margin-bottom: 10px;
+  text-align: center;
 
-/* ----------- 950px - 1400px ----------- */
-@media screen
-  and (min-width: 900px)
-  and (max-width: 1400px){
+}
+.parts p{
+  color: #fff;
+  font-size: 15px;
+}
+.parts div{
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold
 
-#fillgaugeContainer{
-  margin-left: 16%;
-  width: 20%;
-  padding-left: 4%;
-  margin-bottom: 1%;
 }
-.histogramExample {
-    margin-left: 16%;
-    height:300px;
-}
-#barChartExample{
-  margin-left: 3%;
-  width: 32%;
-  margin-bottom: 2%;
-}
-.pieChart {
-    margin-left: -3%;
-}
-.pieChart1 {
-    margin-left: 1%;
-}
+.centerssss{
+    margin: 0 auto;
+font-size: 35px;
+text-align: center;
 }
 
-/* ----------- 1400px + ----------- */
-@media screen 
-  and (min-width: 1401px){
-
-#fillgaugeContainer{
-  margin-left: 22%;
-  width: 18%;
-  padding-left: 7%;
-  margin-bottom: 2%;
+.fa.fa-spinner{
+    margin-top: 25%;
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 4000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 4000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
-.histogramExample {
-    margin-left: 18%;
-    height:370px;
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
 }
-#barChartExample{
-  margin-bottom: 2%;
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
 }
-.pieChart {
-    margin-left: 12%;
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
 }
-.pieChart1 {
-    margin-left: 14%;
-}
-#fillgauge1{
-  margin-bottom: 18%;
-}
-#firstPieChart, #secondPieChart{
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
 
 #+END_SRC
