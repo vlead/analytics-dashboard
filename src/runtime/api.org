@@ -17,15 +17,22 @@
 #+NAME: main-html
 #+BEGIN_SRC html 
 <!DOCTYPE html>
-<html>
+<meta charset="utf-8">
 <head>
-<title>Dashboard</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="../static/css/tab.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    
+  <link href="../static/css/style.css" rel="stylesheet" />
+  
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
+<style>
+</style>
 <body>
-<div class="centerssss"><i class="fa fa-spinner" aria-hidden="true"></i></div>
+  <div class="centerssss"><i class="fa fa-spinner" aria-hidden="true"></i></div>
 <div class = "main">
 <div class="top">
 </div>
@@ -42,20 +49,17 @@
   </div>
 </div>
 </div>
-<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-<script src="../static/js/chart_display.js"></script>
-</body>
-</html>
+<script src="../static/js/piecharts.js"></script>
 #+END_SRC
 
 ** Liquid Fill Gauge Default Settings
    Following function contain liquid fill gauge default settings
 #+NAME: liquidfillgauge-defaultsettings
 #+BEGIN_SRC html 
-$('.centerssss').show();
-$('.main').hide();
+    $('.centerssss').show();
+    $('.main').hide();
     var count = 0;
 $.ajax({ // Ajax call for URL
   method: 'GET',
