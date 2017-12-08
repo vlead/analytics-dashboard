@@ -1145,9 +1145,9 @@ body{
     width:100%;
     height: 100%;
     margin:0px auto;
-    background: -moz-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; ; /* ff3.6+ */
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, #08A3A3)) no-repeat center center fixed; ; /* safari4+,chrome */
-    background: -webkit-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; ; /* safari5.1+,chrome10+ */
+    background: -moz-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, #08A3A3)) no-repeat center center fixed; /* safari4+,chrome */
+    background: -webkit-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; /* safari5.1+,chrome10+ */
     background: -o-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed ; /* opera 11.10+ */
     background: -ms-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) ; /* ie10+ */
     background: linear-gradient(137deg, rgba(153,218,255,1) 0%, #08A3A3 100%); /* w3c */
@@ -1164,7 +1164,6 @@ rect:hover {  fill:#fff; }
 .axis {  font: 10px sans-serif; }
 .legend tr{    border-bottom:1px solid grey; }
 .legend tr:first-child{    border-top:1px solid grey; }
-
 .legend1 tr{    border-bottom:1px solid grey; }
 .legend1 tr:first-child{    border-top:1px solid grey; }
 #fillgaugeContainer,#firstPieChart,#secondPieChart,#barChartExample{
@@ -1186,7 +1185,7 @@ rect:hover {  fill:#fff; }
 }
 #firstPieChart,#secondPieChart,#barChartExample
 {
-  display: inline-block
+  display: inline-block;
 }
 #barChartExample{
 
@@ -1272,13 +1271,13 @@ rect:hover {  fill:#fff; }
     width : 100%;
 }
 .histogramExample{
-  margin-left: 8%
+  margin-left: 8%;
 }
 #fillgauge1{
   display: inline-block;
 }
 .part1{
-margin-left: 1%
+margin-left: 1%;
 }
 .parts{
   margin-right: 1%;
@@ -1295,7 +1294,7 @@ margin-left: 1%
 .parts div{
   color: #fff;
   font-size: 22px;
-  font-weight: bold
+  font-weight: bold;
 
 }
 .centerssss{
