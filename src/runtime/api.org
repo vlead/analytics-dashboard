@@ -23,7 +23,7 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     
-  <link href="../static/css/style.css" rel="stylesheet" />
+  <link href="../static/css/tab.css" rel="stylesheet" />
   
   
   <!-- Latest compiled and minified JavaScript -->
@@ -51,7 +51,7 @@
 </div>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="../static/js/piecharts.js"></script>
+<script src="../static/js/chart_display.js"></script>
 #+END_SRC
 
 ** Liquid Fill Gauge Default Settings
@@ -1148,14 +1148,11 @@ body{
     background: -moz-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; /* ff3.6+ */
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, #08A3A3)) no-repeat center center fixed; /* safari4+,chrome */
     background: -webkit-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed ; /* opera 11.10+ */
-    background: -ms-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) ; /* ie10+ */
+    background: -o-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%) no-repeat center center fixed; /* opera 11.10+ */
+    background: -ms-linear-gradient(313deg, rgba(153,218,255,1) 0%, #08A3A3 100%); /* ie10+ */
     background: linear-gradient(137deg, rgba(153,218,255,1) 0%, #08A3A3 100%); /* w3c */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#008080',GradientType=0 ); /* ie6-9 */    
     background-position: center center fixed;     
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 path {  stroke: #fff; }
@@ -1164,6 +1161,7 @@ rect:hover {  fill:#fff; }
 .axis {  font: 10px sans-serif; }
 .legend tr{    border-bottom:1px solid grey; }
 .legend tr:first-child{    border-top:1px solid grey; }
+
 .legend1 tr{    border-bottom:1px solid grey; }
 .legend1 tr:first-child{    border-top:1px solid grey; }
 #fillgaugeContainer,#firstPieChart,#secondPieChart,#barChartExample{
@@ -1295,7 +1293,6 @@ margin-left: 1%;
   color: #fff;
   font-size: 22px;
   font-weight: bold;
-
 }
 .centerssss{
     margin: 0 auto;
@@ -1304,36 +1301,11 @@ text-align: center;
 }
 
 .fa.fa-spinner{
-    margin-top: 25%;
-    -webkit-animation-name: spin;
-    -webkit-animation-duration: 4000ms;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-name: spin;
-    -moz-animation-duration: 4000ms;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -ms-animation-name: spin;
-    -ms-animation-duration: 4000ms;
-    -ms-animation-iteration-count: infinite;
-    -ms-animation-timing-function: linear;
-    
+    margin-top: 25%;    
     animation-name: spin;
     animation-duration: 4000ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-}
-@-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
 }
 @keyframes spin {
     from {
@@ -1343,7 +1315,6 @@ text-align: center;
         transform:rotate(360deg);
     }
 }
-
 #+END_SRC
 
 * Tangle 
